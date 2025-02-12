@@ -2,7 +2,7 @@ package com.flipkart.bean;
 
 import java.util.List;
 
-public class GymOwner {
+public class GymOwner extends User{
     private String aadhar;
     private String PAN;
     private List<GymCenter> gyms;
