@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -114,40 +115,119 @@ public class MainMenu {
         System.out.println("Password changed successfully!");
     }
 
+    private static void findGymBasedonLocation(Scanner scanner){
+        System.out.println("Enter city/location: ");
+        String cityInput;
+        cityInput = scanner.nextLine();
+        System.out.println("Searching gym in city " + cityInput);
+    }
+    private static void bookGymSlot(Scanner scanner){
+        System.out.println("Enter gymID: ");
+        int gymId;
+        gymId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter slot Id: ");
+        int slotId;
+        slotId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Redirecting to payment.. ");
+        paymentHandler(scanner);
+    }
+
+    private static void paymentHandler(Scanner scanner){
+        System.out.println("Choose mode of Payment: ");
+        System.out.println("1. UPI");
+        System.out.println("2. Credit/Debit Card");
+        System.out.println("3. Net Banking");
+        System.out.println("4. Go Back");
+
+        int choice;
+        choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        switch (choice) {
+            case 1:
+                System.out.println("Using UPI for payment");
+                break;
+            case 2:
+                System.out.println("Using Credit/Debit Card for payment");
+                break;
+            case 3:
+                System.out.println("Using Net Banking for payment");
+                break;
+            case 4:
+                System.out.println("going back.. ");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+    }
+
+    public static void cancelBookingHandler(Scanner scanner){
+        System.out.println("Enter gymID: ");
+        int gymId;
+        gymId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter slot Id: ");
+        int slotId;
+        slotId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Booking for the gym id: " + gymId + " and slot id : " + slotId + " is cancelled..");
+    }
+
+
+
     // Gym customer menu
     private static void customerMenu(Scanner scanner) {
         int choice;
         do {
             System.out.println("\n-- Gym Customer Menu --");
-            System.out.println("1. View Available Gyms");
-            System.out.println("2. Book Slot");
-            System.out.println("3. View My Bookings");
-            System.out.println("4. Cancel Booking");
-            System.out.println("5. Logout");
+//            System.out.println("1. View Available Gyms");
+//            System.out.println("2. Book Slot");
+//            System.out.println("3. View My Bookings");
+//            System.out.println("4. Cancel Booking");
+//            System.out.println("5. Logout");
+
+            System.out.println("1. View Profile");
+            System.out.println("2. Edit Profile");
+            System.out.println("3. Find gyms based on location");
+            System.out.println("4. Book Gym Slot");
+            System.out.println("5. View all Bookings");
+            System.out.println("6. Cancel Bookings");
+            System.out.println("7. Log Out");
+
+
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
 
             switch (choice) {
                 case 1:
-                    System.out.println("Viewing available gyms...");
+                    System.out.println("Viewing Profile...");
                     break;
                 case 2:
-                    System.out.println("Booking a slot...");
+                    System.out.println("Editing profile...");
                     break;
                 case 3:
-                    System.out.println("Viewing my bookings...");
+                    findGymBasedonLocation(scanner);
                     break;
                 case 4:
-                    System.out.println("Cancelling a booking...");
+                    bookGymSlot(scanner);
                     break;
                 case 5:
-                    System.out.println("Logging out...");
+                    System.out.println("viewing all bookings");
+                    break;
+                case 6:
+                    cancelBookingHandler(scanner);
+                    break;
+                case 7:
+                    System.out.println("Logging out.. ");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 5);
+        } while (choice != 7);
     }
 
     // Gym owner menu
