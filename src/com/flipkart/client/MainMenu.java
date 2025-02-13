@@ -230,40 +230,144 @@ public class MainMenu {
         } while (choice != 7);
     }
 
+    private static void slotInputHandler(Scanner scanner){
+        System.out.println("Enter the number of slots: ");
+        int numberOfSlots = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < numberOfSlots; i++) {
+            int startTime, endTime;
+            System.out.println("Enter the starting Time of " + (i + 1)+ " th slot");
+            startTime = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Enter the ending Time of " + (i + 1) + " th slot");
+            endTime = scanner.nextInt();
+            scanner.nextLine();
+            if (i != numberOfSlots - 1){
+                System.out.println("Enter Details of Next Slot.. ");
+            }
+        }
+    }
+
+    private static void registerNewGym(Scanner scanner){
+        System.out.print("Enter Gym Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Gym Location: ");
+        String location = scanner.nextLine();
+
+        System.out.print("Enter Gym Capacity: ");
+        int capacity = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter slots information");
+        slotInputHandler(scanner);
+
+        System.out.println("Gym registered successfully with id: 101");
+
+
+    }
+
+    private static void gymEditMenu(Scanner scanner){
+        System.out.println("1. Edit gym name: ");
+        System.out.println("2. Edit gym slots: ");
+        System.out.println("3. Edit price: ");
+        System.out.println("4. go back ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                System.out.println("Enter new gym name: ");
+                String newName = scanner.nextLine();
+                System.out.println("Edited name to " + newName);
+                break;
+            case 2:
+                slotInputHandler(scanner);
+                System.out.println("Slot updated successfully");
+                break;
+            case 3:
+                System.out.println("Enter new price: ");
+                int price = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Price updated to " + price);
+                break;
+            case 4:
+                System.out.println("going back..");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+
+    }
+
+
+    private static void editGymDetails(Scanner scanner){
+        System.out.print("Enter Gym Id: ");
+        int gymId = scanner.nextInt();
+        scanner.nextLine();
+        gymEditMenu(scanner);
+        System.out.println("Successfully edited details");
+    }
+
+
     // Gym owner menu
     private static void ownerMenu(Scanner scanner) {
         int choice;
         do {
             System.out.println("\n-- Gym Owner Menu --");
-            System.out.println("1. View My Gyms");
-            System.out.println("2. Add Gym Slot");
-            System.out.println("3. Edit Gym Details");
-            System.out.println("4. View Bookings for My Gym");
-            System.out.println("5. Logout");
+//            System.out.println("1. View My Gyms");
+//            System.out.println("2. Add Gym Slot");
+//            System.out.println("3. Edit Gym Details");
+//            System.out.println("4. View Bookings for My Gym");
+//            System.out.println("5. Logout");
+
+
+            System.out.println("1. View Profile");
+            System.out.println("2. Edit Profile");
+            System.out.println("3. Register his/her gym");
+            System.out.println("4. View approved gyms");
+            System.out.println("5. View pending approvals");
+            System.out.println("6. Edit Gym Details");
+            System.out.println("7. Remove his Gym Centers");
+            System.out.println("8. Log out");
+
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
 
             switch (choice) {
                 case 1:
-                    System.out.println("Viewing my gyms...");
+                    System.out.println("Viewing Profile...");
                     break;
                 case 2:
-                    System.out.println("Adding a gym slot...");
+                    System.out.println("Editing Profile...");
                     break;
                 case 3:
-                    System.out.println("Editing gym details...");
+                    registerNewGym(scanner);
                     break;
                 case 4:
-                    System.out.println("Viewing bookings for my gym...");
+                    System.out.println("Viewing approved gyms");
                     break;
+
                 case 5:
-                    System.out.println("Logging out...");
+                    System.out.println("Viewing pending approvals");
+                    break;
+                case 6:
+                    editGymDetails(scanner);
+                    break;
+                case 7:
+                    System.out.println("Enter gym id: ");
+                    int gymId = scanner.nextInt();
+                    System.out.println("Removed gym with id " + gymId);
+                    break;
+                case 8:
+                    System.out.println("Logging out..");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 5);
+        } while (choice != 8);
     }
 
     // Gym admin menu
