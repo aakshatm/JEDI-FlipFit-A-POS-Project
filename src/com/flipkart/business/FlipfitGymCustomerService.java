@@ -1,6 +1,6 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.User;
+import com.flipkart.bean.FlipfitUser;
 
 public class FlipfitGymCustomerService extends FlipfitUserService {
     public void viewAvailableSlots(int centerId, String date) {
@@ -19,15 +19,15 @@ public class FlipfitGymCustomerService extends FlipfitUserService {
         System.out.println("Added to waiting list of "+ centerId + " for the slot " + slot_id);
     }
 
-    public void bookGymSlot(User user, int slotId) {
+    public void bookGymSlot(FlipfitUser user, int slotId) {
         System.out.println(user.getName() + " booked slot ID: " + slotId);
     }
 
-    public void cancelBooking(User user, int bookingId) {
+    public void cancelBooking(FlipfitUser user, int bookingId) {
         System.out.println(user.getName() + " canceled booking ID: " + bookingId);
     }
 
-    public void cancelBooking(User user, String date) {
+    public void cancelBooking(FlipfitUser user, String date) {
         System.out.println(user.getName() + " is viewing their workout plan for " + date);
     }
 }

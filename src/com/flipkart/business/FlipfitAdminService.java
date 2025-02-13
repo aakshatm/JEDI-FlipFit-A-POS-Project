@@ -1,8 +1,6 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipfitCustomer;
 import com.flipkart.bean.FlipfitGymOwner;
-import com.flipkart.bean.User;
 
 public class FlipfitAdminService {
 
