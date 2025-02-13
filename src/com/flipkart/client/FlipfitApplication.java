@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.business.FlipfitAdminInterface;
 import com.flipkart.business.FlipfitAdminService;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.business.FlipfitGymOwnerService;
@@ -11,9 +12,9 @@ public class FlipfitApplication {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
-        FlipfitAdminService adminService = new FlipfitAdminService();
-        FlipfitGymCustomerService customerService = new FlipfitGymCustomerService();
-        FlipfitGymOwnerService ownerService = new FlipfitGymOwnerService();
+        FlipfitAdminInterface adminService = new FlipfitAdminService();
+        FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
+        FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
 
         // Welcome message
         System.out.println("Welcome to FlipFit Application");
