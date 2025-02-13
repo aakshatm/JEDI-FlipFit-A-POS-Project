@@ -378,11 +378,10 @@ public class MainMenu {
             System.out.println("1. View All Registered Gyms");
             System.out.println("2. View All Users");
             System.out.println("3. View pending approvals");
-            System.out.println("4. View approved gyms");
-            System.out.println("5. Approve/Reject Gym Owner Registration");
-            System.out.println("6. View All Bookings");
-            System.out.println("7. Deactivate Gym");
-            System.out.println("8. Logout");
+            System.out.println("4. Approve/Reject Gym Owner Registration");
+            System.out.println("5. View All Bookings");
+            System.out.println("6. Deactivate Gym");
+            System.out.println("7. Logout");
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
@@ -398,18 +397,15 @@ public class MainMenu {
                     System.out.println("Viewing all pending approvals..");
                     break;
                 case 4:
-                    System.out.println("Viewing all approved gyms..");
-                    break;
-                case 5:
                     approveRejectGymOwner(scanner);
                     break;
-                case 6:
+                case 5:
                     viewAllBookings();
                     break;
-                case 7:
+                case 6:
                     deactivateGym(scanner);
                     break;
-                case 8:
+                case 7:
                     System.out.println("Logging out...");
                     break;
                 default:
