@@ -2,7 +2,7 @@ package com.flipkart.bean;
 
 import java.util.List;
 
-public class GymCustomer extends User {
+public class FlipfitCustomer extends User {
     private int age;
     private List<Booking> bookings;
 

@@ -1,7 +1,5 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.GymCenter;
-
 //public class GymBusiness {
 //
 // private GymCenter gymCenter;

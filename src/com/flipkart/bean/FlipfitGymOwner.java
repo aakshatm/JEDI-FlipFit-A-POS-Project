@@ -2,10 +2,10 @@ package com.flipkart.bean;
 
 import java.util.List;
 
-public class GymOwner extends User{
+public class FlipfitGymOwner extends User{
     private String aadhar;
     private String PAN;
-    private List<GymCenter> gyms;
+    private List<FlipfitGymCenter> gyms;
 
     public String getAadhar() {
         return aadhar;
@@ -23,11 +23,11 @@ public class GymOwner extends User{
         this.PAN = PAN;
     }
 
-    public List<GymCenter> getGyms() {
+    public List<FlipfitGymCenter> getGyms() {
         return gyms;
     }
 
-    public void setGyms(List<GymCenter> gyms) {
+    public void setGyms(List<FlipfitGymCenter> gyms) {
         this.gyms = gyms;
     }
 }

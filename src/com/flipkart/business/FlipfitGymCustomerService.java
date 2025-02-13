@@ -2,9 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.User;
 
-import java.sql.SQLOutput;
-
-public class GymCustomerService extends UserService {
+public class FlipfitGymCustomerService extends FlipfitUserService {
     public void viewAvailableSlots(int centerId, String date) {
         System.out.println("Viewing available slots for Center ID: " + centerId + " on " + date);
     }

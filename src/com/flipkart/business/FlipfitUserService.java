@@ -2,7 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.User;
 
-public class UserService {
+public class FlipfitUserService {
     public void login(User user) {
         System.out.println(user.getName() + " logged in successfully!");
     }
