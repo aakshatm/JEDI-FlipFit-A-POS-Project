@@ -1,22 +1,24 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.FlipfitCustomer;
+import com.flipkart.bean.FlipfitGymOwner;
 import com.flipkart.bean.User;
 
 public class FlipfitAdminService {
-    public void login(FlipfitCustomer user) {
+
+    public void login(FlipfitGymOwner user) {
         System.out.println(user.getName() + " logged in successfully!");
     }
 
-    public void logout(FlipfitCustomer user) {
+    public void logout(FlipfitGymOwner user) {
         System.out.println(user.getName() + " logged out.");
     }
 
-    public void viewProfile(FlipfitCustomer user) {
+    public void viewProfile(FlipfitGymOwner user) {
         System.out.println("User Profile: " + user.getName() + " (Email: " + user.getEmail() + ")");
     }
 
-    public void editProfile(FlipfitCustomer user) {
+    public void editProfile(FlipfitGymOwner user) {
         System.out.println("Edited User Profile: " + user.getName() + " (Email: " + user.getEmail() + ")");
     }
 
@@ -24,4 +26,16 @@ public class FlipfitAdminService {
         System.out.println("User Registered Successfully");
     }
 
+    public void approveGym(){
+
+    }
+    public void viewRegisteredGym(){
+
+    }
+    public void viewRegisteredCustomers(){
+
+    }
+    public void viewPendingApprovals(){
+
+    }
 }
