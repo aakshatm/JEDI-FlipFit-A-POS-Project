@@ -377,10 +377,12 @@ public class MainMenu {
             System.out.println("\n-- Gym Admin Menu --");
             System.out.println("1. View All Registered Gyms");
             System.out.println("2. View All Users");
-            System.out.println("3. Approve/Reject Gym Owner Registration");
-            System.out.println("4. View All Bookings");
-            System.out.println("5. Deactivate Gym");
-            System.out.println("6. Logout");
+            System.out.println("3. View pending approvals");
+            System.out.println("4. View approved gyms");
+            System.out.println("5. Approve/Reject Gym Owner Registration");
+            System.out.println("6. View All Bookings");
+            System.out.println("7. Deactivate Gym");
+            System.out.println("8. Logout");
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
@@ -393,21 +395,27 @@ public class MainMenu {
                     viewAllUsers();
                     break;
                 case 3:
-                    approveRejectGymOwner(scanner);
+                    System.out.println("Viewing all pending approvals..");
                     break;
                 case 4:
-                    viewAllBookings();
+                    System.out.println("Viewing all approved gyms..");
                     break;
                 case 5:
-                    deactivateGym(scanner);
+                    approveRejectGymOwner(scanner);
                     break;
                 case 6:
+                    viewAllBookings();
+                    break;
+                case 7:
+                    deactivateGym(scanner);
+                    break;
+                case 8:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 6);
+        } while (choice != 8);
     }
 
     private static void viewAllGyms() {
