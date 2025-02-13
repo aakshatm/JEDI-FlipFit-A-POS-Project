@@ -1,12 +1,19 @@
 package com.flipkart.client;
 
-import java.sql.SQLOutput;
+import com.flipkart.business.FlipfitAdminService;
+import com.flipkart.business.FlipfitGymCustomerService;
+import com.flipkart.business.FlipfitGymOwnerService;
+
 import java.util.Scanner;
 
-public class MainMenu {
+public class FlipfitApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice;
+
+        FlipfitAdminService adminService = new FlipfitAdminService();
+        FlipfitGymCustomerService customerService = new FlipfitGymCustomerService();
+        FlipfitGymOwnerService ownerService = new FlipfitGymOwnerService();
 
         // Welcome message
         System.out.println("Welcome to FlipFit Application");
