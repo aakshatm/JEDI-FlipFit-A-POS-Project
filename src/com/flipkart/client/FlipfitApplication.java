@@ -1,6 +1,9 @@
 package com.flipkart.client;
 
 import com.flipkart.business.FlipfitAdminInterface;
+import com.flipkart.business.FlipfitGymCustomerInterface;
+import com.flipkart.business.FlipfitGymOwnerInterface;
+
 import com.flipkart.business.FlipfitAdminService;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.business.FlipfitGymOwnerService;
