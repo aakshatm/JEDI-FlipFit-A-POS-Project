@@ -2,7 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.FlipfitGymOwner;
 
-public class FlipfitAdminService {
+public class FlipfitAdminService implements FlipfitAdminInterface{
 
     public void login(FlipfitGymOwner user) {
         System.out.println(user.getName() + " logged in successfully!");
