@@ -1,42 +1,43 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.GymCenter;
-import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.FlipfitGymOwner;
+import com.flipkart.bean.FlipfitGymCenter;
+import com.flipkart.bean.Slot;
 
 public class FlipfitGymOwnerService {
-    public void registerGym(GymOwner ownwer, GymCenter gym){
+    public void registerGym(FlipfitGymOwner ownwer, FlipfitGymCenter gym){
 
     }
 
-    public void viewRegisteredGyms(GymOwner ownwer){
+    public void viewRegisteredGyms(FlipfitGymOwner ownwer){
 
     }
 
-    public void editGymDetails(GymOwner ownwer, int gymId){
+    public void editGymDetails(FlipfitGymOwner ownwer, int gymId){
 
     }
 
-    public void removeGym(GymOwner ownwer, int gymId){
+    public void removeGym(FlipfitGymOwner ownwer, int gymId){
 
     }
 
-    public void addSlots(GymOwner ownwer, int gymId, Slot slot){
+    public void addSlots(FlipfitGymOwner ownwer, int gymId, Slot slot){
 
     }
 
-    public void editSlots(GymOwner ownwer, int gymId, int slotId, Slot newSlot){
+    public void editSlots(FlipfitGymOwner ownwer, int gymId, int slotId, Slot newSlot){
 
     }
 
-    public void removeSlot(GymOwner ownwer, int gymId, int slotId){
+    public void removeSlot(FlipfitGymOwner ownwer, int gymId, int slotId){
 
     }
 
-    public void viewApprovedGyms(GymOwner ownwer){
+    public void viewApprovedGyms(FlipfitGymOwner ownwer){
 
     }
 
-    public void viewPendingApprovals(GymOwner ownwer){
+    public void viewPendingApprovals(FlipfitGymOwner ownwer){
 
     }
 }
