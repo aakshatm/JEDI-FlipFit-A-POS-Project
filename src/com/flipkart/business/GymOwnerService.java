@@ -1,9 +1,9 @@
-package com.flipkart.business;
-
-import com.flipkart.bean.GymCenter;
-import com.flipkart.bean.GymOwner;
-
-public class GymOwnerService {
+//package com.flipkart.business;
+//
+//import com.flipkart.bean.GymCenter;
+//import com.flipkart.bean.GymOwner;
+//
+//public class GymOwnerService {
 //    public void registerGym(GymOwner ownwer, GymCenter gym){
 //
 //    }
@@ -28,7 +28,7 @@ public class GymOwnerService {
 //
 //    }
 //
-//    public void removeSlot(GymOwner ownwer, int gymId, int slotId){
+////    public void removeSlot(GymOwner ownwer, int gymId, int slotId){
 //
 //    }
 //
@@ -39,4 +39,4 @@ public class GymOwnerService {
 //    public void viewPendingApprovals(GymOwner ownwer){
 //
 //    }
-}
+//}

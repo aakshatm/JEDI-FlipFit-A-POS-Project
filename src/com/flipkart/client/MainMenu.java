@@ -379,30 +379,80 @@ public class MainMenu {
             System.out.println("2. View All Users");
             System.out.println("3. Approve/Reject Gym Owner Registration");
             System.out.println("4. View All Bookings");
-            System.out.println("5. Logout");
+            System.out.println("5. Deactivate Gym");
+            System.out.println("6. Logout");
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
 
             switch (choice) {
                 case 1:
-                    System.out.println("Viewing all registered gyms...");
+                    viewAllGyms();
                     break;
                 case 2:
-                    System.out.println("Viewing all users...");
+                    viewAllUsers();
                     break;
                 case 3:
-                    System.out.println("Approving/rejecting gym owner registration...");
+                    approveRejectGymOwner(scanner);
                     break;
                 case 4:
-                    System.out.println("Viewing all bookings...");
+                    viewAllBookings();
                     break;
                 case 5:
+                    deactivateGym(scanner);
+                    break;
+                case 6:
                     System.out.println("Logging out...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 5);
+        } while (choice != 6);
+    }
+
+    private static void viewAllGyms() {
+        System.out.println("Displaying all registered gyms...");
+        System.out.println("Gym 1: FitLife Gym - Location: City A");
+        System.out.println("Gym 2: PowerHouse Gym - Location: City B");
+    }
+
+    private static void viewAllUsers() {
+        System.out.println("Displaying all users...");
+        System.out.println("User 1: John Doe (Customer)");
+        System.out.println("User 2: Jane Smith (Gym Owner)");
+    }
+
+    private static void approveRejectGymOwner(Scanner scanner) {
+        System.out.println("Enter Gym Owner's Name:");
+        String gymOwnerName = scanner.nextLine();
+        System.out.println("Approve or Reject (Enter 'approve' or 'reject'):");
+        String decision = scanner.nextLine();
+
+        if ("approve".equalsIgnoreCase(decision)) {
+            System.out.println("Gym Owner " + gymOwnerName + " approved.");
+        } else if ("reject".equalsIgnoreCase(decision)) {
+            System.out.println("Gym Owner " + gymOwnerName + " rejected.");
+        } else {
+            System.out.println("Invalid decision.");
+        }
+    }
+
+    private static void viewAllBookings() {
+        System.out.println("Displaying all bookings...");
+        System.out.println("Booking 1: Gym 1 - Slot 10:00 AM (Customer: John)");
+        System.out.println("Booking 2: Gym 2 - Slot 11:00 AM (Customer: Jane)");
+    }
+
+    private static void deactivateGym(Scanner scanner) {
+        System.out.println("Enter Gym Name to deactivate:");
+        String gymName = scanner.nextLine();
+        System.out.println("Confirm deactivation (Yes/No):");
+        String confirmation = scanner.nextLine();
+
+        if ("Yes".equalsIgnoreCase(confirmation)) {
+            System.out.println("Gym " + gymName + " deactivated.");
+        } else {
+            System.out.println("Gym deactivation cancelled.");
+        }
     }
 }
