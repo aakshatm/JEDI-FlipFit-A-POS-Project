@@ -94,10 +94,56 @@ public class FlipfitGymCustomerService {
     }
 
     // Find Gym by Location
-    public void findGymByLocation(String location) {
-        for (FlipfitGymCenter gym : gyms.values()) {
-            if (gym.getGymCity().equalsIgnoreCase(location)) {
-                System.out.println("Found gym: " + gym.getGymName() + " in " + location);
+    public FlipfitGymCenter findGymByCity(String city, List<FlipfitGymCenter> listOfGyms) {
+        for (FlipfitGymCenter gym: listOfGyms){
+            if (gym.getGymCity().equals(city)){
+                return gym;
+            }
+        }
+        return null;
+    }
+
+//    private int bookingId;
+//    private int gymId;
+//    private int slotId;
+//    private boolean isConfirmed;
+
+
+//    private int slotId;
+//    private int startTime;
+//    private int endTime;
+//    private int capacity;
+//    private List<Booking> bookings;
+//    private List<Booking> waitlisted;
+
+    public boolean bookGymSlot(int bookingId, int gymId, int slotId,  List<FlipfitGymCenter> listOfGyms, List<Slot> slotList){
+        boolean bookingConfirmed = true;
+        Slot foundSlot = null;
+        for (Slot slot: slotList){
+            if (slot.getSlotId() == slotId){
+                if (slot.getBookings().size() >= slot.getCapacity()){
+                    foundSlot = slot;
+                    bookingConfirmed = false;
+                    break;
+                }
+            }
+        }
+        if (foundSlot == null) return false;
+
+        for (FlipfitGymCenter gym: listOfGyms){
+            if (gym.getGymId() == gymId){
+                Booking newBooking = new Booking();
+                newBooking.setBookingId(bookingId);
+                newBooking.setGymId(gymId);
+                newBooking.setSlot(slotId);
+                newBooking.setConfirmed(bookingConfirmed);
+                if (bookingConfirmed == true){
+                    foundSlot.getBookings().add(newBooking);
+                    return true;
+                }else{
+                    foundSlot.getWaitlisted().add(newBooking);
+                    return true;
+                }
             }
         }
     }

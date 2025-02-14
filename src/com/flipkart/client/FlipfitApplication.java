@@ -211,7 +211,7 @@ public class FlipfitApplication {
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
-            System.out.println("3. Find gyms based on location"); // ownwer ki service ke through karega
+            System.out.println("3. Find gyms based on city"); // done // assuming ki hum list of gym center main app mei store karenge
             System.out.println("4. Book Gym Slot"); // owner ki service ke through karega
             System.out.println("5. View all Bookings"); // done
             System.out.println("6. Cancel Bookings"); // done
