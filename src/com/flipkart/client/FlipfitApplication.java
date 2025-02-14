@@ -1,4 +1,11 @@
 package com.flipkart.client;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
 
 import com.flipkart.business.FlipfitAdminInterface;
 import com.flipkart.business.FlipfitGymCustomerInterface;
@@ -187,8 +194,6 @@ public class FlipfitApplication {
         System.out.println("Booking for the gym id: " + gymId + " and slot id : " + slotId + " is cancelled..");
     }
 
-
-
     // Gym customer menu
     private static void customerMenu(Scanner scanner) {
         int choice;
@@ -327,12 +332,6 @@ public class FlipfitApplication {
         int choice;
         do {
             System.out.println("\n-- Gym Owner Menu --");
-//            System.out.println("1. View My Gyms");
-//            System.out.println("2. Add Gym Slot");
-//            System.out.println("3. Edit Gym Details");
-//            System.out.println("4. View Bookings for My Gym");
-//            System.out.println("5. Logout");
-
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
@@ -381,93 +380,228 @@ public class FlipfitApplication {
         } while (choice != 8);
     }
 
-    // Gym admin menu
-    private static void adminMenu(Scanner scanner) {
-        int choice;
-        do {
-            System.out.println("\n-- Gym Admin Menu --");
-            System.out.println("1. View All Registered Gyms");
-            System.out.println("2. View All Users");
-            System.out.println("3. View pending approvals");
-            System.out.println("4. Approve/Reject Gym Owner Registration");
-            System.out.println("5. View All Bookings");
-            System.out.println("6. Deactivate Gym");
-            System.out.println("7. Logout");
+        private static List<String> gyms = new ArrayList<>();
+        private static Set<String> users = new HashSet<>();
+        private static Map<String, String> pendingApprovals = new HashMap<>();
+        private static List<String> bookings = new ArrayList<>();
 
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+        static {
+            // Pre-populated Gyms
+            gyms.add("FitLife Gym - Location: City A");
+            gyms.add("PowerHouse Gym - Location: City B");
 
-            switch (choice) {
-                case 1:
-                    viewAllGyms();
-                    break;
-                case 2:
-                    viewAllUsers();
-                    break;
-                case 3:
-                    System.out.println("Viewing all pending approvals..");
-                    break;
-                case 4:
-                    approveRejectGymOwner(scanner);
-                    break;
-                case 5:
-                    viewAllBookings();
-                    break;
-                case 6:
-                    deactivateGym(scanner);
-                    break;
-                case 7:
-                    System.out.println("Logging out...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+            // Pre-populated Users
+            users.add("John Doe (Customer)");
+            users.add("Jane Smith (Gym Owner)");
+
+            // Pre-populated Pending Approvals
+            pendingApprovals.put("Michael Johnson", "Gym Owner");
+            pendingApprovals.put("Emily Davis", "Gym Owner");
+
+            // Pre-populated Bookings
+            bookings.add("Gym 1 - Slot 10:00 AM (Customer: John)");
+            bookings.add("Gym 2 - Slot 11:00 AM (Customer: Jane)");
+        }
+
+        private static void adminMenu(Scanner scanner) {
+            int choice;
+            do {
+                System.out.println("\n-- Gym Admin Menu --");
+                System.out.println("1. View All Registered Gyms");
+                System.out.println("2. View All Users");
+                System.out.println("3. View Pending Approvals");
+                System.out.println("4. Approve/Reject Gym Owner Registration");
+                System.out.println("5. View All Bookings");
+                System.out.println("6. Deactivate Gym");
+                System.out.println("7. Logout");
+
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+
+                switch (choice) {
+                    case 1:
+                        viewAllGyms();
+                        break;
+                    case 2:
+                        viewAllUsers();
+                        break;
+                    case 3:
+                        viewPendingApprovals();
+                        break;
+                    case 4:
+                        approveRejectGymOwner(scanner);
+                        break;
+                    case 5:
+                        viewAllBookings();
+                        break;
+                    case 6:
+                        deactivateGym(scanner);
+                        break;
+                    case 7:
+                        System.out.println("Logging out...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            } while (choice != 7);
+        }
+
+        private static void viewAllGyms() {
+            System.out.println("Displaying all registered gyms...");
+            for (String gym : gyms) {
+                System.out.println(gym);
             }
-        } while (choice != 8);
-    }
+        }
 
-    private static void viewAllGyms() {
-        System.out.println("Displaying all registered gyms...");
-        System.out.println("Gym 1: FitLife Gym - Location: City A");
-        System.out.println("Gym 2: PowerHouse Gym - Location: City B");
-    }
+        private static void viewAllUsers() {
+            System.out.println("Displaying all users...");
+            for (String user : users) {
+                System.out.println(user);
+            }
+        }
 
-    private static void viewAllUsers() {
-        System.out.println("Displaying all users...");
-        System.out.println("User 1: John Doe (Customer)");
-        System.out.println("User 2: Jane Smith (Gym Owner)");
-    }
+        private static void viewPendingApprovals() {
+            System.out.println("Viewing all pending approvals...");
+            if (pendingApprovals.isEmpty()) {
+                System.out.println("No pending approvals.");
+            } else {
+                for (Map.Entry<String, String> entry : pendingApprovals.entrySet()) {
+                    System.out.println(entry.getKey() + " - " + entry.getValue());
+                }
+            }
+        }
 
-    private static void approveRejectGymOwner(Scanner scanner) {
-        System.out.println("Enter Gym Owner's Name:");
-        String gymOwnerName = scanner.nextLine();
-        System.out.println("Approve or Reject (Enter 'approve' or 'reject'):");
-        String decision = scanner.nextLine();
+        private static void approveRejectGymOwner(Scanner scanner) {
+            System.out.println("Enter Gym Owner's Name:");
+            String gymOwnerName = scanner.nextLine();
 
-        if ("approve".equalsIgnoreCase(decision)) {
-            System.out.println("Gym Owner " + gymOwnerName + " approved.");
-        } else if ("reject".equalsIgnoreCase(decision)) {
-            System.out.println("Gym Owner " + gymOwnerName + " rejected.");
-        } else {
-            System.out.println("Invalid decision.");
+            if (!pendingApprovals.containsKey(gymOwnerName)) {
+                System.out.println("No pending approval found for " + gymOwnerName);
+                return;
+            }
+
+            System.out.println("Approve or Reject (Enter 'approve' or 'reject'):");
+            String decision = scanner.nextLine();
+
+            if ("approve".equalsIgnoreCase(decision)) {
+                users.add(gymOwnerName + " (Gym Owner)");
+                pendingApprovals.remove(gymOwnerName);
+                System.out.println("Gym Owner " + gymOwnerName + " approved.");
+            } else if ("reject".equalsIgnoreCase(decision)) {
+                pendingApprovals.remove(gymOwnerName);
+                System.out.println("Gym Owner " + gymOwnerName + " rejected.");
+            } else {
+                System.out.println("Invalid decision.");
+            }
+        }
+
+        private static void viewAllBookings() {
+            System.out.println("Displaying all bookings...");
+            for (String booking : bookings) {
+                System.out.println(booking);
+            }
+        }
+
+        private static void deactivateGym(Scanner scanner) {
+            System.out.println("Enter Gym Name to deactivate:");
+            String gymName = scanner.nextLine();
+
+            if (gyms.removeIf(g -> g.contains(gymName))) {
+                System.out.println("Gym " + gymName + " deactivated.");
+            } else {
+                System.out.println("No gym found with the name " + gymName);
+            }
         }
     }
 
-    private static void viewAllBookings() {
-        System.out.println("Displaying all bookings...");
-        System.out.println("Booking 1: Gym 1 - Slot 10:00 AM (Customer: John)");
-        System.out.println("Booking 2: Gym 2 - Slot 11:00 AM (Customer: Jane)");
-    }
 
-    private static void deactivateGym(Scanner scanner) {
-        System.out.println("Enter Gym Name to deactivate:");
-        String gymName = scanner.nextLine();
-        System.out.println("Confirm deactivation (Yes/No):");
-        String confirmation = scanner.nextLine();
-
-        if ("Yes".equalsIgnoreCase(confirmation)) {
-            System.out.println("Gym " + gymName + " deactivated.");
-        } else {
-            System.out.println("Gym deactivation cancelled.");
-        }
-    }
-}
+// Gym admin menu
+//    private static void adminMenu(Scanner scanner) {
+//        int choice;
+//        do {
+//            System.out.println("\n-- Gym Admin Menu --");
+//            System.out.println("1. View All Registered Gyms");
+//            System.out.println("2. View All Users");
+//            System.out.println("3. View pending approvals");
+//            System.out.println("4. Approve/Reject Gym Owner Registration");
+//            System.out.println("5. View All Bookings");
+//            System.out.println("6. Deactivate Gym");
+//            System.out.println("7. Logout");
+//
+//            choice = scanner.nextInt();
+//            scanner.nextLine(); // Consume newline character
+//
+//            switch (choice) {
+//                case 1:
+//                    viewAllGyms();
+//                    break;
+//                case 2:
+//                    viewAllUsers();
+//                    break;
+//                case 3:
+//                    System.out.println("Viewing all pending approvals..");
+//                    break;
+//                case 4:
+//                    approveRejectGymOwner(scanner);
+//                    break;
+//                case 5:
+//                    viewAllBookings();
+//                    break;
+//                case 6:
+//                    deactivateGym(scanner);
+//                    break;
+//                case 7:
+//                    System.out.println("Logging out...");
+//                    break;
+//                default:
+//                    System.out.println("Invalid choice. Please try again.");
+//            }
+//        } while (choice != 8);
+//    }
+//
+//    private static void viewAllGyms() {
+//        System.out.println("Displaying all registered gyms...");
+//        System.out.println("Gym 1: FitLife Gym - Location: City A");
+//        System.out.println("Gym 2: PowerHouse Gym - Location: City B");
+//    }
+//
+//    private static void viewAllUsers() {
+//        System.out.println("Displaying all users...");
+//        System.out.println("User 1: John Doe (Customer)");
+//        System.out.println("User 2: Jane Smith (Gym Owner)");
+//    }
+//
+//    private static void approveRejectGymOwner(Scanner scanner) {
+//        System.out.println("Enter Gym Owner's Name:");
+//        String gymOwnerName = scanner.nextLine();
+//        System.out.println("Approve or Reject (Enter 'approve' or 'reject'):");
+//        String decision = scanner.nextLine();
+//
+//        if ("approve".equalsIgnoreCase(decision)) {
+//            System.out.println("Gym Owner " + gymOwnerName + " approved.");
+//        } else if ("reject".equalsIgnoreCase(decision)) {
+//            System.out.println("Gym Owner " + gymOwnerName + " rejected.");
+//        } else {
+//            System.out.println("Invalid decision.");
+//        }
+//    }
+//
+//    private static void viewAllBookings() {
+//        System.out.println("Displaying all bookings...");
+//        System.out.println("Booking 1: Gym 1 - Slot 10:00 AM (Customer: John)");
+//        System.out.println("Booking 2: Gym 2 - Slot 11:00 AM (Customer: Jane)");
+//    }
+//
+//    private static void deactivateGym(Scanner scanner) {
+//        System.out.println("Enter Gym Name to deactivate:");
+//        String gymName = scanner.nextLine();
+//        System.out.println("Confirm deactivation (Yes/No):");
+//        String confirmation = scanner.nextLine();
+//
+//        if ("Yes".equalsIgnoreCase(confirmation)) {
+//            System.out.println("Gym " + gymName + " deactivated.");
+//        } else {
+//            System.out.println("Gym deactivation cancelled.");
+//        }
+//    }
+//}
