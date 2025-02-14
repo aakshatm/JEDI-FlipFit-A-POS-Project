@@ -3,11 +3,20 @@ package com.flipkart.bean;
 import java.util.List;
 
 public class Slot {
+    private int slotId;
     private int startTime;
     private int endTime;
     private int capacity;
     private List<Booking> bookings;
     private List<Booking> waitlisted;
+
+    public int getSlotId() {
+        return slotId;
+    }
+
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
+    }
 
     public int getStartTime() {
         return startTime;
