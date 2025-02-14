@@ -1,5 +1,8 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.FlipfitCustomer;
+import com.flipkart.bean.FlipfitGymCenter;
+import com.flipkart.bean.FlipfitUser;
 import com.flipkart.business.FlipfitAdminInterface;
 import com.flipkart.business.FlipfitGymCustomerInterface;
 import com.flipkart.business.FlipfitGymOwnerInterface;
@@ -11,13 +14,19 @@ import com.flipkart.business.FlipfitGymOwnerService;
 import java.util.Scanner;
 
 public class FlipfitApplication {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice;
 
         FlipfitAdminInterface adminService = new FlipfitAdminService();
-        FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
+        FlipfitGymCustomerService customerService = new FlipfitGymCustomerService();
         FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
+
+        System.out.println(customerService.register(101, "asdf@gmail.com", "aakshat", "aakshat7", "239023"));
+        if (customerService.login("asdf@gmail.com", "aakshat")){
+            System.out.println("login ho gya");
+        }
 
         // Welcome message
         System.out.println("Welcome to FlipFit Application");
@@ -202,11 +211,11 @@ public class FlipfitApplication {
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
-            System.out.println("3. Find gyms based on location");
-            System.out.println("4. Book Gym Slot");
-            System.out.println("5. View all Bookings");
-            System.out.println("6. Cancel Bookings");
-            System.out.println("7. Log Out");
+            System.out.println("3. Find gyms based on location"); // ownwer ki service ke through karega
+            System.out.println("4. Book Gym Slot"); // owner ki service ke through karega
+            System.out.println("5. View all Bookings"); // done
+            System.out.println("6. Cancel Bookings"); // done
+            System.out.println("7. Log Out"); // done
 
 
 

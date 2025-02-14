@@ -4,13 +4,83 @@ import com.flipkart.bean.*;
 
 import java.util.*;
 
-public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
+public class FlipfitGymCustomerService {
 
     private Map<Integer, FlipfitCustomer> customers = new HashMap<>();
     private Map<Integer, FlipfitGymCenter> gyms = new HashMap<>();
     private Map<Integer, Booking> bookings = new HashMap<>();
 
+    public List<FlipfitCustomer> registeredCustomers;
+
+//    private int userId;
+//    private String email;
+//    private String name;
+//    private String password;
+//    private String contactNumber;
+//private int age;
+//    private List<Booking> bookings;
+
+    public FlipfitGymCustomerService(){
+        registeredCustomers = new ArrayList<>();
+    }
+    public boolean register(int userId, String email, String name, String password, String contactNumber){
+        FlipfitCustomer newUser = new FlipfitCustomer();
+        newUser.setUserId(userId);
+        newUser.setEmail(email);
+        newUser.setName(name);
+        newUser.setPassword(password);
+        newUser.setContactNumber(contactNumber);
+        registeredCustomers.add(newUser);
+        return true;
+    }
+
+    public boolean login(String email, String password){
+        for (int i = 0; i < registeredCustomers.size(); i++){
+            if (email.equals(registeredCustomers.get(i).getEmail()) && password.equals(registeredCustomers.get(i).getPassword())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // View Available Slots
+    public boolean viewProfile(int userId, String email, String name, String password, String contactNumber){
+        for (int i = 0; i < registeredCustomers.size(); i++){
+            if (registeredCustomers.get(i).getUserId() == userId){
+                registeredCustomers.get(i).setUserId(userId);
+                registeredCustomers.get(i).setEmail(email);
+                registeredCustomers.get(i).setName(name);
+                registeredCustomers.get(i).setPassword(password);
+                registeredCustomers.get(i).setContactNumber(contactNumber);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // edit profile
+    public FlipfitCustomer viewProfile(int userId){
+        for (int i = 0; i < registeredCustomers.size(); i++){
+            if (registeredCustomers.get(i).getUserId() == userId) {
+                return registeredCustomers.get(i);
+            }
+        }
+        return null;
+    }
+
+    // view all booking
+    public List<Booking> getAllBooking(int userId){
+        for (int i = 0; i < registeredCustomers.size(); i++){
+            if (registeredCustomers.get(i).getUserId() == userId){
+                return registeredCustomers.get(i).getBookings();
+            }
+        }
+
+        return null;
+    }
+
+
     public void viewAvailableSlots(int centerId, String date) {
         FlipfitGymCenter gym = gyms.get(centerId);
         if (gym != null) {
@@ -80,19 +150,21 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
     }
 
     // Cancel Booking
-    public void cancelBooking(FlipfitCustomer user, int bookingId) {
-        Booking booking = bookings.get(bookingId);
-        if (booking != null) {
-            FlipfitGymCenter gym = gyms.get(booking.getGymId());
-            if (gym != null) {
-                Slot slot = getSlotById(gym, booking.getSlot());
-                if (slot != null) {
-                    slot.getBookings().remove(booking);
-                    bookings.remove(bookingId);
-                    System.out.println(user.getName() + " canceled booking ID: " + bookingId);
+    public boolean cancelBooking(int userId, int bookingId) {
+        for (int i = 0; i < registeredCustomers.size(); i++){
+            if (registeredCustomers.get(i).getUserId() == userId){
+                List<Booking> oldBookings =  registeredCustomers.get(i).getBookings();
+                List<Booking> newBookings = new ArrayList<>();
+                for (int j = 0; j < oldBookings.size(); j++){
+                    if (oldBookings.get(j).getBookingId() != bookingId){
+                        newBookings.add(oldBookings.get(j));
+                    }
                 }
+                registeredCustomers.get(i).setBookings(newBookings);
+                return true;
             }
         }
+        return false;
     }
 
     // Helper method to get slot by ID
