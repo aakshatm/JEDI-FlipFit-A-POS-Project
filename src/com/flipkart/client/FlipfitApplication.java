@@ -1,8 +1,6 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.FlipfitCustomer;
-import com.flipkart.bean.FlipfitGymCenter;
-import com.flipkart.bean.FlipfitUser;
+import com.flipkart.bean.*;
 import com.flipkart.business.FlipfitAdminInterface;
 import com.flipkart.business.FlipfitGymCustomerInterface;
 import com.flipkart.business.FlipfitGymOwnerInterface;
@@ -11,9 +9,27 @@ import com.flipkart.business.FlipfitAdminService;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.business.FlipfitGymOwnerService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class FlipfitApplication {
+    private List<FlipfitGymCenter> gymCenterList;
+    private List<Slot> slotList;
+
+//    private int gymId;
+//    private String gymName;
+//    private String gymCity;
+//    private float gymPrice;
+//    private List<Slot> slots;
+//
+//    private int slotId;
+//    private int startTime;
+//    private int endTime;
+//    private int capacity;
+//    private List<Booking> bookings;
+//    private List<Booking> waitlisted;
+
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -23,10 +39,24 @@ public class FlipfitApplication {
         FlipfitGymCustomerService customerService = new FlipfitGymCustomerService();
         FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
 
+        // hard coding the data
+
         System.out.println(customerService.register(101, "asdf@gmail.com", "aakshat", "aakshat7", "239023"));
         if (customerService.login("asdf@gmail.com", "aakshat")){
             System.out.println("login ho gya");
         }
+
+        Slot s1 = new Slot();
+
+        FlipfitGymCenter gc = new FlipfitGymCenter();
+        gc.setGymId(101);
+        gc.setGymName("Hla");
+        gc.setGymCity("Delhi");
+        gc.setGymPrice(1100);
+        gc.setSlots(s1);
+
+
+        // end of hard coding
 
         // Welcome message
         System.out.println("Welcome to FlipFit Application");
@@ -212,7 +242,7 @@ public class FlipfitApplication {
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
             System.out.println("3. Find gyms based on city"); // done // assuming ki hum list of gym center main app mei store karenge
-            System.out.println("4. Book Gym Slot"); // owner ki service ke through karega
+            System.out.println("4. Book Gym Slot"); // done // hume gym center ki list and slot ki list banani padegi main mei hi
             System.out.println("5. View all Bookings"); // done
             System.out.println("6. Cancel Bookings"); // done
             System.out.println("7. Log Out"); // done

@@ -1,5 +1,6 @@
 package com.flipkart.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Slot {
@@ -9,6 +10,11 @@ public class Slot {
     private int capacity;
     private List<Booking> bookings;
     private List<Booking> waitlisted;
+
+    public Slot(){
+        bookings = new ArrayList<>();
+        waitlisted = new ArrayList<>();
+    }
 
     public int getSlotId() {
         return slotId;
