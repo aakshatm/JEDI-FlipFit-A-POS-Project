@@ -113,7 +113,7 @@ public class FlipfitGymOwnerService implements FlipfitGymOwnerInterface {
         return flipFitGymOwnerDAOImplementation.updateGymDetails(gym);
     }
 
-
+    @Override
     public boolean addSlots(int gymId, List<Slot> slots) {
         return flipFitGymOwnerDAOImplementation.addSlots(gymId, slots);
     }

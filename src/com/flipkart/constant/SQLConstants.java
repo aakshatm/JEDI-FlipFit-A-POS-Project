@@ -8,7 +8,7 @@ package com.flipkart.constant;
 public class SQLConstants {
 
     // Insert a new gym with provided details
-    public static final String GYM_OWNER_INSERT_GYM = "INSERT INTO Gym (gymName, gymAddress, location, ownerId, Status) VALUES(?, ?, ?, ?, ?)";
+    public static final String GYM_OWNER_INSERT_GYM = "INSERT INTO Gym (gymName, gymAddress, location, Status) VALUES(?, ?, ?, ?)";
 
     // Insert new slots for a gym
     public static final String GYM_OWNER_ADD_SLOTS = "INSERT INTO Slots (startTime, seatCount, gymId) VALUES (?, ?, ?)";

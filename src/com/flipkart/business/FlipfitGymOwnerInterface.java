@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.bean.FlipfitGymOwner;
+import com.flipkart.bean.Slot;
 
 /**
  * Interface representing the operations that a FlipfitGymCenter Owner can perform.
@@ -12,6 +13,7 @@ import com.flipkart.bean.FlipfitGymOwner;
  *
  */
 public interface FlipfitGymOwnerInterface {
+    boolean addSlots(int gymId, List<Slot> slots);
 
     /**
      * Adds a new gym.

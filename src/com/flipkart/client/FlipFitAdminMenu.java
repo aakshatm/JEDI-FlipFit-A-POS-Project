@@ -53,6 +53,7 @@ public class FlipFitAdminMenu {
 
     public void viewAllGymOwnwers(){
         List<FlipfitGymOwner> ownwers = adminService.viewGymOwners();
+        ownwers.display();
         for(FlipfitGymOwner owner : ownwers){
             owner.display();
         }

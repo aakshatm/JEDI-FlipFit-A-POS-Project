@@ -25,8 +25,8 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
             preparedStatement.setString(1, gym.getGymName());
             preparedStatement.setString(2, gym.getGymAddress());
             preparedStatement.setString(3, gym.getLocation());
-            preparedStatement.setInt(4, gym.getOwnerId());
-            preparedStatement.setString(5, gym.getStatus());
+//            preparedStatement.setInt(4, gym.getOwnerId());
+            preparedStatement.setString(4, gym.getStatus());
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted == 0) {
