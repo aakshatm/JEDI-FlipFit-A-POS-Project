@@ -43,7 +43,7 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
     }
 
     /**
-     * Updates the password of a user.
+     * Updates the password of a user
      *
      * @param email  the email of the user
      * @param password  the current password of the user
