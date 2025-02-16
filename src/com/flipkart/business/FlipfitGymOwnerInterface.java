@@ -13,6 +13,9 @@ import com.flipkart.bean.Slot;
  *
  */
 public interface FlipfitGymOwnerInterface {
+
+    FlipfitGymOwner getProfile(String email, String password);
+
     boolean addSlots(int gymId, List<Slot> slots);
 
     /**

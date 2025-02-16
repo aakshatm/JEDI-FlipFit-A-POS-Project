@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface FlipFitGymOwnerDAOInterface {
 
+    FlipfitGymOwner getProfile(String email, String password);
+
     /**
      * Retrieves a list of gyms owned by a specific gym owner.
      * @param ownerId The ID of the gym owner whose gyms are to be retrieved. This should be a valid identifier for a gym owner in the system.

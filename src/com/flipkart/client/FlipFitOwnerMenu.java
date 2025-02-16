@@ -23,6 +23,11 @@ public class FlipFitOwnerMenu {
     private static FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
     private static Scanner scanner = new Scanner(System.in);
 
+    public void viewProfile(String email, String password){
+        FlipfitGymOwner owner = ownerService.getProfile(email, password);
+        owner.display();
+    }
+
     /// Verifies if the provided email and password match a registered gym owner.
     /// @param email Gym owner's email address.
     /// @param password Gym owner's password.
@@ -48,7 +53,8 @@ public class FlipFitOwnerMenu {
             System.out.println("Press 4 to add slots");
             System.out.println("Press 5 to update seat count by");
             System.out.println("Press 6 to update your details");
-            System.out.println("Press 7 to logout" );
+            System.out.println("Press 7 to view profile");
+            System.out.println("Press 8 to logout" );
 
             int choice = Integer.parseInt(scanner.nextLine());
 
@@ -75,6 +81,9 @@ public class FlipFitOwnerMenu {
                         System.out.println("Gym owner not updated" );
                     break;
                 case 7:
+                    viewProfile(email, password);
+                    break;
+                case 8:
                     return true;
                 default:
                     System.out.println("Invalid option!" );
