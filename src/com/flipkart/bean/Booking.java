@@ -3,7 +3,7 @@ package com.flipkart.bean;
 public class Booking {
     private int bookingId;
     private int gymId;
-    private int slot;
+    private String slot;
     private boolean isConfirmed;
 
     public int getBookingId() {
@@ -22,11 +22,11 @@ public class Booking {
         this.gymId = gymId;
     }
 
-    public int getSlot() {
+    public String getSlot() {
         return slot;
     }
 
-    public void setSlot(int slot) {
+    public void setSlot(String slot) {
         this.slot = slot;
     }
 
