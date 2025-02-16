@@ -1,13 +1,18 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipfitCustomer;
-import com.flipkart.bean.Payment;
+import java.util.List;
+
 import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.bean.FlipfitGymOwner;
 
-import java.util.List;
-
+/**
+ * Interface representing the operations that a FlipfitGymCenter Owner can perform.
+ * Includes methods for adding gyms, viewing owned gyms, validating gym owners,
+ * and updating gym owner details.
+ *
+ */
 public interface FlipfitGymOwnerInterface {
+
     /**
      * Adds a new gym.
      *
@@ -84,22 +89,5 @@ public interface FlipfitGymOwnerInterface {
      * @return true if the gym details were updated successfully; false otherwise
      */
     boolean updateGymDetails(FlipfitGymCenter gym);
-
-    // View available slots at a given center on a particular date
-    public void viewAvailableSlots(int centerId, String date);
-
-    // Find gym centers by location (city)
-    public void findGymByLocation(String location);
-
-    // Make payment for a confirmed booking
-    public void makePayment(int bookingId, Payment payment);
-
-    // Register for a waiting list if the slot is full
-    public void registerForWaitingList(int centerId, int slotId, FlipfitCustomer user);
-
-    // Book a gym slot for a user
-    public void bookGymSlot(FlipfitCustomer user, int slotId, int gymId);
-
-    // Cancel a booking by bookingId
-    public void cancelBooking(FlipfitCustomer user, int bookingId);
 }
+
