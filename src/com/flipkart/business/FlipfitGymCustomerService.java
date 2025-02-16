@@ -26,12 +26,18 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      */
     FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
+
+    public FlipfitCustomer getProfile(String email, String password){
+        return flipFitCustomerDAOImplementation.getProfile(email, password);
+    }
+
     /**
      * Creates a new user in the system.
      *
      * @param user  the user object containing the user's details
      * @return  true if user creation is successful, false otherwise
      */
+
     public boolean createUser(FlipfitCustomer user) {
         return flipFitCustomerDAOImplementation.createUser(user);
     }
@@ -46,7 +52,7 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      */
     @Override
     public boolean updateUserPassword(String email, String password, String updatedPassword) {
-        return false;
+        return flipFitUpdatePasswordDAOImplementation.updateGymUserPassword(email, password, updatedPassword);
     }
 
     /**

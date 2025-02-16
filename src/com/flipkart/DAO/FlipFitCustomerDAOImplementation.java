@@ -18,6 +18,40 @@ import java.util.List;
 public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInterface {
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
 
+    public FlipfitCustomer getProfile(String email, String password){
+        FlipfitCustomer profile = null;
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM User WHERE email = ? AND password = ?")) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    profile = new FlipfitCustomer();
+                    profile.setUserId(resultSet.getInt("userId"));
+                    profile.setUserName(resultSet.getString("userName"));
+                    profile.setPhoneNumber(resultSet.getString("phoneNumber"));
+                    profile.setAddress(resultSet.getString("address"));
+                    profile.setLocation(resultSet.getString("location"));
+                    profile.setEmail(resultSet.getString("email"));
+                    profile.setPassword(resultSet.getString("password"));
+                    return profile;
+                } else {
+                    throw new UserNotFoundException();
+                }
+            }
+            catch (UserNotFoundException e){
+                System.out.println("User details not found");
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        return profile;
+    }
+
     @Override
     public List<FlipfitGymCenter> viewAllGymsByArea(String area) {
         List<FlipfitGymCenter> gyms = new ArrayList<>();
