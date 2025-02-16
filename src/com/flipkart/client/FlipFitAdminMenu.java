@@ -53,12 +53,16 @@ public class FlipFitAdminMenu {
 
     public void viewAllGymOwnwers(){
         List<FlipfitGymOwner> ownwers = adminService.viewGymOwners();
-        ownwers.display()
+        for(FlipfitGymOwner owner : ownwers){
+            owner.display();
+        }
     }
 
     public void viewAllGyms(){
         List<FlipfitGymCenter> gyms = adminService.viewGyms();
-
+        for(FlipfitGymCenter gym : gyms){
+            gym.display();
+        }
     }
 
     public void verifyGym(){
