@@ -85,7 +85,9 @@ public class FlipFitGymCustomerMenu {
         int userId = customer.getUserId();
 
         List<Booking> bookings = customerService.viewAllBookings(userId);
-//        bookings.
+        for (Booking booking : bookings){
+            booking.displayBookings();
+        }
     }
 
 

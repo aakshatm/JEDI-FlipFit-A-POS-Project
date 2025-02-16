@@ -211,12 +211,15 @@ public class Booking {
     public void displayBookings() {
         System.out.println("Booking Details:");
         System.out.println("------------------------------");
-        System.out.println("Customer ID: " + getUserId());
-        System.out.println("Name: " + getUserName());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Phone Number: " + getPhoneNumber());
-        System.out.println("Address: " + getAddress());
-        System.out.println("Location: " + getLocation());
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Booking ID: " + bookingId);
+        System.out.println("Created At: " + createdAt);
+        System.out.println("Booking Status: " + bookingStatus);
+        System.out.println("Date: " + date);
+        System.out.println("Time: " + time);
+        System.out.println("Status: " + status);
+        System.out.println("Slot Id: " + slotId);
+        System.out.println("Status: " + status);
         System.out.println("------------------------------");
     }
 }
