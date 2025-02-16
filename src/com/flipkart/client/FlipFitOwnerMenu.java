@@ -1,6 +1,7 @@
 package com.flipkart.client;
 
 import com.flipkart.bean.FlipfitGymCenter;
+import com.flipkart.bean.FlipfitGymOwner;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.FlipfitGymOwnerInterface;
 import com.flipkart.business.FlipfitGymOwnerService;
@@ -72,7 +73,7 @@ public class FlipFitOwnerMenu {
             System.out.println("Gym could not be added!" );
     }
 
-    private void addSlots() {
+    public void addSlots() {
         System.out.println( "Gym ID: " );
         int gymId = Integer.parseInt(scanner.nextLine());
 
@@ -99,9 +100,18 @@ public class FlipFitOwnerMenu {
             System.out.println( "Gym could not be added!" );
     }
 
+    /// Updates the gym owner's password.
+    /// @param userMail Gym owner's email address.
+    /// @param password Current password.
+    /// @param updatedPassword New password.
+    /// @return true if the password update is successful, false otherwise.
+    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
+    }
+
     /// Displays all gyms owned by the logged-in gym owner.
     /// @param email Gym owner's email address.
-    private void displayGyms(String email) {
+    public void displayGyms(String email) {
         int gymOwnerId = ownerService.getGymOwnerIdByEmail(email);
         if (gymOwnerId == -1) {
             System.out.println("No such gym owner exists with email: " + email);
@@ -140,7 +150,7 @@ public class FlipFitOwnerMenu {
     /**
      * Updates the seat count for a specific gym and slot.
      */
-    private void updateSeatCount(String email) {
+    public void updateSeatCount(String email) {
         displayGyms(email);
         System.out.println("Enter gym ID: ");
         int gymId = Integer.parseInt(scanner.nextLine());
@@ -185,6 +195,82 @@ public class FlipFitOwnerMenu {
         gym.setGymId(gymId);
 
         return ownerService.updateGymDetails(gym);
+    }
+
+    /// Updates the details of an existing gym owner.
+    /// @return true if the update is successful, false otherwise.
+    private boolean updateGymOwnerDetails() {
+        System.out.println( "Enter gym owner details:" );
+        System.out.println( "Email: " );
+        String ownerEmail = scanner.nextLine();
+       
+        System.out.println( "Name: " );
+        String ownerName = scanner.nextLine();
+        System.out.println( "Phone Number: " );
+        String phoneNo = scanner.nextLine();
+        
+
+        FlipfitGymOwner gymOwner = new FlipfitGymOwner();
+        gymOwner.setOwnerEmail(ownerEmail);
+        gymOwner.setOwnerName(ownerName);
+        gymOwner.setPhoneNo(phoneNo);
+
+        return ownerService.updateGymOwner(gymOwner);
+    }
+
+    /**
+     * Handles the creation of a new gym owner account.
+     */
+    public void createGymOwner() {
+        System.out.println("Enter gym owner details:" );
+        System.out.println( "Email: " );
+        String ownerEmail = scanner.nextLine();
+
+        System.out.println( "Name: " );
+        String ownerName = scanner.nextLine();
+        System.out.println( "Password: " );
+        String password = scanner.nextLine();
+
+        System.out.println( "Phone Number: " );
+        String phoneNo = scanner.nextLine();
+
+        System.out.println( "National ID: " );
+        String nationalId = scanner.nextLine();
+
+
+        if (nationalId.length() != 12) {
+            System.out.println( "Invalid national ID! Length must be 12" );
+            return;
+        }
+
+        System.out.println( "GST: " );
+        String GST = scanner.nextLine();
+
+        System.out.println( "PAN Number: " );
+        String PAN = scanner.nextLine();
+
+        if (PAN.length() != 10) {
+            System.out.println( "Invalid PAN Card Number. Length must be 10" );
+            return;
+        }
+
+        FlipfitGymOwner gymOwner = new FlipfitGymOwner();
+        List<FlipfitGymCenter> emptyGymList = new ArrayList<>();
+        gymOwner.setOwnerEmail(ownerEmail);
+        gymOwner.setPAN(PAN);
+        gymOwner.setOwnerName(ownerName);
+        gymOwner.setGST(GST);
+        gymOwner.setPassword(password);
+        gymOwner.setNationalId(nationalId);
+        gymOwner.setPhoneNo(phoneNo);
+        gymOwner.setGyms(emptyGymList);
+        gymOwner.setVerificationStatus("unverified");
+
+        if (ownerService.createGymOwner(gymOwner)) {
+            System.out.println( "Gym owner created!" );
+        } else {
+            System.out.println( "Gym owner not created!" );
+        }
     }
     
 }
