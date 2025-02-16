@@ -11,9 +11,9 @@ public class test {
 //        System.out.println(adminService.login(101, "Election77@7"));
 //        adminService.editProfile(101, "random");
 
-        FlipfitGymCustomerInterface gymcustomerService = new FlipfitGymCustomerService();
-        System.out.println(gymcustomerService.getSeatCount(1, 6));
-        gymcustomerService.bookSlot(1, 6, "aakshatmalhotra100@gmail.com"); // issue in booking
+//        FlipfitGymCustomerInterface gymcustomerService = new FlipfitGymCustomerService();
+//        System.out.println(gymcustomerService.getSeatCount(1, 6));
+//        gymcustomerService.bookSlot(1, 6, "aakshatmalhotra100@gmail.com"); // issue in booking
 //        for (Booking book: gymcustomerService.viewAllBookings(2)){
 //            System.out.println(book.getBookingId());
 //        }
@@ -79,6 +79,10 @@ public class test {
 //            System.out.println(gym.getGymId());
 //            System.out.println(gym.getGymName());
 //        }
+
+
+        FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
+        customerService.editProfile(5, "asdfasd@gmail.com", "234123", "23412", "21341", "23423", "23423");
 
     }
 }
