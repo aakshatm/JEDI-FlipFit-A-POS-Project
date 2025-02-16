@@ -207,4 +207,23 @@ public class Booking {
     public void setBookingStatus(int bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
+
+    public void displayBookings() {
+        System.out.println("Booking Details:");
+        System.out.println("------------------------------");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Booking ID: " + bookingId);
+        System.out.println("Created At: " + createdAt);
+        String bookingStatusmsg = "confirmed";
+        if (bookingStatus == 2){
+            bookingStatusmsg = "cancelled";
+        }
+        System.out.println("Booking Status: " + bookingStatusmsg);
+        System.out.println("Date: " + date);
+        System.out.println("Time: " + time);
+//        System.out.println("Status: " + status);
+        System.out.println("Slot Id: " + slotId);
+//        System.out.println("Status: " + status);
+        System.out.println("------------------------------");
+    }
 }

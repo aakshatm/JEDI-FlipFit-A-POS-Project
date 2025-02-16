@@ -85,4 +85,15 @@ public class Slot {
     public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;
     }
+
+
+    public void display(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("Slot ID: " + slotId);
+        System.out.println("Start Time: " + startTime);
+        System.out.println("Seat Count: " + seatCount);
+        System.out.println("--------------------------------------------------");
+
+
+    }
 }

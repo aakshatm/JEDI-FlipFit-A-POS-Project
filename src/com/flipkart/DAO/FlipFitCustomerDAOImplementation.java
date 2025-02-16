@@ -19,6 +19,64 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
 
     @Override
+    public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
+        String query = "UPDATE User SET email = ?, password = ?, userName = ?, phoneNumber = ?, address = ?, location = ? WHERE userId = ?";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, phoneNumber);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, location);
+            preparedStatement.setInt(7, customerId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Return true if update is successful
+
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public FlipfitCustomer getProfile(String email, String password){
+        FlipfitCustomer profile = null;
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM User WHERE email = ? AND password = ?")) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    profile = new FlipfitCustomer();
+                    profile.setUserId(resultSet.getInt("userId"));
+                    profile.setUserName(resultSet.getString("userName"));
+                    profile.setPhoneNumber(resultSet.getString("phoneNumber"));
+                    profile.setAddress(resultSet.getString("address"));
+                    profile.setLocation(resultSet.getString("location"));
+                    profile.setEmail(resultSet.getString("email"));
+                    profile.setPassword(resultSet.getString("password"));
+                    return profile;
+                } else {
+                    throw new UserNotFoundException();
+                }
+            }
+            catch (UserNotFoundException e){
+                System.out.println("User details not found");
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        return profile;
+    }
+
+    @Override
     public List<FlipfitGymCenter> viewAllGymsByArea(String area) {
         List<FlipfitGymCenter> gyms = new ArrayList<>();
 
@@ -122,10 +180,10 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 return false;
             }
 
-            if ((!cancelOverlappingBookingIfExists(gymId, startTime, userId, 0)) && (!cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
-                System.out.println("Unable to cancel the overlapping booking. Please try again");
-                return false;
-            }
+//            if ((!cancelOverlappingBookingIfExists(gymId, startTime, userId, 0)) && (!cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
+//                System.out.println("Unable to cancel the overlapping booking. Please try again");
+//                return false;
+//            }
 
             try (Connection conn = DatabaseConnector.getConnection();
                  PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_BOOKING);) {

@@ -8,6 +8,7 @@ import com.flipkart.DAO.FlipFitUpdatePasswordDAOImplementation;
 
 import java.util.*;
 
+
 /**
  * Provides operations related to user services including user creation, updating user details,
  * validating users, and managing bookings.
@@ -26,18 +27,30 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      */
     FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
+
+    @Override
+    public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
+        return flipFitCustomerDAOImplementation.editProfile(customerId, email, password, username, phoneNumber, address, location);
+    }
+
+    @Override
+    public FlipfitCustomer getProfile(String email, String password){
+        return flipFitCustomerDAOImplementation.getProfile(email, password);
+    }
+
     /**
      * Creates a new user in the system.
      *
      * @param user  the user object containing the user's details
      * @return  true if user creation is successful, false otherwise
      */
+
     public boolean createUser(FlipfitCustomer user) {
         return flipFitCustomerDAOImplementation.createUser(user);
     }
 
     /**
-     * Updates the password of a user.
+     * Updates the password of a user
      *
      * @param email  the email of the user
      * @param password  the current password of the user
@@ -46,7 +59,7 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      */
     @Override
     public boolean updateUserPassword(String email, String password, String updatedPassword) {
-        return false;
+        return flipFitUpdatePasswordDAOImplementation.updateGymUserPassword(email, password, updatedPassword);
     }
 
     /**
@@ -68,9 +81,12 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      * @param updatedPassword  the new password to set
      * @return  true if password update is successful, false otherwise
      */
+    @Override
     public boolean updateGymUserPassword(String email, String password, String updatedPassword) {
         return flipFitUpdatePasswordDAOImplementation.updateGymUserPassword(email, password, updatedPassword);
     }
+
+
 
     /**
      * Updates the details of a user.

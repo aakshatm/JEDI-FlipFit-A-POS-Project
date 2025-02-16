@@ -1,363 +1,355 @@
 package com.flipkart.client;
 
-import java.util.*;
+import com.flipkart.bean.FlipfitGymCenter;
+import com.flipkart.bean.FlipfitGymOwner;
+import com.flipkart.bean.Slot;
+import com.flipkart.business.FlipfitGymOwnerInterface;
+import com.flipkart.business.FlipfitGymOwnerService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class FlipFitOwnerMenu {
-    private final List<Gym> ownerGyms = new ArrayList<>();
-    private final List<GymOwner> gymOwners = new ArrayList<>();
-    private final List<PendingApproval> pendingApprovals = new ArrayList<>();
-    private final Map<Integer, Slot> gymSlots = new HashMap<>();
+//    System.out.println("1. View Profile");
+//            System.out.println("2. Edit Profile");
+//            System.out.println("3. Register his/her gym");
+//            System.out.println("4. View approved gyms");
+//            System.out.println("5. View pending approvals");
+//            System.out.println("6. Edit Gym Details");
+//            System.out.println("7. Remove his Gym Centers");
+//            System.out.println("8. Log out");
 
-    public FlipFitOwnerMenu() {
-        initializeData();
+    private static FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public void viewProfile(String email, String password){
+        FlipfitGymOwner owner = ownerService.getProfile(email, password);
+        owner.display();
     }
 
-    private void initializeData() {
-        ownerGyms.addAll(Arrays.asList(
-                new Gym(1, "FitLife Pro", "Central Delhi", "Premium", 4.5, true),
-                new Gym(2, "PowerHouse Elite", "South Mumbai", "Elite", 4.8, true),
-                new Gym(3, "CrossFit Zone", "Indiranagar", "Standard", 4.2, true)
-        ));
-
-        gymOwners.addAll(Arrays.asList(
-                new GymOwner(101, "John Smith", "john@gym.com", "9876543210", "Premium"),
-                new GymOwner(102, "Sarah Wilson", "sarah@gym.com", "9876543211", "Elite")
-        ));
-
-        pendingApprovals.addAll(Arrays.asList(
-                new PendingApproval("Michael Johnson", "michael@gym.com", "Elite Fitness"),
-                new PendingApproval("Emily Brown", "emily@gym.com", "Fitness Hub")
-        ));
-
-        gymSlots.put(1, new Slot(1, "06:00", "07:00", 20));
-        gymSlots.put(2, new Slot(2, "07:00", "08:00", 15));
-        gymSlots.put(3, new Slot(3, "08:00", "09:00", 25));
+    /// Verifies if the provided email and password match a registered gym owner.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if the credentials are valid, false otherwise.
+    boolean verifyGymOwner(String email, String password) {
+        return ownerService.validateGymOwner(email, password);
     }
 
-    private void viewProfile() {
-        GymOwner currentOwner = gymOwners.get(0);
-
-        System.out.println("\n=== Your Profile ===");
-        System.out.println("─".repeat(75));
-        System.out.printf("%-5s │ %-20s │ %-25s │ %-15s │ %-10s%n",
-                "ID", "Name", "Email", "Phone", "Type");
-        System.out.println("─".repeat(75));
-
-        System.out.printf("%-5d │ %-20s │ %-25s │ %-15s │ %-10s%n",
-                currentOwner.id,
-                currentOwner.name,
-                currentOwner.email,
-                currentOwner.phone,
-                currentOwner.type);
-
-        System.out.println("─".repeat(75));
-    }
-    private void registerNewGym(Scanner scanner) {
-        System.out.println("\n=== Register New Gym ===");
-        System.out.print("Enter Gym Name: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Enter Location: ");
-        String location = scanner.nextLine();
-
-        System.out.print("Enter Category (Standard/Premium/Elite): ");
-        String category = scanner.nextLine();
-
-        int newId = ownerGyms.size() + 1;
-        ownerGyms.add(new Gym(newId, name, location, category, 0.0, true));
-
-        System.out.println("\nEnter Slot Information:");
-        addGymSlots(scanner, newId);
-
-        System.out.println("\nGym registered successfully!");
-        viewApprovedGyms();
-    }
-
-    private void addGymSlots(Scanner scanner, int gymId) {
-        System.out.print("Number of slots to add: ");
-        int slotCount = scanner.nextInt();
-        scanner.nextLine();
-
-        for (int i = 0; i < slotCount; i++) {
-            System.out.println("\nSlot " + (i + 1) + ":");
-            System.out.print("Start Time (HH:mm): ");
-            String startTime = scanner.nextLine();
-            System.out.print("End Time (HH:mm): ");
-            String endTime = scanner.nextLine();
-            System.out.print("Capacity: ");
-            int capacity = scanner.nextInt();
-            scanner.nextLine();
-
-            int slotId = gymSlots.size() + 1;
-            gymSlots.put(slotId, new Slot(slotId, startTime, endTime, capacity));
+    /// Handles the gym owner login process and displays the menu options.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if logout is successful, false otherwise.
+    public boolean gymOwnerLogin(String email, String password) {
+        if (!verifyGymOwner(email, password)) {
+            return false;
         }
-    }
+        System.out.println( "Login Successful! (Gym Owner)" );
+        while (true) {
+            System.out.println(  "-----------------Gym Owner Menu-----------------" );
+            System.out.println( "Press 1 to add a gym");
+            System.out.println("Press 2 to update gym details");
+            System.out.println("Press 3 to view all gyms");
+            System.out.println("Press 4 to add slots");
+            System.out.println("Press 5 to update seat count by");
+            System.out.println("Press 6 to update your details");
+            System.out.println("Press 7 to view profile");
+            System.out.println("Press 8 to logout" );
 
-    private void viewApprovedGyms() {
-        System.out.println("\n=== Approved Gyms ===");
-        System.out.println("─".repeat(85));
-        System.out.printf("%-5s │ %-20s │ %-15s │ %-10s │ %-8s │ %-10s%n",
-                "ID", "Name", "Location", "Category", "Rating", "Status");
-        System.out.println("─".repeat(85));
-
-        for (Gym gym : ownerGyms) {
-            System.out.printf("%-5d │ %-20s │ %-15s │ %-10s │ %-8.1f │ %-10s%n",
-                    gym.id, gym.name, gym.location, gym.category,
-                    gym.rating, gym.active ? "Active" : "Inactive");
-        }
-        System.out.println("─".repeat(85));
-    }
-
-    private void viewPendingGymApprovals() {
-        System.out.println("\n=== Pending Approvals ===");
-        System.out.println("─".repeat(65));
-        System.out.printf("%-20s │ %-25s │ %-15s%n",
-                "Owner Name", "Email", "Gym Name");
-        System.out.println("─".repeat(65));
-
-        for (PendingApproval approval : pendingApprovals) {
-            System.out.printf("%-20s │ %-25s │ %-15s%n",
-                    approval.ownerName, approval.email, approval.gymName);
-        }
-        System.out.println("─".repeat(65));
-    }
-
-    private void editGymDetails(Scanner scanner) {
-        viewApprovedGyms();
-        System.out.print("\nEnter Gym ID to edit: ");
-        int gymId = scanner.nextInt();
-        scanner.nextLine();
-
-        Gym gymToEdit = ownerGyms.stream()
-                .filter(gym -> gym.id == gymId)
-                .findFirst()
-                .orElse(null);
-
-        if (gymToEdit != null) {
-            System.out.println("\n1. Edit Name");
-            System.out.println("2. Edit Location");
-            System.out.println("3. Edit Category");
-            System.out.println("4. Edit Slots");
-            System.out.println("5. Go Back");
-
-            System.out.print("\nSelect option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1:
-                    System.out.print("Enter new name: ");
-                    gymToEdit.name = scanner.nextLine();
+                    addGym(email);
                     break;
                 case 2:
-                    System.out.print("Enter new location: ");
-                    gymToEdit.location = scanner.nextLine();
+                    updateGym(email);
                     break;
                 case 3:
-                    System.out.print("Enter new category: ");
-                    gymToEdit.category = scanner.nextLine();
+                    displayGyms(email);
                     break;
                 case 4:
-                    addGymSlots(scanner, gymId);
-                    break;
-            }
-            System.out.println("Gym details updated successfully!");
-            viewApprovedGyms();
-        } else {
-            System.out.println("Gym not found!");
-        }
-    }
-
-    private void removeGym(Scanner scanner) {
-        viewApprovedGyms();
-        System.out.print("\nEnter Gym ID to remove: ");
-        int gymId = scanner.nextInt();
-        scanner.nextLine();
-
-        boolean removed = ownerGyms.removeIf(gym -> gym.id == gymId);
-        if (removed) {
-            System.out.println("Gym removed successfully!");
-            viewApprovedGyms();
-        } else {
-            System.out.println("Gym not found!");
-        }
-    }
-
-    private void editProfile(Scanner scanner) {
-        GymOwner currentOwner = gymOwners.get(0);
-
-        System.out.println("\n=== Edit Profile ===");
-        System.out.println("1. Edit Name");
-        System.out.println("2. Edit Email");
-        System.out.println("3. Edit Phone Number");
-        System.out.println("4. Edit Membership Type");
-        System.out.println("5. Go Back");
-
-        System.out.print("\nSelect option to edit: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (choice) {
-            case 1:
-                System.out.print("Enter new name: ");
-                String newName = scanner.nextLine();
-                currentOwner.name = newName;
-                break;
-            case 2:
-                System.out.print("Enter new email: ");
-                String newEmail = scanner.nextLine();
-                currentOwner.email = newEmail;
-                break;
-            case 3:
-                System.out.print("Enter new phone number: ");
-                String newPhone = scanner.nextLine();
-                currentOwner.phone = newPhone;
-                break;
-            case 4:
-                System.out.println("Select membership type:");
-                System.out.println("1. Standard");
-                System.out.println("2. Premium");
-                System.out.println("3. Elite");
-                System.out.print("Enter choice: ");
-                int typeChoice = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (typeChoice) {
-                    case 1:
-                        currentOwner.type = "Standard";
-                        break;
-                    case 2:
-                        currentOwner.type = "Premium";
-                        break;
-                    case 3:
-                        currentOwner.type = "Elite";
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Membership type not changed.");
-                        return;
-                }
-                break;
-            case 5:
-                return;
-            default:
-                System.out.println("Invalid choice.");
-                return;
-        }
-
-        System.out.println("\nProfile updated successfully!");
-        viewProfile();
-    }
-
-
-    public void showMenu(Scanner scanner) {
-        int choice;
-        do {
-            displayMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-                case 1:
-                    viewProfile();
-                    break;
-                case 2:
-                    editProfile(scanner);
-                break;
-                case 3:
-                    registerNewGym(scanner);
-                    break;
-                case 4:
-                    viewApprovedGyms();
+                    addSlots();
                     break;
                 case 5:
-                    viewPendingGymApprovals();
+                    updateSeatCount(email);
                     break;
                 case 6:
-                    editGymDetails(scanner);
+                    if (updateGymOwnerDetails())
+                        System.out.println("Gym owner updated successfully!" );
+                    else
+                        System.out.println("Gym owner not updated" );
                     break;
                 case 7:
-                    removeGym(scanner);
+                    viewProfile(email, password);
                     break;
                 case 8:
-                    System.out.println("Logging out...");
-                    break;
+                    return true;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+                    System.out.println("Invalid option!" );
             }
-        } while (choice != 8);
-    }
-
-    private void displayMenu() {
-        System.out.println("\n=== Gym Owner Menu ===");
-        System.out.println("1. View Profile");
-        System.out.println("2. Edit Profile");
-        System.out.println("3. Register a new gym");
-        System.out.println("4. View approved gyms");
-        System.out.println("5. View pending approvals");
-        System.out.println("6. Edit Gym Details");
-        System.out.println("7. Remove Gym");
-        System.out.println("8. Log out");
-        System.out.print("\nEnter your choice: ");
-    }
-
-    // Data model classes
-    private static class Gym {
-        int id;
-        String name;
-        String location;
-        String category;
-        double rating;
-        boolean active;
-
-        Gym(int id, String name, String location, String category, double rating, boolean active) {
-            this.id = id;
-            this.name = name;
-            this.location = location;
-            this.category = category;
-            this.rating = rating;
-            this.active = active;
         }
     }
 
-    private static class GymOwner {
-        int id;
-        String name;
-        String email;
-        String phone;
-        String type;
+    /// Adds a new gym to the system.
+    /// @param email Gym owner's email address (used to fetch the owner ID).
+    public void addGym(String email){
+        FlipfitGymCenter gym = new FlipfitGymCenter();
+        int gymOwnerId = ownerService.getGymOwnerIdByEmail(email);
+        if (gymOwnerId == -1) {
+            System.out.println("No such gym owner exists with email: " + email);
+            return;
+        }
+        gym.setOwnerId(gymOwnerId);
 
-        GymOwner(int id, String name, String email, String phone, String type) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.phone = phone;
-            this.type = type;
+        System.out.println("Enter details of the gym: ");
+        System.out.println("Name: " );
+        String gymName = scanner.nextLine();
+        System.out.println( "Address: ");
+        String address = scanner.nextLine();
+        
+        System.out.println( "Location: ");
+        String location = scanner.nextLine();
+        
+        String gymStatus = "unverified";
+
+        gym.setGymAddress(address);
+        gym.setLocation(location);
+        gym.setGymName(gymName);
+        gym.setStatus(gymStatus);
+
+        List<Slot> slots = new ArrayList<>();
+        System.out.println("Please enter number of slots: ");
+        int slotCount = Integer.parseInt(scanner.nextLine());
+        
+        int currentCount = 1;
+        while (currentCount <= slotCount) {
+            System.out.println("Add details for slot number " + currentCount + ": ");
+            System.out.println("Enter start time: ");
+            int startTime = Integer.parseInt(scanner.nextLine());
+            
+            System.out.println("Enter available seats: ");
+            int seatCount = Integer.parseInt(scanner.nextLine());
+            
+            Slot slot = new Slot(-1, startTime, seatCount);
+            slots.add(slot);
+            currentCount++;
+        }
+
+        gym.setSlots(slots);
+        if (ownerService.addGym(gym))
+            System.out.println("Gym added successfully!" );
+        else
+            System.out.println("Gym could not be added!" );
+    }
+
+    public void addSlots() {
+        System.out.println( "Gym ID: " );
+        int gymId = Integer.parseInt(scanner.nextLine());
+
+        List<Slot> slots = new ArrayList<>();
+        System.out.println("Please enter number of slots: " );
+        int slotCount = Integer.parseInt(scanner.nextLine());
+
+        int currentCount = 1;
+        while (currentCount <= slotCount) {
+            System.out.println("Add details for slot number " + currentCount + ": ");
+            System.out.println("Enter start time: ");
+            int startTime = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Enter available seats: ");
+            int seatCount = Integer.parseInt(scanner.nextLine());
+
+            Slot slot = new Slot(-1, startTime, seatCount);
+            slots.add(slot);
+            currentCount++;
+        }
+        if(ownerService.addSlots(gymId, slots))
+            System.out.println( "Gym added successfully!" );
+        else
+            System.out.println( "Gym could not be added!" );
+    }
+
+    /// Updates the gym owner's password.
+    /// @param userMail Gym owner's email address.
+    /// @param password Current password.
+    /// @param updatedPassword New password.
+    /// @return true if the password update is successful, false otherwise.
+//    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+//        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
+//    }
+
+    /// Displays all gyms owned by the logged-in gym owner.
+    /// @param email Gym owner's email address.
+    public void displayGyms(String email) {
+        int gymOwnerId = ownerService.getGymOwnerIdByEmail(email);
+        if (gymOwnerId == -1) {
+            System.out.println("No such gym owner exists with email: " + email);
+            return;
+        }
+
+        List<FlipfitGymCenter> gymsList = ownerService.viewMyGyms(gymOwnerId);
+        if (gymsList.isEmpty()) {
+            System.out.println("No gyms found for the gym owner with email: " + email);
+            return;
+        }
+
+        String gymLeftAlignFormat = "| %-5d | %-20s | %-40s | %-20s |%n";
+        String slotLeftAlignFormat = "| %-5d | %-15s | %-5d |%n";
+
+        for (FlipfitGymCenter gym : gymsList) {
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+            System.out.format("| Gym ID|     Name             |           Address                        |     Location         |\n");
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+            System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation());
+            System.out.format("+-------+----------------------+------------------------------------------+----------------------+\n");
+            System.out.println("Slots: ");
+            System.out.format("+-------+---------------+-------+\n");
+            System.out.format("|Slot ID|     Time      | Seats |\n");
+            System.out.format("+-------+---------------+-------+\n");
+
+            for (Slot slot : gym.getSlots()) {
+                System.out.format(slotLeftAlignFormat, slot.getSlotsId(), slot.getStartTime() + " - " + (slot.getStartTime() + 1), slot.getSeatCount());
+            }
+            System.out.format("+-------+---------------+-------+\n");
+            System.out.println();
         }
     }
 
-    private static class PendingApproval {
-        String ownerName;
-        String email;
-        String gymName;
-
-        PendingApproval(String ownerName, String email, String gymName) {
-            this.ownerName = ownerName;
-            this.email = email;
-            this.gymName = gymName;
-        }
+    /// Updates the gym owner's password.
+    /// @param userMail Gym owner's email address.
+    /// @param password Current password.
+    /// @param updatedPassword New password.
+    /// @return true if the password update is successful, false otherwise.
+    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
     }
 
-    private static class Slot {
-        int id;
-        String startTime;
-        String endTime;
-        int capacity;
+    /**
+     * Updates the seat count for a specific gym and slot.
+     */
+    public void updateSeatCount(String email) {
+        displayGyms(email);
+        System.out.println("Enter gym ID: ");
+        int gymId = Integer.parseInt(scanner.nextLine());
 
-        Slot(int id, String startTime, String endTime, int capacity) {
-            this.id = id;
-            this.startTime = startTime;
-            this.endTime = endTime;
-            this.capacity = capacity;
+        System.out.println("Enter start time: ");
+        int startTime = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Update seat count by: ");
+        int seatCount = Integer.parseInt(scanner.nextLine());
+
+        if (ownerService.updateSeatCount(gymId, startTime, seatCount))
+            System.out.println("Seat count updated!");
+        else
+            System.out.println("Seat count not updated");
+    }
+
+    /**
+     * Updates the details of an existing gym.
+     * @param email email of the gymOwner
+     * @return true if gym details are updated successfully, false otherwise.
+     * */
+    public boolean updateGym(String email) {
+        displayGyms(email);
+
+        System.out.println("Enter gym ID: ");
+        int gymId = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Enter gym details: ");
+        System.out.println("Name: ");
+        String gymName = scanner.nextLine();
+        System.out.println("Gym Address: ");
+        String gymAddress = scanner.nextLine();
+
+        System.out.println("Gym Location: ");
+        String gymALocation = scanner.nextLine();
+
+
+        FlipfitGymCenter gym = new FlipfitGymCenter();
+        gym.setGymName(gymName);
+        gym.setGymAddress(gymAddress);
+        gym.setLocation(gymALocation);
+        gym.setGymId(gymId);
+
+        return ownerService.updateGymDetails(gym);
+    }
+
+    /// Updates the details of an existing gym owner.
+    /// @return true if the update is successful, false otherwise.
+    private boolean updateGymOwnerDetails() {
+        System.out.println( "Enter gym owner details:" );
+        System.out.println( "Email: " );
+        String ownerEmail = scanner.nextLine();
+       
+        System.out.println( "Name: " );
+        String ownerName = scanner.nextLine();
+        System.out.println( "Phone Number: " );
+        String phoneNo = scanner.nextLine();
+        
+
+        FlipfitGymOwner gymOwner = new FlipfitGymOwner();
+        gymOwner.setOwnerEmail(ownerEmail);
+        gymOwner.setOwnerName(ownerName);
+        gymOwner.setPhoneNo(phoneNo);
+
+        return ownerService.updateGymOwner(gymOwner);
+    }
+
+    /**
+     * Handles the creation of a new gym owner account.
+     */
+    public void createGymOwner() {
+        System.out.println("Enter gym owner details:" );
+        System.out.println( "Email: " );
+        String ownerEmail = scanner.nextLine();
+
+        System.out.println( "Name: " );
+        String ownerName = scanner.nextLine();
+        System.out.println( "Password: " );
+        String password = scanner.nextLine();
+
+        System.out.println( "Phone Number: " );
+        String phoneNo = scanner.nextLine();
+
+        System.out.println( "National ID: " );
+        String nationalId = scanner.nextLine();
+
+
+        if (nationalId.length() != 12) {
+            System.out.println( "Invalid national ID! Length must be 12" );
+            return;
+        }
+
+        System.out.println( "GST: " );
+        String GST = scanner.nextLine();
+
+        System.out.println( "PAN Number: " );
+        String PAN = scanner.nextLine();
+
+        if (PAN.length() != 10) {
+            System.out.println( "Invalid PAN Card Number. Length must be 10" );
+            return;
+        }
+
+        FlipfitGymOwner gymOwner = new FlipfitGymOwner();
+        List<FlipfitGymCenter> emptyGymList = new ArrayList<>();
+        gymOwner.setOwnerEmail(ownerEmail);
+        gymOwner.setPAN(PAN);
+        gymOwner.setOwnerName(ownerName);
+        gymOwner.setGST(GST);
+        gymOwner.setPassword(password);
+        gymOwner.setNationalId(nationalId);
+        gymOwner.setPhoneNo(phoneNo);
+        gymOwner.setGyms(emptyGymList);
+        gymOwner.setVerificationStatus("unverified");
+
+        if (ownerService.createGymOwner(gymOwner)) {
+            System.out.println( "Gym owner created!" );
+        } else {
+            System.out.println( "Gym owner not created!" );
         }
     }
+    
 }
+

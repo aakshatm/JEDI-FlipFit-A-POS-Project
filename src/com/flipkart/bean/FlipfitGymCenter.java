@@ -162,4 +162,27 @@ public class FlipfitGymCenter {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public void display(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("Gym ID: " + gymId);
+        System.out.println("Gym Name: " + gymName);
+        System.out.println("Gym Address: " + gymAddress);
+        System.out.println("--------------------------------------------------");
+    }
+
+    public void displayWithSlot(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("Gym ID: " + gymId);
+        System.out.println("Gym Name: " + gymName);
+        System.out.println("Gym Address: " + gymAddress);
+        System.out.println("--------------------------------------------------");
+
+        for (Slot slot: slots){
+            slot.display();
+        }
+    }
+
+
 }
+

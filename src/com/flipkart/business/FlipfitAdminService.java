@@ -12,6 +12,7 @@ import java.util.List;
 public class FlipfitAdminService implements FlipfitAdminInterface{
 
 
+    
     private static FlipfitAdmin admin;
     private static boolean loginIN;
     FlipFitAdminDAOInterface dao = new FlipFitAdminDAOImplementation();
@@ -19,13 +20,11 @@ public class FlipfitAdminService implements FlipfitAdminInterface{
     public FlipfitAdminService(){
         // dao implemenation mei fetch data from database and set it up
         admin = dao.getAdminDetails();
-        System.out.println(admin.getPassword());
-        System.out.println(admin.getAdminId());
         loginIN = false;
     }
     @Override
-    public boolean login(int adminId, String password) {
-        if(adminId == admin.getAdminId() && password.equals(admin.getPassword())){
+    public boolean login(String email, String password) {
+        if(email.equals(admin.getEmail()) && password.equals(admin.getPassword())){
             loginIN = true;
             return true;
         }
@@ -53,6 +52,7 @@ public class FlipfitAdminService implements FlipfitAdminInterface{
 
     @Override
     public boolean editProfile(int adminId, String password) {
+        admin = dao.getAdminDetails();
         if (loginIN && adminId == admin.getAdminId()){
             dao.editProfile(password);
             admin.setPassword(password);

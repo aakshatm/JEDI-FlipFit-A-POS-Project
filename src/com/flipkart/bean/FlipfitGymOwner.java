@@ -144,7 +144,6 @@ public class FlipfitGymOwner {
      * Sets the national ID of the gym owner.
      *
      * @param nationalId the nationalId to set, which is the national identification number of the gym owner.
-
      */
     public void setNationalId(String nationalId) {
         this.nationalId = nationalId;
@@ -163,7 +162,6 @@ public class FlipfitGymOwner {
      * Sets the GST number of the gym owner.
      *
      * @param GST the GST number to set for the gym owner.
-
      */
     public void setGST(String GST) {
         this.GST = GST;
@@ -239,5 +237,26 @@ public class FlipfitGymOwner {
      */
     public void setVerificationStatus(String verificationStatus) {
         this.verificationStatus = verificationStatus;
+    }
+
+    public void display() {
+        System.out.println("Admin Details:");
+        System.out.println("------------------------------");
+        System.out.println("Owner Id: " + ownerId);
+        System.out.println("Owner Name: " + ownerName);
+        System.out.println("PAN: " + PAN);
+        System.out.println("GST: " + GST);
+        System.out.println("Owner Email: " + ownerEmail);
+        System.out.println("Phone Number: " + phoneNo);
+        System.out.println("National Id: " + nationalId);
+        System.out.println("Verification Status: " + verificationStatus);
+        if (gyms != null){
+            System.out.println("------------GYMS LIST-----------");
+                for (FlipfitGymCenter gym : gyms) {
+                    gym.display();
+                }
+        }
+
+        System.out.println("------------------------------");
     }
 }

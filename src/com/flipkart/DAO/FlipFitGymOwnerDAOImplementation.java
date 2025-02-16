@@ -14,6 +14,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInterface {
+
+    public FlipfitGymOwner getProfile(String email, String password) {
+        FlipfitGymOwner gymOwner = null;
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM GymOwner WHERE ownerEmail = ? AND password = ?")) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) { // Check if there is a matching record
+                    gymOwner = new FlipfitGymOwner();
+                    gymOwner.setOwnerId(resultSet.getInt("ownerId"));
+                    gymOwner.setOwnerName(resultSet.getString("ownerEmail"));
+                    gymOwner.setOwnerEmail(resultSet.getString("password"));
+                    gymOwner.setPhoneNo(resultSet.getString("phoneNo"));
+                    gymOwner.setNationalId(resultSet.getString("nationalId"));
+                    gymOwner.setGST(resultSet.getString("GST"));
+                    gymOwner.setPAN(resultSet.getString("PAN"));
+                    gymOwner.setVerificationStatus(resultSet.getString("verificationStatus"));
+                    // Populate other fields as necessary
+                    return gymOwner;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+
+        return null; // Returns null if no record is found
+    }
+
+
+
     @Override
     public boolean addGym(FlipfitGymCenter gym) {
         int gymId = -1;

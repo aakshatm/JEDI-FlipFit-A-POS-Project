@@ -18,6 +18,12 @@ public class FlipfitGymOwnerService implements FlipfitGymOwnerInterface {
     private final FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
     private final FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
+    @Override
+    public FlipfitGymOwner getProfile(String email, String password){
+        return flipFitGymOwnerDAOImplementation.getProfile(email, password);
+    }
+
+
     /**
      * Adds a new gym to the system.
      *
@@ -113,7 +119,7 @@ public class FlipfitGymOwnerService implements FlipfitGymOwnerInterface {
         return flipFitGymOwnerDAOImplementation.updateGymDetails(gym);
     }
 
-
+    @Override
     public boolean addSlots(int gymId, List<Slot> slots) {
         return flipFitGymOwnerDAOImplementation.addSlots(gymId, slots);
     }

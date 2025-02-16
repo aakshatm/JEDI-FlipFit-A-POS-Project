@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface FlipFitCustomerDAOInterface {
 
+    boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
     /**
      * Book a slot at a specific gym for a given time using the user's email.
      * @param gymId - The ID of the gym

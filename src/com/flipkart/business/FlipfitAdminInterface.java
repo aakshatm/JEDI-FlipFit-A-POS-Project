@@ -8,7 +8,7 @@ import com.flipkart.bean.FlipfitGymOwner;
 import java.util.List;
 
 public interface FlipfitAdminInterface {
-    boolean login(int adminId, String password);
+    boolean login(String email, String password);
     FlipfitAdmin viewProfile();
     boolean editProfile(int adminId, String password);
 
