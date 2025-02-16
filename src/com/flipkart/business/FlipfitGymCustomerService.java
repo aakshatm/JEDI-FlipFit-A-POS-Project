@@ -27,6 +27,11 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
     FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
 
+    @Override
+    public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
+        return flipFitCustomerDAOImplementation.editProfile(customerId, email, password, username, phoneNumber, address, location);
+    }
+
     public FlipfitCustomer getProfile(String email, String password){
         return flipFitCustomerDAOImplementation.getProfile(email, password);
     }

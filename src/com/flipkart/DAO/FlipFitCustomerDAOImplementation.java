@@ -18,6 +18,30 @@ import java.util.List;
 public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInterface {
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
 
+    @Override
+    public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
+        String query = "UPDATE User SET email = ?, password = ?, userName = ?, phoneNumber = ?, address = ?, location = ? WHERE userId = ?";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, phoneNumber);
+            preparedStatement.setString(5, address);
+            preparedStatement.setString(6, location);
+            preparedStatement.setInt(7, customerId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Return true if update is successful
+
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+
     public FlipfitCustomer getProfile(String email, String password){
         FlipfitCustomer profile = null;
 
