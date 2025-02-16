@@ -5,6 +5,7 @@ import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.business.FlipfitGymCustomerInterface;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.bean.Booking;
+import com.flipkart.exception.UserNotFoundException;
 
 import java.util.Scanner;
 
@@ -24,12 +25,20 @@ public class FlipFitGymCustomerMenu {
 //            System.out.println("6. Cancel Bookings"); // done
 //            System.out.println("7. Log Out"); // done
 
-    FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
-    Scanner scanner = new Scanner(System.in);
+    private FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
+    private Scanner scanner = new Scanner(System.in);
 
     public void viewProfile(String email, String password){
-        FlipfitCustomer customer = customerService.getProfile(email, password);
-        customer.displayCustomer();
+        try{
+            FlipfitCustomer customer = customerService.getProfile(email, password);
+            if (customer == null){
+                throw new UserNotFoundException();
+            }
+            customer.displayCustomer();
+        } catch (UserNotFoundException e){
+
+        }
+
     }
 
     public void editProfile(String email, String password){
@@ -63,7 +72,10 @@ public class FlipFitGymCustomerMenu {
     }
 
     public void bookGymSlot(String email){
-        customerService.viewAllGymsWithSlots();
+        List<FlipfitGymCenter> listOfGyms = customerService.viewAllGymsWithSlots();
+        for (FlipfitGymCenter gym: listOfGyms){
+            gym.displayWithSlot();
+        }
         int gymId, startTime;
         System.out.println("Enter gymID: ");
         System.out.println("Enter startTime: ");

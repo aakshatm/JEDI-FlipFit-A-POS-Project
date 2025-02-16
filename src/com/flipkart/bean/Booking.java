@@ -214,12 +214,16 @@ public class Booking {
         System.out.println("Customer ID: " + customerId);
         System.out.println("Booking ID: " + bookingId);
         System.out.println("Created At: " + createdAt);
-        System.out.println("Booking Status: " + bookingStatus);
+        String bookingStatusmsg = "confirmed";
+        if (bookingStatus == 2){
+            bookingStatusmsg = "cancelled";
+        }
+        System.out.println("Booking Status: " + bookingStatusmsg);
         System.out.println("Date: " + date);
         System.out.println("Time: " + time);
-        System.out.println("Status: " + status);
+//        System.out.println("Status: " + status);
         System.out.println("Slot Id: " + slotId);
-        System.out.println("Status: " + status);
+//        System.out.println("Status: " + status);
         System.out.println("------------------------------");
     }
 }

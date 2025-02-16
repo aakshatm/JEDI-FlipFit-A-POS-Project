@@ -240,4 +240,14 @@ public class FlipfitGymOwner {
     public void setVerificationStatus(String verificationStatus) {
         this.verificationStatus = verificationStatus;
     }
+
+    public void display() {
+        System.out.println("Admin Details:");
+        System.out.println("------------------------------");
+        System.out.println("Owner Id: " + ownerId);
+        System.out.println("Owner Email: " + ownerEmail);
+        System.out.println("Phone Number: " + phoneNo);
+        System.out.println("National Id: " + nationalId);
+        System.out.println("------------------------------");
+    }
 }
