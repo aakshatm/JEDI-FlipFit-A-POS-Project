@@ -1,6 +1,7 @@
 package com.flipkart.client;
 import java.util.*;
 import com.flipkart.bean.FlipfitCustomer;
+import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.business.FlipfitGymCustomerInterface;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.bean.Booking;
@@ -15,9 +16,9 @@ public class FlipFitGymCustomerMenu {
 ////            System.out.println("4. Cancel Booking");
 ////            System.out.println("5. Logout");
 //
-//            System.out.println("1. View Profile");
-//            System.out.println("2. Edit Profile");
-//            System.out.println("3. Find gyms based on city"); // done // assuming ki hum list of gym center main app mei store karenge
+//            System.out.println("1. View Profile"); -> done
+//            System.out.println("2. Edit Profile"); -> done
+//            System.out.println("3. Find gyms based on city"); // done
 //            System.out.println("4. Book Gym Slot"); // done // hume gym center ki list and slot ki list banani padegi main mei hi
 //            System.out.println("5. View all Bookings"); // done
 //            System.out.println("6. Cancel Bookings"); // done
@@ -52,6 +53,31 @@ public class FlipFitGymCustomerMenu {
 //        boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
 
         customerService.editProfile(customerId, email, password, username, phoneNumber, address, location);
+    }
+
+    public void viewGymBasedOnLocation(String location){
+        List<FlipfitGymCenter> gyms = customerService.viewAllGymsByArea(location);
+        for (FlipfitGymCenter gym: gyms){
+            gym.display();
+        }
+    }
+
+    public void bookGymSlot(String email){
+        customerService.viewAllGymsWithSlots();
+        int gymId, startTime;
+        System.out.println("Enter gymID: ");
+        System.out.println("Enter startTime: ");
+        gymId = scanner.nextInt();
+        scanner.nextLine();
+        startTime = scanner.nextInt();
+        scanner.nextLine();
+        boolean bookingDone = customerService.bookSlot(gymId, startTime, email);
+        // payment handle later
+        if (bookingDone){
+            System.out.println("Booking Confirmed");
+        }else{
+            System.out.println("Booking not done..");
+        }
     }
 
     public void viewAllBookings(String email, String password) {
