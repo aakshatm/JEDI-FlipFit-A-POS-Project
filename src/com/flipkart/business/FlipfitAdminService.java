@@ -1,39 +1,104 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.FlipFitAdminDAOImplementation;
+import com.flipkart.DAO.FlipFitAdminDAOInterface;
+import com.flipkart.bean.FlipfitAdmin;
+import com.flipkart.bean.FlipfitCustomer;
+import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.bean.FlipfitGymOwner;
+
+import java.util.List;
 
 public class FlipfitAdminService implements FlipfitAdminInterface{
 
-    public void login(FlipfitGymOwner user) {
-        System.out.println(user.getName() + " logged in successfully!");
+
+    private static FlipfitAdmin admin;
+    private static boolean loginIN;
+    FlipFitAdminDAOInterface dao = new FlipFitAdminDAOImplementation();
+
+    public FlipfitAdminService(){
+        // dao implemenation mei fetch data from database and set it up
+        admin = dao.getAdminDetails();
+        System.out.println(admin.getPassword());
+        System.out.println(admin.getAdminId());
+        loginIN = false;
+    }
+    @Override
+    public boolean login(int adminId, String password) {
+        if(adminId == admin.getAdminId() && password.equals(admin.getPassword())){
+            loginIN = true;
+            return true;
+        }
+        loginIN = false;
+        return false;
     }
 
-    public void logout(FlipfitGymOwner user) {
-        System.out.println(user.getName() + " logged out.");
+    @Override
+    public boolean logout(){
+        if (loginIN){
+            loginIN = false;
+            return true;
+        }
+        return false;
     }
 
-    public void viewProfile(FlipfitGymOwner user) {
-        System.out.println("User Profile: " + user.getName() + " (Email: " + user.getEmail() + ")");
+
+    @Override
+    public FlipfitAdmin viewProfile() {
+        if (loginIN){
+            return admin;
+        }
+        return null;
     }
 
-    public void editProfile(FlipfitGymOwner user) {
-        System.out.println("Edited User Profile: " + user.getName() + " (Email: " + user.getEmail() + ")");
+    @Override
+    public boolean editProfile(int adminId, String password) {
+        if (loginIN && adminId == admin.getAdminId()){
+            dao.editProfile(password);
+            admin.setPassword(password);
+            return true;
+        }
+        return false;
     }
 
-    public void register(){
-        System.out.println("User Registered Successfully");
+    @Override
+    public List<FlipfitGymOwner> viewGymOwners() {
+        // call to database to return the list of ownwers;
+        return dao.viewGymOwners();
     }
 
-    public void approveGym(){
-
+    @Override
+    public List<FlipfitGymCenter> viewGyms() {
+        // call to database to return the list of centers
+        return dao.viewGyms();
     }
-    public void viewRegisteredGym(){
 
+    @Override
+    public List<FlipfitCustomer> viewCustomers() {
+        // call to database to return customers
+        return dao.viewCustomers();
     }
-    public void viewRegisteredCustomers(){
 
+    @Override
+    public boolean verifyGym(int gymId) {
+        // call to database to get gym Details using id
+        // manually view the info
+        // user will tell whether to verify or not
+        return dao.verifyGym(gymId);
     }
-    public void viewPendingApprovals(){
 
+    @Override
+    public boolean verifyGymOwner(int gymOwnerId) {
+        return dao.verifyGymOwner(gymOwnerId);
+    }
+
+    @Override
+    public List<FlipfitGymOwner> getUnverifiedGymOwners() {
+        return dao.getUnverifiedGymOwners();
+    }
+
+    @Override
+    public List<FlipfitGymCenter> getUnverifiedGyms() {
+        return dao.getUnverifiedGyms();
     }
 }

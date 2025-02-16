@@ -2,7 +2,6 @@ package com.flipkart.bean;
 
 public class FlipfitAdmin {
     private int adminId;
-
     /**
      * Password for the admin account.
      */
