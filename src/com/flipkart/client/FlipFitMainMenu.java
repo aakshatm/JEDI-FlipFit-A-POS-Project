@@ -50,6 +50,7 @@ public class FlipFitMainMenu {
                             break;
                         case "gym owner":
 //                            ownerMenu(scanner);
+
                             break;
                         case "gym admin":
                             boolean loggedIn = adminMenu.login(email, password);
@@ -65,50 +66,56 @@ public class FlipFitMainMenu {
                                     System.out.println("Press 5 to verify gym owners");
                                     System.out.println("Press 6 to view pending gyms approvals");
                                     System.out.println("Press 7 to view pending gym owners approvals");
-                                    System.out.println("Press 8 to exit");
-                                }
+                                    System.out.println("Press 8 to view profile");
+//                                    System.out.println("Press 9 to edit profile");
+                                    // add view and edit profile wala options
 
-                                optionSelected = Integer.parseInt(scanner.nextLine());
+                                    System.out.println("Press 9 to exit");
+                                    optionSelected = Integer.parseInt(scanner.nextLine());
 
-                                switch (optionSelected) {
-                                    case 1:
-                                        adminMenu.viewCustomers();
-                                        break;
-                                    case 2:
-                                        adminMenu.viewAllGyms();
-                                        break;
-                                    case 3:
-                                        adminMenu.viewAllGymOwnwers();
-                                        break;
-                                    case 4:
-                                        adminMenu.viewUnverfiedGyms();
-                                        System.out.println("Enter the gym ID to be verified:");
+                                    switch (optionSelected) {
+                                        case 1:
+                                            adminMenu.viewCustomers();
+                                            break;
+                                        case 2:
+                                            adminMenu.viewAllGyms();
+                                            break;
+                                        case 3:
+                                            adminMenu.viewAllGymOwnwers();
+                                            break;
+                                        case 4:
+                                            adminMenu.viewUnverfiedGyms();
+                                            System.out.println("Enter the gym ID to be verified:");
 //                            int gymId = Integer.parseInt(scanner.nextLine());
-                                        if (adminMenu.verifyGym())
-                                            System.out.println("Gym verified successfully!");
-                                        else
-                                            System.out.println("Gym with given Id does not exists.");
-                                        break;
-                                    case 5:
-                                        adminMenu.viewUnverfiedGymOwnwers();
-                                        System.out.println("Enter the gym owner ID to be verified:");
+                                            if (adminMenu.verifyGym())
+                                                System.out.println("Gym verified successfully!");
+                                            else
+                                                System.out.println("Gym with given Id does not exists.");
+                                            break;
+                                        case 5:
+                                            adminMenu.viewUnverfiedGymOwnwers();
+                                            System.out.println("Enter the gym owner ID to be verified:");
 //                            int gymOwnerId = Integer.parseInt(scanner.nextLine());
-                                        if (adminMenu.verifyGymOwnner())
-                                            System.out.println("Gym owner verified successfully!");
-                                        else
-                                            System.out.println("Gym owner with given ID does not exists.");
-                                        break;
-                                    case 6:
-                                        adminMenu.viewUnverfiedGyms();
-                                        break;
-                                    case 7:
-                                        adminMenu.viewUnverfiedGymOwnwers();
-                                        break;
-                                    case 8:
-                                        loggedIn = false;
-                                        break;
+                                            if (adminMenu.verifyGymOwnner())
+                                                System.out.println("Gym owner verified successfully!");
+                                            else
+                                                System.out.println("Gym owner with given ID does not exists.");
+                                            break;
+                                        case 6:
+                                            adminMenu.viewUnverfiedGyms();
+                                            break;
+                                        case 7:
+                                            adminMenu.viewUnverfiedGymOwnwers();
+                                            break;
+                                        case 8:
+                                            adminMenu.viewProfile();
+                                            break;
+                                        case 9:
+                                            loggedIn = false;
+                                            break;
+                                    }
+                                    if (!loggedIn) break;
                                 }
-                                if (!loggedIn) break;
                             }
                             break;
                         default:

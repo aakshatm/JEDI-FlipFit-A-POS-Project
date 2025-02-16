@@ -250,11 +250,11 @@ public class FlipfitGymOwner {
         System.out.println("Phone Number: " + phoneNo);
         System.out.println("National Id: " + nationalId);
         System.out.println("Verification Status: " + verificationStatus);
-
-        System.out.println("------------GYMS LIST-----------");
-
-        for (FlipfitGymCenter gym : gyms) {
-            gym.display();
+        if (gyms != null){
+            System.out.println("------------GYMS LIST-----------");
+                for (FlipfitGymCenter gym : gyms) {
+                    gym.display();
+                }
         }
 
         System.out.println("------------------------------");

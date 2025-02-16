@@ -55,8 +55,16 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
                 while (resultSet.next()) {
                     adminId = resultSet.getInt("adminId");
                     password = resultSet.getString("password");
+                    String name,phoneNumber, email;
+                    name = resultSet.getString("name");
+                    phoneNumber = resultSet.getString("phoneNumber");
+                    email = resultSet.getString("email");
+
                     admin.setAdminId(adminId);
                     admin.setPassword(password);
+                    admin.setName(name);
+                    admin.setPhoneNumber(phoneNumber);
+                    admin.setEmail(email);
                     return admin;
                 }
             }

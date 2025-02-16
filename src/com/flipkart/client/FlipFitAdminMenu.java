@@ -33,11 +33,18 @@ public class FlipFitAdminMenu {
 
     public void viewUnverfiedGymOwnwers(){
         List<FlipfitGymOwner> gymOwnwers =  adminService.getUnverifiedGymOwners();
+        for (FlipfitGymOwner owner: gymOwnwers){
+            owner.display();
+        }
 
     }
 
     public void viewUnverfiedGyms(){
         List<FlipfitGymCenter> gymCenters =  adminService.getUnverifiedGyms();
+
+        for(FlipfitGymCenter gym: gymCenters){
+            gym.display();
+        }
 
     }
 

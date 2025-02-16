@@ -10,6 +10,7 @@ public class FlipfitAdmin {
     private String phoneNumber;
     private String email;
 
+
     public String getName() {
         return name;
     }
