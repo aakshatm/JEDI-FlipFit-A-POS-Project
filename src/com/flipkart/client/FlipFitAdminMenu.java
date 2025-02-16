@@ -20,6 +20,10 @@ public class FlipFitAdminMenu {
     private FlipfitAdminInterface adminService = new FlipfitAdminService();
     private Scanner scanner = new Scanner(System.in);
 
+    public boolean login(String email, String password){
+        return adminService.login(email, password);
+    }
+
     public void viewCustomers(){
         List<FlipfitCustomer> customers = adminService.viewCustomers();
         for (FlipfitCustomer customer: customers){
@@ -65,7 +69,7 @@ public class FlipFitAdminMenu {
         }
     }
 
-    public void verifyGym(){
+    public boolean verifyGym(){
         viewUnverfiedGyms();
         int gymId;
         System.out.println("Please enter the gymId to verify: ");
@@ -74,12 +78,14 @@ public class FlipFitAdminMenu {
         boolean approved = adminService.verifyGym(gymId);
         if (approved){
             System.out.println("Successfully verified..");
+            return true;
         }else{
             System.out.println("Couldn't verify.. ");
+            return false;
         }
     }
 
-    public void verifyGymOwnner(){
+    public boolean verifyGymOwnner(){
         viewUnverfiedGymOwnwers();
         int ownerId;
         System.out.println("Please enter the ownerId to verify: ");
@@ -88,8 +94,10 @@ public class FlipFitAdminMenu {
         boolean approved = adminService.verifyGym(ownerId);
         if (approved){
             System.out.println("Successfully verified..");
+            return true;
         }else{
             System.out.println("Couldn't verify.. ");
+            return false;
         }
     }
 

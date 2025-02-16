@@ -1,73 +1,123 @@
-//package com.flipkart.client;
-//
-//import com.flipkart.bean.*;
-//import com.flipkart.business.FlipfitAdminInterface;
-//import com.flipkart.business.FlipfitGymOwnerInterface;
-//
-//import com.flipkart.business.FlipfitAdminService;
-//import com.flipkart.business.FlipfitGymCustomerService;
-//import com.flipkart.business.FlipfitGymOwnerService;
-//
-//import java.util.List;
-//import java.util.Scanner;
-//
-//public class FlipFitMainMenu {
-//    private List<FlipfitGymCenter> gymCenterList;
-//    private List<Slot> slotList;
-//
-////    private int gymId;
-////    private String gymName;
-////    private String gymCity;
-////    private float gymPrice;
-////    private List<Slot> slots;
-////
-////    private int slotId;
-////    private int startTime;
-////    private int endTime;
-////    private int capacity;
-////    private List<Booking> bookings;
-////    private List<Booking> waitlisted;
-//
-//
-//
-//    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        int choice;
-//
-//        FlipfitAdminInterface adminService = new FlipfitAdminService();
-//        FlipfitGymCustomerService customerService = new FlipfitGymCustomerService();
-//        FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
-//
-//        // hard coding the data
-//
-//        System.out.println(customerService.register(101, "asdf@gmail.com", "aakshat", "aakshat7", "239023"));
-//        if (customerService.login("asdf@gmail.com", "aakshat")){
-//            System.out.println("login ho gya");
-//        }
-//
-//        Slot s1 = new Slot();
-//
-//        FlipfitGymCenter gc = new FlipfitGymCenter();
-//        gc.setGymId(101);
-//        gc.setGymName("Hla");
-//        gc.setGymCity("Delhi");
-//        gc.setGymPrice(1100);
-//        gc.setSlots(s1);
-//
-//
-//        // end of hard coding
-//
-//        // Welcome message
-//        System.out.println("Welcome to FlipFit Application");
-//
+package com.flipkart.client;
+
+import com.flipkart.bean.*;
+import com.flipkart.business.FlipfitAdminInterface;
+import com.flipkart.business.FlipfitGymOwnerInterface;
+
+import com.flipkart.business.FlipfitAdminService;
+import com.flipkart.business.FlipfitGymCustomerService;
+import com.flipkart.business.FlipfitGymOwnerService;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class FlipFitMainMenu {
+
+    static Scanner scanner = new Scanner(System.in);
+
+    static FlipFitAdminMenu adminMenu = new FlipFitAdminMenu();
+    static FlipFitGymCustomerMenu customerMenu = new FlipFitGymCustomerMenu();
+    static FlipFitOwnerMenu ownerMenu = new FlipFitOwnerMenu();
+
+    public static void main(String[] args) {
+
+        boolean isInApp = true;
+        System.out.println("Welcome to FlipFit Application");
+
+        while (isInApp) {
+            System.out.println("\nEnter your choice:");
+            System.out.println("1. Login");
+            System.out.println("2. Registration of Gym Customer");
+            System.out.println("3. Registration of Gym Owner");
+            System.out.println("4. Change Password");
+            System.out.println("5. Exit");
+
+            int optionSelected = Integer.parseInt(scanner.nextLine());
+
+            switch (optionSelected) {
+                case 1:
+                    System.out.println("Enter email:");
+                    String email = scanner.nextLine();
+                    System.out.println("Enter Password:");
+                    String password = scanner.nextLine();
+                    System.out.println("Enter Role (gym customer / gym owner / gym admin):");
+                    String role = scanner.nextLine();
+
+                    // Process login based on role
+                    switch (role.toLowerCase()) {
+                        case "gym customer":
+//                            customerMenu(scanner);
+                            break;
+                        case "gym owner":
+//                            ownerMenu(scanner);
+                            break;
+                        case "gym admin":
+                            boolean loggedIn = adminMenu.login(email, password);
+                            if (!loggedIn) {
+                                System.out.println("Incorrect Email and password. Try Again!!");
+                            } else {
+                                while (loggedIn) {
+                                    System.out.println("-----------------Admin Menu------------------");
+                                    System.out.println("Press 1 to view customers");
+                                    System.out.println("Press 2 to view all gyms");
+                                    System.out.println("Press 3 to view all gym owners");
+                                    System.out.println("Press 4 to verify gym");
+                                    System.out.println("Press 5 to verify gym owners");
+                                    System.out.println("Press 6 to view pending gyms approvals");
+                                    System.out.println("Press 7 to view pending gym owners approvals");
+                                    System.out.println("Press 8 to exit");
+                                }
+
+                                optionSelected = Integer.parseInt(scanner.nextLine());
+
+                                switch (optionSelected) {
+                                    case 1:
+                                        adminMenu.viewCustomers();
+                                        break;
+                                    case 2:
+                                        adminMenu.viewAllGyms();
+                                        break;
+                                    case 3:
+                                        adminMenu.viewAllGymOwnwers();
+                                        break;
+                                    case 4:
+                                        adminMenu.viewUnverfiedGyms();
+                                        System.out.println("Enter the gym ID to be verified:");
+//                            int gymId = Integer.parseInt(scanner.nextLine());
+                                        if (adminMenu.verifyGym())
+                                            System.out.println("Gym verified successfully!");
+                                        else
+                                            System.out.println("Gym with given Id does not exists.");
+                                        break;
+                                    case 5:
+                                        adminMenu.viewUnverfiedGymOwnwers();
+                                        System.out.println("Enter the gym owner ID to be verified:");
+//                            int gymOwnerId = Integer.parseInt(scanner.nextLine());
+                                        if (adminMenu.verifyGymOwnner())
+                                            System.out.println("Gym owner verified successfully!");
+                                        else
+                                            System.out.println("Gym owner with given ID does not exists.");
+                                        break;
+                                    case 6:
+                                        adminMenu.viewUnverfiedGyms();
+                                        break;
+                                    case 7:
+                                        adminMenu.viewUnverfiedGymOwnwers();
+                                        break;
+                                    case 8:
+                                        loggedIn = false;
+                                        break;
+                                }
+                                if (!loggedIn) break;
+                            }
+                            break;
+                        default:
+                            System.out.println("Invalid role entered. Returning to main menu.");
+                    }
+            }
+
 //        do {
 //            // Display main menu
-//            System.out.println("\nEnter your choice:");
-//            System.out.println("1. Login");
-//            System.out.println("2. Registration of Gym Customer");
-//            System.out.println("3. Registration of Gym Owner");
-//            System.out.println("4. Change Password");
-//            System.out.println("5. Exit");
 //
 //            // Read user input
 //            choice = scanner.nextInt();
@@ -93,34 +143,32 @@
 //                    System.out.println("Invalid choice. Please try again.");
 //            }
 //        } while (choice != 5);
-//
+
 //        scanner.close();
-//    }
-//
+        }
+
 //    private static void login(Scanner scanner) {
-//        System.out.println("Enter Username:");
-//        String username = scanner.nextLine();
+//        System.out.println("Enter email:");
+//        String email = scanner.nextLine();
 //        System.out.println("Enter Password:");
 //        String password = scanner.nextLine();
 //        System.out.println("Enter Role (gym customer / gym owner / gym admin):");
 //        String role = scanner.nextLine();
 //
-//        // Process login based on role
 //        switch (role.toLowerCase()) {
 //            case "gym customer":
-//                customerMenu(scanner);
+////                customerMenu(scanner);
 //                break;
 //            case "gym owner":
-//                ownerMenu(scanner);
+////                ownerMenu(scanner);
 //                break;
 //            case "gym admin":
-//                adminMenu(scanner);
-//                break;
+//
 //            default:
 //                System.out.println("Invalid role entered. Returning to main menu.");
 //        }
 //    }
-//
+
 //    private static void registerCustomer(Scanner scanner) {
 //        System.out.println("Registering Gym Customer...");
 //        // Collect customer details for registration (simplified for example)
@@ -163,7 +211,7 @@
 //        // Change password logic (simplified for example)
 //        System.out.println("Password changed successfully!");
 //    }
-//
+
 //    private static void findGymBasedonLocation(Scanner scanner){
 //        System.out.println("Enter city/location: ");
 //        String cityInput;
@@ -182,7 +230,7 @@
 //        System.out.println("Redirecting to payment.. ");
 //        paymentHandler(scanner);
 //    }
-//
+
 //    private static void paymentHandler(Scanner scanner){
 //        System.out.println("Choose mode of Payment: ");
 //        System.out.println("1. UPI");
@@ -211,7 +259,7 @@
 //                System.out.println("Invalid choice. Please try again.");
 //        }
 //    }
-//
+
 //    public static void cancelBookingHandler(Scanner scanner){
 //        System.out.println("Enter gymID: ");
 //        int gymId;
@@ -224,10 +272,9 @@
 //
 //        System.out.println("Booking for the gym id: " + gymId + " and slot id : " + slotId + " is cancelled..");
 //    }
-//
-//
-//
-//    // Gym customer menu
+
+
+        // Gym customer menu
 //    private static void customerMenu(Scanner scanner) {
 //        int choice;
 //        do {
@@ -278,7 +325,7 @@
 //            }
 //        } while (choice != 7);
 //    }
-//
+
 //    private static void slotInputHandler(Scanner scanner){
 //        System.out.println("Enter the number of slots: ");
 //        int numberOfSlots = scanner.nextInt();
@@ -296,7 +343,7 @@
 //            }
 //        }
 //    }
-//
+
 //    private static void registerNewGym(Scanner scanner){
 //        System.out.print("Enter Gym Name: ");
 //        String name = scanner.nextLine();
@@ -315,7 +362,7 @@
 //
 //
 //    }
-//
+
 //    private static void gymEditMenu(Scanner scanner){
 //        System.out.println("1. Edit gym name: ");
 //        System.out.println("2. Edit gym slots: ");
@@ -349,8 +396,8 @@
 //        }
 //
 //    }
-//
-//
+
+
 //    private static void editGymDetails(Scanner scanner){
 //        System.out.print("Enter Gym Id: ");
 //        int gymId = scanner.nextInt();
@@ -358,9 +405,9 @@
 //        gymEditMenu(scanner);
 //        System.out.println("Successfully edited details");
 //    }
-//
-//
-//    // Gym owner menu
+
+
+        // Gym owner menu
 //    private static void ownerMenu(Scanner scanner) {
 //        int choice;
 //        do {
@@ -418,8 +465,8 @@
 //            }
 //        } while (choice != 8);
 //    }
-//
-//    // Gym admin menu
+
+        // Gym admin menu
 //    private static void adminMenu(Scanner scanner) {
 //        int choice;
 //        do {
@@ -462,7 +509,7 @@
 //            }
 //        } while (choice != 8);
 //    }
-//
+
 //    private static void viewAllGyms() {
 //        System.out.println("Displaying all registered gyms...");
 //        System.out.println("Gym 1: FitLife Gym - Location: City A");
@@ -474,7 +521,7 @@
 //        System.out.println("User 1: John Doe (Customer)");
 //        System.out.println("User 2: Jane Smith (Gym Owner)");
 //    }
-//
+
 //    private static void approveRejectGymOwner(Scanner scanner) {
 //        System.out.println("Enter Gym Owner's Name:");
 //        String gymOwnerName = scanner.nextLine();
@@ -489,13 +536,13 @@
 //            System.out.println("Invalid decision.");
 //        }
 //    }
-//
+
 //    private static void viewAllBookings() {
 //        System.out.println("Displaying all bookings...");
 //        System.out.println("Booking 1: Gym 1 - Slot 10:00 AM (Customer: John)");
 //        System.out.println("Booking 2: Gym 2 - Slot 11:00 AM (Customer: Jane)");
 //    }
-//
+
 //    private static void deactivateGym(Scanner scanner) {
 //        System.out.println("Enter Gym Name to deactivate:");
 //        String gymName = scanner.nextLine();
@@ -509,3 +556,5 @@
 //        }
 //    }
 //}
+    }
+}

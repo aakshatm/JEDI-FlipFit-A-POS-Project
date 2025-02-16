@@ -24,8 +24,8 @@ public class FlipfitAdminService implements FlipfitAdminInterface{
         loginIN = false;
     }
     @Override
-    public boolean login(int adminId, String password) {
-        if(adminId == admin.getAdminId() && password.equals(admin.getPassword())){
+    public boolean login(String email, String password) {
+        if(email.equals(admin.getEmail()) && password.equals(admin.getPassword())){
             loginIN = true;
             return true;
         }
