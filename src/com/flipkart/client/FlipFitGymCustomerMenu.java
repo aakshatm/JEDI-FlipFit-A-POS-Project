@@ -91,5 +91,24 @@ public class FlipFitGymCustomerMenu {
     }
 
 
+    public void cancelBooking(){
+        int bookingId;
+        System.out.println("Please enter the booking ID: ");
+        bookingId = scanner.nextInt();
+        scanner.nextLine();
+        boolean cancelledSuccessfully = customerService.cancelSlot(bookingId);
+        if (cancelledSuccessfully){
+            System.out.println("Booking Cancelling Successfully..");
+            System.out.println("Refund Initiated");
+        }
+        else{
+            System.out.println("Not able to cancel Booking");
+        }
+    }
+
+    public void logout(){
+        System.out.println("Logging out");
+    }
+
 
 }
