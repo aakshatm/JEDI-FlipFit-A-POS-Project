@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public interface FlipfitGymCustomerInterface {
-
+    public boolean updateGymUserPassword(String email, String password, String updatedPassword);
 
     boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
 

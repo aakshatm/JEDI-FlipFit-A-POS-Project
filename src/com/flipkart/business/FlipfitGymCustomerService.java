@@ -81,9 +81,12 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
      * @param updatedPassword  the new password to set
      * @return  true if password update is successful, false otherwise
      */
+    @Override
     public boolean updateGymUserPassword(String email, String password, String updatedPassword) {
         return flipFitUpdatePasswordDAOImplementation.updateGymUserPassword(email, password, updatedPassword);
     }
+
+
 
     /**
      * Updates the details of a user.

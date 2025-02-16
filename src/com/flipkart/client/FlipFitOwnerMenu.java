@@ -22,7 +22,68 @@ public class FlipFitOwnerMenu {
 
     private static FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
     private static Scanner scanner = new Scanner(System.in);
-    
+
+    /// Verifies if the provided email and password match a registered gym owner.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if the credentials are valid, false otherwise.
+    boolean verifyGymOwner(String email, String password) {
+        return ownerService.validateGymOwner(email, password);
+    }
+
+    /// Handles the gym owner login process and displays the menu options.
+    /// @param email Gym owner's email address.
+    /// @param password Gym owner's password.
+    /// @return true if logout is successful, false otherwise.
+    public boolean gymOwnerLogin(String email, String password) {
+        if (!verifyGymOwner(email, password)) {
+            return false;
+        }
+        System.out.println( "Login Successful! (Gym Owner)" );
+        while (true) {
+            System.out.println(  "-----------------Gym Owner Menu-----------------" );
+            System.out.println( "Press 1 to add a gym");
+            System.out.println("Press 2 to update gym details");
+            System.out.println("Press 3 to view all gyms");
+            System.out.println("Press 4 to add slots");
+            System.out.println("Press 5 to update seat count by");
+            System.out.println("Press 6 to update your details");
+            System.out.println("Press 7 to logout" );
+
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    addGym(email);
+                    break;
+                case 2:
+                    updateGym(email);
+                    break;
+                case 3:
+                    displayGyms(email);
+                    break;
+                case 4:
+                    addSlots();
+                    break;
+                case 5:
+                    updateSeatCount(email);
+                    break;
+                case 6:
+                    if (updateGymOwnerDetails())
+                        System.out.println("Gym owner updated successfully!" );
+                    else
+                        System.out.println("Gym owner not updated" );
+                    break;
+                case 7:
+                    return true;
+                default:
+                    System.out.println("Invalid option!" );
+            }
+        }
+    }
+
+    /// Adds a new gym to the system.
+    /// @param email Gym owner's email address (used to fetch the owner ID).
     public void addGym(String email){
         FlipfitGymCenter gym = new FlipfitGymCenter();
         int gymOwnerId = ownerService.getGymOwnerIdByEmail(email);
@@ -105,9 +166,9 @@ public class FlipFitOwnerMenu {
     /// @param password Current password.
     /// @param updatedPassword New password.
     /// @return true if the password update is successful, false otherwise.
-    public boolean updatePassword(String userMail, String password, String updatedPassword) {
-        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
-    }
+//    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+//        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
+//    }
 
     /// Displays all gyms owned by the logged-in gym owner.
     /// @param email Gym owner's email address.
@@ -146,6 +207,14 @@ public class FlipFitOwnerMenu {
         }
     }
 
+    /// Updates the gym owner's password.
+    /// @param userMail Gym owner's email address.
+    /// @param password Current password.
+    /// @param updatedPassword New password.
+    /// @return true if the password update is successful, false otherwise.
+    public boolean updatePassword(String userMail, String password, String updatedPassword) {
+        return ownerService.updateGymOwnerPassword(userMail, password, updatedPassword);
+    }
 
     /**
      * Updates the seat count for a specific gym and slot.

@@ -60,7 +60,6 @@ public class FlipfitAdmin {
         System.out.println("Name: " + name);
         System.out.println("Phone Number: " + phoneNumber);
         System.out.println("Email: " + email);
-        System.out.println("Phone Number: " + getPhoneNumber());
         System.out.println("------------------------------");
     }
 }

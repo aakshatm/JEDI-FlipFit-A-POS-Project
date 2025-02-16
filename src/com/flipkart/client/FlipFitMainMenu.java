@@ -46,11 +46,17 @@ public class FlipFitMainMenu {
                     // Process login based on role
                     switch (role.toLowerCase()) {
                         case "gym customer":
-//                            customerMenu(scanner);
-                            break;
+                          if (!customerMenu.userLogin(email, password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials to login" );
+                                break;
+                            }
+                          break;
                         case "gym owner":
 //                            ownerMenu(scanner);
-
+                            if (!ownerMenu.gymOwnerLogin(email, password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials to login");
+                                break;
+                            }
                             break;
                         case "gym admin":
                             boolean loggedIn = adminMenu.login(email, password);
@@ -121,7 +127,60 @@ public class FlipFitMainMenu {
                         default:
                             System.out.println("Invalid role entered. Returning to main menu.");
                     }
+                    break;
+                case 2:
+                    customerMenu.createCustomer();
+                    break;
+                case 3:
+                    ownerMenu.createGymOwner();
+                    break;
+                case 4:
+                    System.out.println("-------------Reset Password Page--------------");
+                    System.out.println("Select your role:");
+                    System.out.println("Press 1 for gym user");
+                    System.out.println("Press 2 for gym owner");
+                    System.out.println("Press 3 for gym admin");
+                    int rolechoice = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Please enter your email:");
+                    email = scanner.nextLine();
+                    System.out.println("Please enter your current password:");
+                    password = scanner.nextLine();
+                    System.out.println("Please enter new password:");
+                    String updatedPassword = scanner.nextLine();
+                    
+
+                    switch (rolechoice) {
+                        case 1:
+                            if (!customerMenu.validateUser(email, password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials" );
+                            } else {
+                                if (customerMenu.updatePassword(email, password, updatedPassword))
+                                    System.out.println( "Password updated successfully!" );
+                                else
+                                    System.out.println("Password doesn't match!" );
+                            }
+                            break;
+                        case 2:
+                            if (!ownerMenu.verifyGymOwner(email, password)) {
+                                System.out.println("Invalid credentials! Please enter valid credentials" );
+                            } else {
+                                if (ownerMenu.updatePassword(email, password, updatedPassword))
+                                    System.out.println( "Password updated successfully!" );
+                                else
+                                    System.out.println("Password doesn't match!" );
+                            }
+                            break;
+                        case 3:
+//                            adminMenu.changePassword(updatedPassword);
+                            System.out.println("Sorry! You don't have enough rights to do that." );
+                            break;
+                    }
+                    break;
+                case 5:
+                    isInApp = false;
+                    break;
             }
+
 
 //        do {
 //            // Display main menu
