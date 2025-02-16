@@ -1,105 +1,109 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.FlipfitCustomer;
-import com.flipkart.bean.Payment;
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.FlipfitGymCenter;
-import com.flipkart.bean.FlipfitGymOwner;
+import com.flipkart.bean.FlipfitCustomer;
 
 import java.util.List;
 
+/**
+ * Interface for user-related operations.
+ * Provides methods for booking and canceling slots, viewing gyms, and managing user details.
+ *
+ */
 public interface FlipfitGymCustomerInterface {
-    /**
-     * Adds a new gym.
-     *
-     * @param gym the FlipfitGymCenter object to be added
-     * @return true if the gym was added successfully; false otherwise
-     */
-    boolean addGym(FlipfitGymCenter gym);
 
     /**
-     * Views the list of gyms owned by a specific gym owner.
+     * Cancels a slot booking based on the booking ID.
      *
-     * @param gymOwnerId the unique identifier of the gym owner whose gyms are to be viewed
-     * @return a list of FlipfitGymCenter objects owned by the specified gym owner
+     * @param bookingId the ID of the booking to be canceled
+     * @return true if the cancellation was successful; false otherwise
      */
-    List<FlipfitGymCenter> viewMyGyms(int gymOwnerId);
+    boolean cancelSlot(int bookingId);
 
     /**
-     * Validates a gym owner's credentials.
+     * Retrieves all bookings made by the user.
      *
-     * @param email the email of the gym owner
-     * @param password the current password of the gym owner
-     * @return true if the email and password are valid; false otherwise
+     * @param userId the ID of the user whose bookings are to be retrieved
+     * @return a list of bookings made by the user
      */
-    boolean validateGymOwner(String email, String password);
+    List<Booking> viewAllBookings(int userId);
 
     /**
-     * Creates a new gym owner.
+     * Retrieves all gyms with available slots.
      *
-     * @param gymOwner the FlipfitGymOwner object containing details of the new gym owner
-     * @return true if the gym owner was created successfully; false otherwise
+     * @return a list of gyms with available slots
      */
-    boolean createGymOwner(FlipfitGymOwner gymOwner);
+    List<FlipfitGymCenter> viewAllGymsWithSlots();
 
     /**
-     * Updates the password for a gym owner.
+     * Retrieves all gyms in a specified area.
      *
-     * @param email the email of the gym owner
-     * @param password the current password of the gym owner
+     * @param area the area in which to search for gyms
+     * @return a list of gyms located in the specified area
+     */
+    List<FlipfitGymCenter> viewAllGymsByArea(String area);
+
+    /**
+     * Books a slot at a specified gym.
+     *
+     * @param gymId the ID of the gym where the slot is to be booked
+     * @param startTime the start time of the slot
+     * @param email the email of the user making the booking
+     * @return true if the booking was successful; false otherwise
+     */
+    boolean bookSlot(int gymId, int startTime, String email);
+
+    /**
+     * Validates a user based on email and password.
+     *
+     * @param email the email of the user
+     * @param password the password of the user
+     * @return true if the credentials are valid; false otherwise
+     */
+    boolean validateUser(String email, String password);
+
+    /**
+     * Creates a new user.
+     *
+     * @param user the FlipfitCustomer object containing user details
+     * @return true if the user was created successfully; false otherwise
+     */
+    boolean createUser(FlipfitCustomer user);
+
+    /**
+     * Updates the password for a user.
+     *
+     * @param email the email of the user
+     * @param password the current password of the user
      * @param updatedPassword the new password to be set
      * @return true if the password was updated successfully; false otherwise
      */
-    boolean updateGymOwnerPassword(String email, String password, String updatedPassword);
-
-    /**
-     * Updates the details of an existing gym owner.
-     *
-     * @param gymOwner the FlipfitGymOwner object containing updated details of the gym owner
-     * @return true if the gym owner details were updated successfully; false otherwise
-     */
-    boolean updateGymOwner(FlipfitGymOwner gymOwner);
-
-    /**
-     * Retrieves the unique identifier of a gym owner based on their email.
-     *
-     * @param email the email of the gym owner
-     * @return the unique identifier of the gym owner
-     */
-    int getGymOwnerIdByEmail(String email);
-
-    /**
-     * Updates the seat count for a specific gym slot.
-     *
-     * @param gymId the unique identifier of the gym
-     * @param startTime the start time of the slot
-     * @param seatCount the new seat count to be set for the slot
-     * @return true if the seat count was updated successfully; false otherwise
-     */
-    boolean updateSeatCount(int gymId, int startTime, int seatCount);
+    boolean updateUserPassword(String email, String password, String updatedPassword);
 
     /**
      * Updates user details.
      *
-     * @param gym the FlipfitGymCenter object containing updated gym details
-     * @return true if the gym details were updated successfully; false otherwise
+     * @param user the FlipfitCustomer object containing updated user details
+     * @return true if the user details were updated successfully; false otherwise
      */
-    boolean updateGymDetails(FlipfitGymCenter gym);
+    boolean updateUserDetails(FlipfitCustomer user);
 
-    // View available slots at a given center on a particular date
-    public void viewAvailableSlots(int centerId, String date);
+    /**
+     * Retrieves the user ID based on the user's email.
+     *
+     * @param email the email of the user
+     * @return the ID of the user associated with the email
+     */
+    int getUserIdByEmail(String email);
 
-    // Find gym centers by location (city)
-    public void findGymByLocation(String location);
-
-    // Make payment for a confirmed booking
-    public void makePayment(int bookingId, Payment payment);
-
-    // Register for a waiting list if the slot is full
-    public void registerForWaitingList(int centerId, int slotId, FlipfitCustomer user);
-
-    // Book a gym slot for a user
-    public void bookGymSlot(FlipfitCustomer user, int slotId, int gymId);
-
-    // Cancel a booking by bookingId
-    public void cancelBooking(FlipfitCustomer user, int bookingId);
+    /**
+     * Retrieves the number of available seats at a specified gym and start time.
+     *
+     * @param gymId the ID of the gym
+     * @param startTime the start time of the slot
+     * @return the number of available seats
+     */
+    int getSeatCount(int gymId, int startTime);
 }
+
