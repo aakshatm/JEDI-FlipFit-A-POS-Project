@@ -11,9 +11,9 @@ public class test {
 //        System.out.println(adminService.login(101, "Election77@7"));
 //        adminService.editProfile(101, "random");
 
-//        FlipfitGymCustomerInterface gymcustomerService = new FlipfitGymCustomerService();
-//        System.out.println(gymcustomerService.getSeatCount(1, 6));
-//        gymcustomerService.bookSlot(1, 6, "aakshatmalhotra100@gmail.com"); // issue in booking
+        FlipfitGymCustomerInterface gymcustomerService = new FlipfitGymCustomerService();
+        System.out.println(gymcustomerService.getSeatCount(1, 6));
+        gymcustomerService.bookSlot(1, 6, "aakshatmalhotra100@gmail.com"); // issue in booking
 //        for (Booking book: gymcustomerService.viewAllBookings(2)){
 //            System.out.println(book.getBookingId());
 //        }
@@ -67,18 +67,18 @@ public class test {
 //         gym.setSlots(slotList);
 //
 //        System.out.println(ownerService.addGym(gym));
-        FlipfitAdminInterface adminService = new FlipfitAdminService();
-        for (FlipfitGymCenter gym: adminService.getUnverifiedGyms()){
-            System.out.println(gym.getGymId());
-            System.out.println(gym.getGymName());
-        }
-
-        adminService.verifyGym(4);
-
-        for (FlipfitGymCenter gym: adminService.getUnverifiedGyms()){
-            System.out.println(gym.getGymId());
-            System.out.println(gym.getGymName());
-        }
+//        FlipfitAdminInterface adminService = new FlipfitAdminService();
+//        for (FlipfitGymCenter gym: adminService.getUnverifiedGyms()){
+//            System.out.println(gym.getGymId());
+//            System.out.println(gym.getGymName());
+//        }
+//
+//        adminService.verifyGym(4);
+//
+//        for (FlipfitGymCenter gym: adminService.getUnverifiedGyms()){
+//            System.out.println(gym.getGymId());
+//            System.out.println(gym.getGymName());
+//        }
 
     }
 }

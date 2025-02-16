@@ -156,10 +156,10 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 return false;
             }
 
-            if ((!cancelOverlappingBookingIfExists(gymId, startTime, userId, 0)) && (!cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
-                System.out.println("Unable to cancel the overlapping booking. Please try again");
-                return false;
-            }
+//            if ((!cancelOverlappingBookingIfExists(gymId, startTime, userId, 0)) && (!cancelOverlappingBookingIfExists(gymId, startTime, userId, 1))) {
+//                System.out.println("Unable to cancel the overlapping booking. Please try again");
+//                return false;
+//            }
 
             try (Connection conn = DatabaseConnector.getConnection();
                  PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.INSERT_BOOKING);) {
