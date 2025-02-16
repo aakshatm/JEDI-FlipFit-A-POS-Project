@@ -13,8 +13,10 @@ import java.util.List;
  */
 public interface FlipfitGymCustomerInterface {
 
-    
+
     boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
+
+    FlipfitCustomer getProfile(String email, String password);
 
     /**
      * Cancels a slot booking based on the booking ID.

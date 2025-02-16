@@ -207,4 +207,16 @@ public class Booking {
     public void setBookingStatus(int bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
+
+    public void displayBookings() {
+        System.out.println("Booking Details:");
+        System.out.println("------------------------------");
+        System.out.println("Customer ID: " + getUserId());
+        System.out.println("Name: " + getUserName());
+        System.out.println("Email: " + getEmail());
+        System.out.println("Phone Number: " + getPhoneNumber());
+        System.out.println("Address: " + getAddress());
+        System.out.println("Location: " + getLocation());
+        System.out.println("------------------------------");
+    }
 }

@@ -32,6 +32,7 @@ public class FlipfitGymCustomerService implements FlipfitGymCustomerInterface {
         return flipFitCustomerDAOImplementation.editProfile(customerId, email, password, username, phoneNumber, address, location);
     }
 
+    @Override
     public FlipfitCustomer getProfile(String email, String password){
         return flipFitCustomerDAOImplementation.getProfile(email, password);
     }
