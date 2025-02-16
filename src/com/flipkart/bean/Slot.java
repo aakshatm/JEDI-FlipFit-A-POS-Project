@@ -4,63 +4,85 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Slot {
+    /**
+     * Unique identifier for the time slot.
+     */
     private int slotId;
-    private int startTime;
-    private int endTime;
-    private int capacity;
-    private List<Booking> bookings;
-    private List<Booking> waitlisted;
 
-    public Slot(){
-        bookings = new ArrayList<>();
-        waitlisted = new ArrayList<>();
+    /**
+     * Starting time of the time slot, represented as an integer (e.g., in minutes from midnight).
+     */
+    private int startTime;
+
+    /**
+     * Number of seats available in the time slot.
+     */
+    private int seatCount;
+
+    /**
+     * Constructs a Slots object with the specified slot ID, start time, and seat count.
+     *
+     * @param slotId the unique identifier for the slot
+     * @param startTime the starting time of the slot
+     * @param seatCount the number of seats available in the slot
+     */
+    public Slot(int slotId, int startTime, int seatCount) {
+        this.setSlotsId(slotId);
+        this.setStartTime(startTime);
+        this.setSeatCount(seatCount);
     }
 
-    public int getSlotId() {
+    /**
+     * Gets the unique identifier for the time slot.
+     *
+     * @return the slotsId, which is the unique identifier for the slot.
+     * */
+    public int getSlotsId() {
         return slotId;
     }
 
-    public void setSlotId(int slotId) {
-        this.slotId = slotId;
+    /**
+     * Sets the unique identifier for the time slot.
+     *
+     * @param slotsId the slotsId to set, which is the unique identifier for the slot.
+     */
+    public void setSlotsId(int slotsId) {
+        this.slotId = slotsId;
     }
 
+    /**
+     * Gets the starting time of the time slot.
+     *
+     * @return the startTime of the slot, represented as an integer.
+     */
     public int getStartTime() {
         return startTime;
     }
 
+    /**
+     * Sets the starting time of the time slot.
+     *
+     * @param startTime the startTime to set, represented as an integer.
+     */
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
 
-    public int getEndTime() {
-        return endTime;
+    /**
+     * Gets the number of seats available in the time slot.
+     *
+     * @return the seatCount, which is the number of seats available in the slot.
+     */
+    public int getSeatCount() {
+        return seatCount;
     }
 
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public List<Booking> getWaitlisted() {
-        return waitlisted;
-    }
-
-    public void setWaitlisted(List<Booking> waitlisted) {
-        this.waitlisted = waitlisted;
+    /**
+     * Sets the number of seats available in the time slot.
+     *
+     * @param seatCount the seatCount to set, which is the number of seats available in the slot.
+     */
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
     }
 }

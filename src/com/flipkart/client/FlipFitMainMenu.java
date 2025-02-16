@@ -2,7 +2,6 @@ package com.flipkart.client;
 
 import com.flipkart.bean.*;
 import com.flipkart.business.FlipfitAdminInterface;
-import com.flipkart.business.FlipfitGymCustomerInterface;
 import com.flipkart.business.FlipfitGymOwnerInterface;
 
 import com.flipkart.business.FlipfitAdminService;
@@ -12,7 +11,7 @@ import com.flipkart.business.FlipfitGymOwnerService;
 import java.util.List;
 import java.util.Scanner;
 
-public class FlipfitApplication {
+public class FlipFitMainMenu {
     private List<FlipfitGymCenter> gymCenterList;
     private List<Slot> slotList;
 
