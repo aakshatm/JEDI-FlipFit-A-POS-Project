@@ -102,6 +102,7 @@ public class FlipfitApplication {
         System.out.println("Customer registered successfully!");
     }
 
+
     private static void registerGymOwner(Scanner scanner) {
         System.out.println("Registering Gym Owner...");
         System.out.println("Enter Name:");
