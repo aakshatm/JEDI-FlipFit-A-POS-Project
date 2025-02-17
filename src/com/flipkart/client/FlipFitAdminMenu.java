@@ -1,4 +1,5 @@
 package com.flipkart.client;
+
 import com.flipkart.bean.FlipfitAdmin;
 import com.flipkart.bean.FlipfitCustomer;
 import com.flipkart.bean.FlipfitGymCenter;
@@ -10,103 +11,86 @@ import java.util.Scanner;
 
 public class FlipFitAdminMenu {
 
-    private FlipfitAdminInterface adminService = new FlipfitAdminService();
-    private Scanner scanner = new Scanner(System.in);
+    private final FlipfitAdminInterface adminService = new FlipfitAdminService();
+    private final Scanner scanner = new Scanner(System.in);
 
-    public boolean login(String email, String password){
+    public boolean login(String email, String password) {
         return adminService.login(email, password);
     }
 
-    public void viewCustomers(){
+    public void viewCustomers() {
         List<FlipfitCustomer> customers = adminService.viewCustomers();
-        for (FlipfitCustomer customer: customers){
-            customer.displayCustomer();
-        }
+        customers.forEach(FlipfitCustomer::displayCustomer); // Using forEach with method reference
     }
 
-    public void viewUnverfiedGymOwnwers(){
-        List<FlipfitGymOwner> gymOwnwers =  adminService.getUnverifiedGymOwners();
-        for (FlipfitGymOwner owner: gymOwnwers){
-            owner.display();
-        }
-
+    public void viewUnverifiedGymOwners() {
+        List<FlipfitGymOwner> gymOwners = adminService.getUnverifiedGymOwners();
+        gymOwners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
     }
 
-    public void viewUnverfiedGyms(){
-        List<FlipfitGymCenter> gymCenters =  adminService.getUnverifiedGyms();
-
-        for(FlipfitGymCenter gym: gymCenters){
-            gym.display();
-        }
-
+    public void viewUnverifiedGyms() {
+        List<FlipfitGymCenter> gymCenters = adminService.getUnverifiedGyms();
+        gymCenters.forEach(FlipfitGymCenter::display); // Using forEach with method reference
     }
 
-    public String getAdminName(){
+    public String getAdminName() {
         FlipfitAdmin admin = adminService.viewProfile();
         return admin.getName();
     }
 
-    public void viewProfile(){
+    public void viewProfile() {
         FlipfitAdmin admin = adminService.viewProfile();
         admin.display();
     }
 
-    public void changePassword(String password){
+    public void changePassword(String password) {
         FlipfitAdmin admin = adminService.viewProfile();
-
         boolean edited = adminService.editProfile(admin.getAdminId(), password);
-        if (edited){
+        if (edited) {
             System.out.println("Successfully changed password");
         }
     }
 
-    public void viewAllGymOwnwers(){
-        List<FlipfitGymOwner> ownwers = adminService.viewGymOwners();
-        for(FlipfitGymOwner owner : ownwers){
-            owner.display();
-        }
+    public void viewAllGymOwners() {
+        List<FlipfitGymOwner> owners = adminService.viewGymOwners();
+        owners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
     }
 
-    public void viewAllGyms(){
+    public void viewAllGyms() {
         List<FlipfitGymCenter> gyms = adminService.viewGyms();
-        for(FlipfitGymCenter gym : gyms){
-            gym.display();
-        }
+        gyms.forEach(FlipfitGymCenter::display); // Using forEach with method reference
     }
 
-    public boolean verifyGym(){
-        viewUnverfiedGyms();
-        int gymId;
+    public boolean verifyGym() {
+        viewUnverifiedGyms();
         System.out.println("Please enter the gymId to verify: ");
-        gymId = scanner.nextInt();
+        int gymId = scanner.nextInt();
         scanner.nextLine();
         boolean approved = adminService.verifyGym(gymId);
-        if (approved){
+        if (approved) {
             System.out.println("Successfully verified..");
             return true;
-        }else{
+        } else {
             System.out.println("Couldn't verify.. ");
             return false;
         }
     }
 
-    public boolean verifyGymOwnner(){
-        viewUnverfiedGymOwnwers();
-        int ownerId;
+    public boolean verifyGymOwner() {
+        viewUnverifiedGymOwners();
         System.out.println("Please enter the ownerId to verify: ");
-        ownerId = scanner.nextInt();
+        int ownerId = scanner.nextInt();
         scanner.nextLine();
         boolean approved = adminService.verifyGym(ownerId);
-        if (approved){
+        if (approved) {
             System.out.println("Successfully verified..");
             return true;
-        }else{
+        } else {
             System.out.println("Couldn't verify.. ");
             return false;
         }
     }
-
-    public void logout(){
+    public void logout() {
         System.out.println("Logging out..");
     }
 }
