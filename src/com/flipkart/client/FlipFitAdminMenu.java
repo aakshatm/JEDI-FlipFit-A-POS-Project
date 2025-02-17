@@ -200,7 +200,7 @@ public class FlipFitAdminMenu {
         System.out.println("Please enter the ownerId to verify: ");
         int ownerId = scanner.nextInt();
         scanner.nextLine();
-        boolean approved = adminService.verifyGym(ownerId);
+        boolean approved = adminService.verifyGymOwner(ownerId);
         if (approved) {
             System.out.println("Successfully verified..");
             return true;
