@@ -23,7 +23,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
     public boolean editProfile(String password){
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Admin SET password = ?")) {
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ADMIN_PWD_UPDATE)) {
 
             int bookingStatus = 2; // cancelled
             preparedStatement.setString(1, password);
@@ -50,7 +50,7 @@ public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {
         int adminId;
         String password;
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM Admin");) {
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.ALL_ADMIN_DETAILS);) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     adminId = resultSet.getInt("adminId");
