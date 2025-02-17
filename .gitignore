@@ -1,2 +1,4 @@
 out/
 config.properties/
+config.properties
+./config.properties
