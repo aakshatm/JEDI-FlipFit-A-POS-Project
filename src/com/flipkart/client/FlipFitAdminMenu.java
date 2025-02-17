@@ -9,13 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FlipFitAdminMenu {
-//    System.out.println("1. View All Registered Gyms");
-//            System.out.println("2. View All Users");
-//            System.out.println("3. View pending approvals");
-//            System.out.println("4. Approve/Reject Gym Owner Registration");
-//            System.out.println("5. View All Bookings");
-//            System.out.println("6. Deactivate Gym");
-//            System.out.println("7. Logout");
 
     private FlipfitAdminInterface adminService = new FlipfitAdminService();
     private Scanner scanner = new Scanner(System.in);
@@ -46,6 +39,11 @@ public class FlipFitAdminMenu {
             gym.display();
         }
 
+    }
+
+    public String getAdminName(){
+        FlipfitAdmin admin = adminService.viewProfile();
+        return admin.getName();
     }
 
     public void viewProfile(){
