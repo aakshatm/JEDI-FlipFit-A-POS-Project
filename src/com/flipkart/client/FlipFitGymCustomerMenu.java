@@ -1,6 +1,7 @@
 package com.flipkart.client;
 
 import java.util.*;
+
 import com.flipkart.bean.FlipfitCustomer;
 import com.flipkart.bean.FlipfitGymCenter;
 import com.flipkart.business.FlipfitGymCustomerInterface;
@@ -17,20 +18,16 @@ import java.util.Scanner;
 
 public class FlipFitGymCustomerMenu {
 
-    private FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
-    private Scanner scanner = new Scanner(System.in);
+
+    private final FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
+    private final Scanner scanner = new Scanner(System.in);
+
     PaymentInterface payerServiceOperations = new PaymentService();
 
-    /**
-     * Manages user login and displays the customer menu.
-     *
-     * @param email    FlipfitCustomer's email address.
-     * @param password FlipfitCustomer's password.
-     * @return true if login is successful, false otherwise.
-     */
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
+
             LocalDateTime myDateObj = LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String formattedDate = myDateObj.format(myFormatObj);
@@ -38,7 +35,6 @@ public class FlipFitGymCustomerMenu {
             FlipfitCustomer customer = customerService.getProfile(email, password);
             System.out.println("Gym customer " + customer.getUserName() + " logged in at " + formattedDate);
 
-            // Menu loop for the customer
             while (isLoggedIn) {
                 System.out.println("-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
@@ -62,7 +58,9 @@ public class FlipFitGymCustomerMenu {
                         if (gyms2.isEmpty()) {
                             break;
                         }
+
                         System.out.println("Enter the following:");
+
                         System.out.println("FlipfitGymCenter ID: ");
                         int gymId = Integer.parseInt(scanner.nextLine());
 
@@ -93,7 +91,9 @@ public class FlipFitGymCustomerMenu {
                         viewAllBookings(email);
                         break;
                     case 5:
+
                         System.out.println("Enter location you want to find gyms in: ");
+
                         String location = scanner.nextLine();
                         List<FlipfitGymCenter> gyms3 = viewAllGymsByArea(location);
                         printGyms(gyms3);
@@ -155,11 +155,6 @@ public class FlipFitGymCustomerMenu {
         return customerService.validateUser(email, password);
     }
 
-    /**
-     * Prints the list of gyms and their slots.
-     *
-     * @param gyms List of gyms to be printed.
-     */
     private void printGyms(List<FlipfitGymCenter> gyms) {
         if (gyms.isEmpty()) {
             System.out.println("No gyms found.");
@@ -169,7 +164,7 @@ public class FlipFitGymCustomerMenu {
         String gymLeftAlignFormat = "| %-5d | %-20s | %-20s | %-40s | %-15s |%n";
         System.out.println("FlipfitGymCenter List:");
 
-        for (FlipfitGymCenter gym : gyms) {
+        gyms.forEach(gym -> {
             System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
             System.out.format("| FlipfitGymCenter ID|     Name             |     Location         |           Address                         |     Status       |\n");
             System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
@@ -182,20 +177,15 @@ public class FlipFitGymCustomerMenu {
             System.out.format("| Start Time      |   End Time      | Remaining Seats |\n");
             System.out.format("+-----------------+-----------------+-----------------+\n");
 
-            for (Slot slot : gym.getSlots()) {
-                if (slot.getSeatCount() > 0)
-                    System.out.format(slotLeftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount());
-            }
+            gym.getSlots().stream()
+                    .filter(slot -> slot.getSeatCount() > 0)
+                    .forEach(slot -> System.out.format(slotLeftAlignFormat, slot.getStartTime(), (slot.getStartTime() + 1), slot.getSeatCount()));
+
             System.out.format("+-----------------+-----------------+-----------------+\n");
             System.out.println();
-        }
+        });
     }
 
-    /**
-     * Collects and validates card details for payment.
-     *
-     * @return true if card details are valid, false otherwise.
-     */
     public boolean collectAndValidateCardDetails() {
         System.out.print("Enter card number: ");
         String cardNumber = scanner.nextLine();
@@ -248,6 +238,7 @@ public class FlipFitGymCustomerMenu {
         return customerService.bookSlot(gymId, startTime, email);
     }
 
+
     /**
      * Cancels a booking for a slot.
      *
@@ -257,6 +248,7 @@ public class FlipFitGymCustomerMenu {
     public boolean cancelSlot(int bookingId) {
         return customerService.cancelSlot(bookingId);
     }
+
 
     /**
      * Displays all bookings made by the customer.
@@ -281,13 +273,14 @@ public class FlipFitGymCustomerMenu {
             System.out.format("| Booking ID |     Status    |    Time    |  FlipfitGymCenter ID    |\n");
             System.out.format("+------------+---------------+------------+------------+\n");
 
-            for (Booking booking : bookings) {
-                System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId());
-            }
+            bookings.forEach(booking ->
+                    System.out.format(leftAlignFormat, booking.getBookingId(), booking.getBookingStatus(), booking.getTime(), booking.getGymId())
+            );
             System.out.format("+------------+---------------+------------+------------+\n");
         }
         return true;
     }
+
 
     /**
      * Retrieves a list of gyms based on location.
@@ -299,31 +292,23 @@ public class FlipFitGymCustomerMenu {
         return customerService.viewAllGymsByArea(location);
     }
 
+
     /**
      * Creates a new customer account.
      */
+  
     public void createCustomer() {
         System.out.println("Enter customer details: ");
-        // Name
         System.out.println("Name: ");
         String ownerName = scanner.nextLine();
-        // Mobile Number
         System.out.println("Phone Number: ");
         String phoneNo = scanner.nextLine();
-
-        // Address
         System.out.println("Address: ");
         String address = scanner.nextLine();
-
-        // Location
         System.out.println("Location: ");
         String location = scanner.nextLine();
-
-        // Email
         System.out.println("Email: ");
         String ownerEmail = scanner.nextLine();
-
-        // Password
         System.out.println("Password: ");
         String password = scanner.nextLine();
 
@@ -340,6 +325,7 @@ public class FlipFitGymCustomerMenu {
         else
             System.out.println("FlipfitCustomer not created!");
     }
+
 
     /**
      * Updates the details of an existing customer.
@@ -363,6 +349,7 @@ public class FlipFitGymCustomerMenu {
 
         return customerService.updateUserDetails(user);
     }
+
 
     /**
      * Updates the password of a customer.

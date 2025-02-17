@@ -11,8 +11,9 @@ import java.util.Scanner;
 
 public class FlipFitAdminMenu {
 
-    private FlipfitAdminInterface adminService = new FlipfitAdminService();
-    private Scanner scanner = new Scanner(System.in);
+    private final FlipfitAdminInterface adminService = new FlipfitAdminService();
+    private final Scanner scanner = new Scanner(System.in);
+
 
     /**
      * Logs in the admin with the provided credentials.
@@ -28,39 +29,34 @@ public class FlipFitAdminMenu {
     /**
      * Displays the details of all customers.
      */
-    public void viewCustomers(){
+    public void viewCustomers() {
+
         List<FlipfitCustomer> customers = adminService.viewCustomers();
-        for (FlipfitCustomer customer: customers){
-            customer.displayCustomer();
-        }
+        customers.forEach(FlipfitCustomer::displayCustomer); // Using forEach with method reference
     }
 
-    /**
+   /**
      * Displays the list of unverified gym owners.
      */
-    public void viewUnverfiedGymOwnwers(){
-        List<FlipfitGymOwner> gymOwnwers =  adminService.getUnverifiedGymOwners();
-        for (FlipfitGymOwner owner: gymOwnwers){
-            owner.display();
-        }
+    public void viewUnverifiedGymOwners() {
+        List<FlipfitGymOwner> gymOwners = adminService.getUnverifiedGymOwners();
+        gymOwners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
     }
-
+      
     /**
      * Displays the list of unverified gyms.
      */
-    public void viewUnverfiedGyms(){
-        List<FlipfitGymCenter> gymCenters =  adminService.getUnverifiedGyms();
-        for(FlipfitGymCenter gym: gymCenters){
-            gym.display();
-        }
+    public void viewUnverifiedGyms() {
+        List<FlipfitGymCenter> gymCenters = adminService.getUnverifiedGyms();
+        gymCenters.forEach(FlipfitGymCenter::display); // Using forEach with method reference
     }
-
+  
     /**
      * Retrieves the name of the admin.
      *
      * @return The name of the admin.
      */
-    public String getAdminName(){
+    public String getAdminName() {
         FlipfitAdmin admin = adminService.viewProfile();
         return admin.getName();
     }
@@ -68,10 +64,11 @@ public class FlipFitAdminMenu {
     /**
      * Displays the profile details of the admin.
      */
-    public void viewProfile(){
+    public void viewProfile() {
         FlipfitAdmin admin = adminService.viewProfile();
         admin.display();
     }
+
 
     /**
      * Changes the admin password to the provided new password.
@@ -81,30 +78,27 @@ public class FlipFitAdminMenu {
     public void changePassword(String password){
         FlipfitAdmin admin = adminService.viewProfile();
         boolean edited = adminService.editProfile(admin.getAdminId(), password);
-        if (edited){
+        if (edited) {
             System.out.println("Successfully changed password");
         }
     }
 
+
     /**
      * Displays the list of all gym owners.
      */
-    public void viewAllGymOwnwers(){
-        List<FlipfitGymOwner> ownwers = adminService.viewGymOwners();
-        for(FlipfitGymOwner owner : ownwers){
-            owner.display();
-        }
+    public void viewAllGymOwners() {
+        List<FlipfitGymOwner> owners = adminService.viewGymOwners();
+        owners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
     }
-
     /**
      * Displays the list of all gyms.
      */
     public void viewAllGyms(){
         List<FlipfitGymCenter> gyms = adminService.viewGyms();
-        for(FlipfitGymCenter gym : gyms){
-            gym.display();
-        }
+        gyms.forEach(FlipfitGymCenter::display); // Using forEach with method reference
     }
+
 
     /**
      * Verifies a gym by its ID.
@@ -112,14 +106,13 @@ public class FlipFitAdminMenu {
      *
      * @return true if the gym is verified successfully, false otherwise.
      */
-    public boolean verifyGym(){
-        viewUnverfiedGyms();
-        int gymId;
+    public boolean verifyGym() {
+        viewUnverifiedGyms();
         System.out.println("Please enter the gymId to verify: ");
-        gymId = scanner.nextInt();
+        int gymId = scanner.nextInt();
         scanner.nextLine();
         boolean approved = adminService.verifyGym(gymId);
-        if (approved){
+        if (approved) {
             System.out.println("Successfully verified..");
             return true;
         } else {
@@ -128,20 +121,20 @@ public class FlipFitAdminMenu {
         }
     }
 
+
     /**
      * Verifies a gym owner by their ID.
      * Displays the list of unverified gym owners and prompts for owner ID.
      *
      * @return true if the gym owner is verified successfully, false otherwise.
      */
-    public boolean verifyGymOwnner(){
-        viewUnverfiedGymOwnwers();
-        int ownerId;
+    public boolean verifyGymOwner() {
+        viewUnverifiedGymOwners();
         System.out.println("Please enter the ownerId to verify: ");
-        ownerId = scanner.nextInt();
+        int ownerId = scanner.nextInt();
         scanner.nextLine();
         boolean approved = adminService.verifyGym(ownerId);
-        if (approved){
+        if (approved) {
             System.out.println("Successfully verified..");
             return true;
         } else {
@@ -154,7 +147,7 @@ public class FlipFitAdminMenu {
      * Logs out the admin.
      * Displays a logout message.
      */
-    public void logout(){
+    public void logout() {
         System.out.println("Logging out..");
     }
 }

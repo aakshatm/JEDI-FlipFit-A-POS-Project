@@ -3,3 +3,5 @@ config.properties/
 config.properties
 ./config.properties
 /src/config.properties
+./.DS_Store
+**/.DS_Store
