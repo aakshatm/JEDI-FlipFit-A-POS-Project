@@ -14,13 +14,14 @@ import com.flipkart.bean.Payment;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 import java.util.Scanner;
 
 public class FlipFitGymCustomerMenu {
 
+
     private final FlipfitGymCustomerInterface customerService = new FlipfitGymCustomerService();
     private final Scanner scanner = new Scanner(System.in);
+
     PaymentInterface payerServiceOperations = new PaymentService();
 
     public boolean userLogin(String email, String password) {
@@ -33,9 +34,6 @@ public class FlipFitGymCustomerMenu {
 
             FlipfitCustomer customer = customerService.getProfile(email, password);
             System.out.println("Gym customer " + customer.getUserName() + " logged in at " + formattedDate);
-
-
-
 
             while (isLoggedIn) {
                 System.out.println("-------------CUSTOMER MENU-------------");
@@ -60,7 +58,9 @@ public class FlipFitGymCustomerMenu {
                         if (gyms2.isEmpty()) {
                             break;
                         }
-                        System.out.println("Enter the following: ");
+
+                        System.out.println("Enter the following:");
+
                         System.out.println("FlipfitGymCenter ID: ");
                         int gymId = Integer.parseInt(scanner.nextLine());
 
@@ -91,7 +91,9 @@ public class FlipFitGymCustomerMenu {
                         viewAllBookings(email);
                         break;
                     case 5:
-                        System.out.println("Enter location you want find gyms in: ");
+
+                        System.out.println("Enter location you want to find gyms in: ");
+
                         String location = scanner.nextLine();
                         List<FlipfitGymCenter> gyms3 = viewAllGymsByArea(location);
                         printGyms(gyms3);
@@ -131,11 +133,24 @@ public class FlipFitGymCustomerMenu {
         return true;
     }
 
+    /**
+     * Displays the profile of the customer.
+     *
+     * @param email    FlipfitCustomer's email address.
+     * @param password FlipfitCustomer's password.
+     */
     public void viewProfile(String email, String password) {
         FlipfitCustomer profile = customerService.getProfile(email, password);
         profile.displayCustomer();
     }
 
+    /**
+     * Validates the user credentials.
+     *
+     * @param email    FlipfitCustomer's email address.
+     * @param password FlipfitCustomer's password.
+     * @return true if the user is valid, false otherwise.
+     */
     public boolean validateUser(String email, String password) {
         return customerService.validateUser(email, password);
     }
@@ -193,22 +208,54 @@ public class FlipFitGymCustomerMenu {
         return payerServiceOperations.validateCardDetails(payments);
     }
 
+    /**
+     * Processes payment by validating card details.
+     *
+     * @return true if the payment is successful, false otherwise.
+     */
     public boolean processPayments() {
         return collectAndValidateCardDetails();
     }
 
+    /**
+     * Retrieves all gyms with available slots.
+     *
+     * @return List of gyms with available slots.
+     */
     List<FlipfitGymCenter> viewAllGymsWithSlots() {
         return customerService.viewAllGymsWithSlots();
     }
 
+    /**
+     * Books a slot for a gym.
+     *
+     * @param gymId   The ID of the gym to book the slot in.
+     * @param startTime The start time of the slot to book.
+     * @param email   The email of the customer booking the slot.
+     * @return true if the slot is successfully booked, false otherwise.
+     */
     public boolean bookSlot(int gymId, int startTime, String email) {
         return customerService.bookSlot(gymId, startTime, email);
     }
 
+
+    /**
+     * Cancels a booking for a slot.
+     *
+     * @param bookingId ID of the booking to be cancelled.
+     * @return true if the booking is successfully cancelled, false otherwise.
+     */
     public boolean cancelSlot(int bookingId) {
         return customerService.cancelSlot(bookingId);
     }
 
+
+    /**
+     * Displays all bookings made by the customer.
+     *
+     * @param email FlipfitCustomer's email address.
+     * @return true if bookings are displayed, false otherwise.
+     */
     public boolean viewAllBookings(String email) {
         System.out.println("My Booking: ");
         int userId = customerService.getUserIdByEmail(email);
@@ -234,10 +281,22 @@ public class FlipFitGymCustomerMenu {
         return true;
     }
 
+
+    /**
+     * Retrieves a list of gyms based on location.
+     *
+     * @param location The location to filter gyms by.
+     * @return List of gyms located in the specified area.
+     */
     List<FlipfitGymCenter> viewAllGymsByArea(String location) {
         return customerService.viewAllGymsByArea(location);
     }
 
+
+    /**
+     * Creates a new customer account.
+     */
+  
     public void createCustomer() {
         System.out.println("Enter customer details: ");
         System.out.println("Name: ");
@@ -252,6 +311,7 @@ public class FlipFitGymCustomerMenu {
         String ownerEmail = scanner.nextLine();
         System.out.println("Password: ");
         String password = scanner.nextLine();
+
         FlipfitCustomer user = new FlipfitCustomer();
         user.setUserName(ownerName);
         user.setPhoneNumber(phoneNo);
@@ -266,6 +326,12 @@ public class FlipFitGymCustomerMenu {
             System.out.println("FlipfitCustomer not created!");
     }
 
+
+    /**
+     * Updates the details of an existing customer.
+     *
+     * @return true if customer details are successfully updated, false otherwise.
+     */
     public boolean updateUserDetails() {
         System.out.println("Enter customer details: ");
         System.out.println("Email: ");
@@ -284,6 +350,15 @@ public class FlipFitGymCustomerMenu {
         return customerService.updateUserDetails(user);
     }
 
+
+    /**
+     * Updates the password of a customer.
+     *
+     * @param userMail        FlipfitCustomer's email address.
+     * @param password        Current password.
+     * @param updatedPassword New password.
+     * @return true if password is updated successfully, false otherwise.
+     */
     public boolean updatePassword(String userMail, String password, String updatedPassword) {
         return customerService.updateGymUserPassword(userMail, password, updatedPassword);
     }

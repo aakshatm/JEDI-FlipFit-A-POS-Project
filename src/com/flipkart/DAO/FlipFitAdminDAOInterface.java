@@ -9,44 +9,60 @@ import java.util.List;
 
 public interface FlipFitAdminDAOInterface {
 
+    /**
+     * Retrieves the details of the admin.
+     * @return A FlipfitAdmin object containing the admin details such as ID, name, password, phone number, and email.
+     */
     FlipfitAdmin getAdminDetails();
 
+    /**
+     * Allows the admin to edit their profile password.
+     * @param password The new password to be set for the admin.
+     * @return True if the password was updated successfully, otherwise false.
+     */
     boolean editProfile(String password);
 
     /**
-     * Admin Can View All the FlipfitGymCenter Owners
-     *@return A list of GymOwner objects representing all registered gym owners. If no gym owners are found, an empty list is returned.*/
+     * Admin can view all registered gym owners.
+     * @return A list of FlipfitGymOwner objects representing all registered gym owners. If no gym owners are found, an empty list is returned.
+     */
     List<FlipfitGymOwner> viewGymOwners();
+
     /**
-     * Admin Can View All the Gyms
+     * Admin can view all registered gyms.
      * @return A list of FlipfitGymCenter objects representing all registered gyms. If no gyms are found, an empty list is returned.
      */
     List<FlipfitGymCenter> viewGyms();
+
     /**
-     * Admin Can View All the Users
-     * @return A list of User objects representing all registered users. If no users are found, an empty list is returned.
+     * Admin can view all registered users.
+     * @return A list of FlipfitCustomer objects representing all registered users. If no users are found, an empty list is returned.
      */
     List<FlipfitCustomer> viewCustomers();
+
     /**
-     * Admin Can Verify the Gyms and change their Status Like Verified Profile
-     * @return  True if the gym with the specified ID exists and is valid otherwise false if the gym is not found or is invalid.
-     * @param gymId- The ID of the gym to be verified
+     * Admin can verify a gym, updating its status to "verified."
+     * @param gymId The ID of the gym to be verified.
+     * @return True if the gym with the specified ID is found and successfully verified, otherwise false.
      */
     boolean verifyGym(int gymId);
+
     /**
-     * Admin Can Verify the FlipfitGymCenter Owners and change their Status Like Verified Profile
-     * @return  True if the gym owner with the specified ID is valid and exists otherwise false if the gym owner is not found or is invalid.
-     * @param gymOwnerId - The ID of the gym owner to be verified
+     * Admin can verify a gym owner, updating their status to "verified."
+     * @param gymOwnerId The ID of the gym owner to be verified.
+     * @return True if the gym owner with the specified ID is found and successfully verified, otherwise false.
      */
     boolean verifyGymOwner(int gymOwnerId);
+
     /**
-     * Get a list of unverified gyms
-     * @return List of unverified gyms
+     * Retrieves a list of unverified gym owners.
+     * @return A list of unverified FlipfitGymOwner objects.
      */
     List<FlipfitGymOwner> getUnverifiedGymOwners();
+
     /**
-     * Get a list of unverified gym owners
-     * @return List of unverified gym owners
+     * Retrieves a list of unverified gyms.
+     * @return A list of unverified FlipfitGymCenter objects.
      */
     List<FlipfitGymCenter> getUnverifiedGyms();
 }

@@ -15,14 +15,21 @@ import com.flipkart.DAO.FlipFitUpdatePasswordDAOImplementation;
  */
 public class FlipfitGymOwnerService implements FlipfitGymOwnerInterface {
 
+    // DAO instances for FlipfitGymOwner and updating password functionality
     private final FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
     private final FlipFitUpdatePasswordDAOImplementation flipFitUpdatePasswordDAOImplementation = new FlipFitUpdatePasswordDAOImplementation();
 
+    /**
+     * Retrieves the profile of a gym owner using the provided credentials.
+     *
+     * @param email The email address of the gym owner.
+     * @param password The password of the gym owner.
+     * @return A FlipfitGymOwner object representing the gym owner's profile if valid credentials are provided; null otherwise.
+     */
     @Override
     public FlipfitGymOwner getProfile(String email, String password){
         return flipFitGymOwnerDAOImplementation.getProfile(email, password);
     }
-
 
     /**
      * Adds a new gym to the system.
@@ -119,8 +126,16 @@ public class FlipfitGymOwnerService implements FlipfitGymOwnerInterface {
         return flipFitGymOwnerDAOImplementation.updateGymDetails(gym);
     }
 
+    /**
+     * Adds a list of slots to a gym.
+     *
+     * @param gymId The unique identifier of the gym where the slots are to be added.
+     * @param slots A list of Slot objects representing the slots to be added.
+     * @return true if the slots are successfully added to the gym; false otherwise.
+     */
     @Override
     public boolean addSlots(int gymId, List<Slot> slots) {
         return flipFitGymOwnerDAOImplementation.addSlots(gymId, slots);
     }
+
 }

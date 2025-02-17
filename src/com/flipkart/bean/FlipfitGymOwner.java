@@ -239,6 +239,11 @@ public class FlipfitGymOwner {
         this.verificationStatus = verificationStatus;
     }
 
+    /**
+     * Displays the details of the gym owner, including owner ID, name, PAN,
+     * GST, email, phone number, national ID, and verification status.
+     * If there are any associated gyms, their details are also displayed.
+     */
     public void display() {
         System.out.println("Admin Details:");
         System.out.println("------------------------------");
@@ -250,11 +255,13 @@ public class FlipfitGymOwner {
         System.out.println("Phone Number: " + phoneNo);
         System.out.println("National Id: " + nationalId);
         System.out.println("Verification Status: " + verificationStatus);
-        if (gyms != null){
+
+        // Display the associated gyms if any
+        if (gyms != null) {
             System.out.println("------------GYMS LIST-----------");
-                for (FlipfitGymCenter gym : gyms) {
-                    gym.display();
-                }
+            for (FlipfitGymCenter gym : gyms) {
+                gym.display();
+            }
         }
 
         System.out.println("------------------------------");

@@ -62,6 +62,11 @@ public class Notification {
     }
 
 
+    /**
+     * Sets the message for the notification.
+     *
+     * @param message The message to be set for the notification.
+     */
     public void setMessage(String message) {
         this.message = message;
     }
