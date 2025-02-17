@@ -6,6 +6,8 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.FlipfitGymOwnerInterface;
 import com.flipkart.business.FlipfitGymOwnerService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,10 +43,23 @@ public class FlipFitOwnerMenu {
     /// @param password Gym owner's password.
     /// @return true if logout is successful, false otherwise.
     public boolean gymOwnerLogin(String email, String password) {
+        LocalDateTime myDateObj=LocalDateTime.now();
+        DateTimeFormatter myFormatterObj=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate=myDateObj.format(myFormatterObj);
+
+
         if (!verifyGymOwner(email, password)) {
             return false;
         }
+
+
         System.out.println( "Login Successful! (Gym Owner)" );
+        FlipfitGymOwner owner = ownerService.getProfile(email, password);
+        System.out.println("Gym Owner " + owner.getOwnerName() +  " Logged In At "+formattedDate);
+        // show username
+
+
+
         while (true) {
             System.out.println(  "-----------------Gym Owner Menu-----------------" );
             System.out.println( "Press 1 to add a gym");
