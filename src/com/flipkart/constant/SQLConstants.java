@@ -94,6 +94,9 @@ public class SQLConstants {
     // Insert a new booking into the system
     public static final String INSERT_BOOKING = "INSERT INTO Bookings (userId, bookingStatus, time, slotId, gymId) VALUES (?, ?, ?, ?, ?)";
 
+    //update customer profile
+    public static final String UPDATE_CUSTOMER_PROFILE ="UPDATE User SET email = ?, password = ?, userName = ?, phoneNumber = ?, address = ?, location = ? WHERE userId = ?";
+
     // Get bookings by user ID
     public static final String GET_BOOKINGS_BY_USER_ID = "SELECT * FROM Bookings WHERE userId = ?";
 
