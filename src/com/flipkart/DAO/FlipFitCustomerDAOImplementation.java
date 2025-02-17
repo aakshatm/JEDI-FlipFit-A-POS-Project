@@ -86,7 +86,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
                 }
             }
             catch (UserNotFoundException e){
-                System.out.println("User details not found");
+                System.out.println("FlipfitCustomer details not found");
                 return null;
             }
         } catch (SQLException e) {

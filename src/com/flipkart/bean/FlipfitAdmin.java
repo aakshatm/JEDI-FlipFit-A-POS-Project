@@ -109,7 +109,7 @@ public class FlipfitAdmin {
      * Displays the details of the admin, including name, phone number, and email.
      */
     public void display() {
-        System.out.println("Admin Details:");
+        System.out.println("FlipfitAdmin Details:");
         System.out.println("------------------------------");
         System.out.println("Name: " + name);
         System.out.println("Phone Number: " + phoneNumber);

@@ -116,25 +116,25 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Value</div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VERIFY_GYM">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VERIFY_GYM">ADMIN_VERIFY_GYM</a></code></div>
-<div class="col-last even-row-color"><code>"UPDATE Gym SET Status = \'verified\' WHERE gymId = ?"</code></div>
+<div class="col-last even-row-color"><code>"UPDATE FlipfitGymCenter SET Status = \'verified\' WHERE gymId = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VERIFY_GYM_OWNER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VERIFY_GYM_OWNER">ADMIN_VERIFY_GYM_OWNER</a></code></div>
-<div class="col-last odd-row-color"><code>"UPDATE GymOwner SET verificationStatus = \'verified\' WHERE ownerId = ?"</code></div>
+<div class="col-last odd-row-color"><code>"UPDATE FlipfitGymOwner SET verificationStatus = \'verified\' WHERE ownerId = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VIEW_ALL_GYM_OWNERS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VIEW_ALL_GYM_OWNERS">ADMIN_VIEW_ALL_GYM_OWNERS</a></code></div>
-<div class="col-last even-row-color"><code>"SELECT * FROM GymOwner"</code></div>
+<div class="col-last even-row-color"><code>"SELECT * FROM FlipfitGymOwner"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VIEW_ALL_GYMS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VIEW_ALL_GYMS">ADMIN_VIEW_ALL_GYMS</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT * FROM Gym"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT * FROM FlipfitGymCenter"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VIEW_ALL_USERS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VIEW_ALL_USERS">ADMIN_VIEW_ALL_USERS</a></code></div>
-<div class="col-last even-row-color"><code>"SELECT * FROM User"</code></div>
+<div class="col-last even-row-color"><code>"SELECT * FROM FlipfitCustomer"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VIEW_UNVERIFIED_GYM_OWNERS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VIEW_UNVERIFIED_GYM_OWNERS">ADMIN_VIEW_UNVERIFIED_GYM_OWNERS</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT * FROM GymOwner WHERE verificationStatus = \'unverified\'"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT * FROM FlipfitGymOwner WHERE verificationStatus = \'unverified\'"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.ADMIN_VIEW_UNVERIFIED_GYMS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#ADMIN_VIEW_UNVERIFIED_GYMS">ADMIN_VIEW_UNVERIFIED_GYMS</a></code></div>
-<div class="col-last even-row-color"><code>"SELECT * FROM Gym WHERE Status = \'unverified\'"</code></div>
+<div class="col-last even-row-color"><code>"SELECT * FROM FlipfitGymCenter WHERE Status = \'unverified\'"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GET_BOOKING_BY_BOOKING_ID">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_BOOKING_BY_BOOKING_ID">GET_BOOKING_BY_BOOKING_ID</a></code></div>
 <div class="col-last odd-row-color"><code>"SELECT * FROM Bookings WHERE bookingId = ?"</code></div>
@@ -143,13 +143,13 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color"><code>"SELECT * FROM Bookings WHERE userId = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GET_GYM_OWNER_ID_BY_EMAIL">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_GYM_OWNER_ID_BY_EMAIL">GET_GYM_OWNER_ID_BY_EMAIL</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT ownerId FROM GymOwner WHERE ownerEmail = ?"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT ownerId FROM FlipfitGymOwner WHERE ownerEmail = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GET_GYMS_BY_AREA">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_GYMS_BY_AREA">GET_GYMS_BY_AREA</a></code></div>
-<div class="col-last even-row-color"><code>"SELECT * FROM Gym WHERE gymAddress LIKE CONCAT( \'%\',?,\'%\') OR location LIKE CONCAT( \'%\',?,\'%\')"</code></div>
+<div class="col-last even-row-color"><code>"SELECT * FROM FlipfitGymCenter WHERE gymAddress LIKE CONCAT( \'%\',?,\'%\') OR location LIKE CONCAT( \'%\',?,\'%\')"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GET_GYMS_WITH_SLOTS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_GYMS_WITH_SLOTS">GET_GYMS_WITH_SLOTS</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT * FROM Gym WHERE gymId IN (SELECT gymId FROM Slots WHERE seatCount &gt; 0)"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT * FROM FlipfitGymCenter WHERE gymId IN (SELECT gymId FROM Slots WHERE seatCount &gt; 0)"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GET_SEAT_COUNT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_SEAT_COUNT">GET_SEAT_COUNT</a></code></div>
 <div class="col-last even-row-color"><code>"SELECT seatCount FROM Slots WHERE gymId = ? AND startTime = ?"</code></div>
@@ -161,55 +161,55 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color"><code>"SELECT slotsId FROM Slots WHERE gymId = ? AND startTime = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GET_USER_ID_BY_EMAIL">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GET_USER_ID_BY_EMAIL">GET_USER_ID_BY_EMAIL</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT userId FROM User WHERE email = ?"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT userId FROM FlipfitCustomer WHERE email = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_ADD_SLOTS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_ADD_SLOTS">GYM_OWNER_ADD_SLOTS</a></code></div>
 <div class="col-last even-row-color"><code>"INSERT INTO Slots (startTime, seatCount, gymId) VALUES (?, ?, ?)"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_INSERT_GYM">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_INSERT_GYM">GYM_OWNER_INSERT_GYM</a></code></div>
-<div class="col-last odd-row-color"><code>"INSERT INTO Gym (gymName, gymAddress, location, ownerId, Status) VALUES(?, ?, ?, ?, ?)"</code></div>
+<div class="col-last odd-row-color"><code>"INSERT INTO FlipfitGymCenter (gymName, gymAddress, location, ownerId, Status) VALUES(?, ?, ?, ?, ?)"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_UPDATE_PASSWORD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_UPDATE_PASSWORD">GYM_OWNER_UPDATE_PASSWORD</a></code></div>
-<div class="col-last even-row-color"><code>"UPDATE GymOwner SET password = ? WHERE ownerEmail = ? AND password = ?"</code></div>
+<div class="col-last even-row-color"><code>"UPDATE FlipfitGymOwner SET password = ? WHERE ownerEmail = ? AND password = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_UPDATE_SEAT_COUNT">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_UPDATE_SEAT_COUNT">GYM_OWNER_UPDATE_SEAT_COUNT</a></code></div>
 <div class="col-last odd-row-color"><code>"UPDATE Slots SET seatCount = seatCount + ? WHERE startTime = ? AND gymId = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_VERIFY_PASSWORD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_VERIFY_PASSWORD">GYM_OWNER_VERIFY_PASSWORD</a></code></div>
-<div class="col-last even-row-color"><code>"SELECT * FROM GymOwner WHERE ownerEmail = ? AND password = ?"</code></div>
+<div class="col-last even-row-color"><code>"SELECT * FROM FlipfitGymOwner WHERE ownerEmail = ? AND password = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_OWNER_VIEW_GYMS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_OWNER_VIEW_GYMS">GYM_OWNER_VIEW_GYMS</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT * FROM Gym WHERE ownerId = ?"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT * FROM FlipfitGymCenter WHERE ownerId = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.GYM_USER_UPDATE_PASSWORD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#GYM_USER_UPDATE_PASSWORD">GYM_USER_UPDATE_PASSWORD</a></code></div>
-<div class="col-last even-row-color"><code>"UPDATE User SET password = ? WHERE email = ? AND password = ?"</code></div>
+<div class="col-last even-row-color"><code>"UPDATE FlipfitCustomer SET password = ? WHERE email = ? AND password = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.INSERT_BOOKING">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#INSERT_BOOKING">INSERT_BOOKING</a></code></div>
 <div class="col-last odd-row-color"><code>"INSERT INTO Bookings (userId, bookingStatus, time, slotId, gymId) VALUES (?, ?, ?, ?, ?)"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.INSERT_GYM_OWNER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#INSERT_GYM_OWNER">INSERT_GYM_OWNER</a></code></div>
-<div class="col-last even-row-color"><code>"INSERT INTO GymOwner (ownerName, ownerEmail, password, phoneNo, nationalId, GST, PAN, verificationStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"</code></div>
+<div class="col-last even-row-color"><code>"INSERT INTO FlipfitGymOwner (ownerName, ownerEmail, password, phoneNo, nationalId, GST, PAN, verificationStatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.INSERT_USER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#INSERT_USER">INSERT_USER</a></code></div>
-<div class="col-last odd-row-color"><code>"INSERT INTO User (userName, phoneNumber, address, location, email, password) VALUES (?, ?, ?, ?, ?, ?)"</code></div>
+<div class="col-last odd-row-color"><code>"INSERT INTO FlipfitCustomer (userName, phoneNumber, address, location, email, password) VALUES (?, ?, ?, ?, ?, ?)"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.UPDATE_BOOKING_STATUS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#UPDATE_BOOKING_STATUS">UPDATE_BOOKING_STATUS</a></code></div>
 <div class="col-last even-row-color"><code>"UPDATE Bookings SET bookingStatus = ? WHERE bookingId = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.UPDATE_GYM">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#UPDATE_GYM">UPDATE_GYM</a></code></div>
-<div class="col-last odd-row-color"><code>"UPDATE Gym SET location = ?, gymAddress = ?, gymName = ? Where gymId = ?"</code></div>
+<div class="col-last odd-row-color"><code>"UPDATE FlipfitGymCenter SET location = ?, gymAddress = ?, gymName = ? Where gymId = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.UPDATE_GYM_OWNER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#UPDATE_GYM_OWNER">UPDATE_GYM_OWNER</a></code></div>
-<div class="col-last even-row-color"><code>"UPDATE GymOwner SET ownerName = ?, phoneNo = ? WHERE ownerEmail = ?"</code></div>
+<div class="col-last even-row-color"><code>"UPDATE FlipfitGymOwner SET ownerName = ?, phoneNo = ? WHERE ownerEmail = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.UPDATE_OVERLAPPING_BOOKING_STATUS">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#UPDATE_OVERLAPPING_BOOKING_STATUS">UPDATE_OVERLAPPING_BOOKING_STATUS</a></code></div>
 <div class="col-last odd-row-color"><code>"UPDATE Bookings SET bookingStatus = ? WHERE userId = ? AND gymId = ? AND time = ? AND bookingStatus = ?"</code></div>
 <div class="col-first even-row-color"><code id="com.flipkart.constant.SQLConstants.UPDATE_USER">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#UPDATE_USER">UPDATE_USER</a></code></div>
-<div class="col-last even-row-color"><code>"UPDATE User SET userName = ?, phoneNumber = ? WHERE email = ?"</code></div>
+<div class="col-last even-row-color"><code>"UPDATE FlipfitCustomer SET userName = ?, phoneNumber = ? WHERE email = ?"</code></div>
 <div class="col-first odd-row-color"><code id="com.flipkart.constant.SQLConstants.VERIFY_USER_PASSWORD">public&nbsp;static&nbsp;final&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="com/flipkart/constant/SQLConstants.html#VERIFY_USER_PASSWORD">VERIFY_USER_PASSWORD</a></code></div>
-<div class="col-last odd-row-color"><code>"SELECT * FROM User WHERE email = ? and password = ?"</code></div>
+<div class="col-last odd-row-color"><code>"SELECT * FROM FlipfitCustomer WHERE email = ? and password = ?"</code></div>
 </div>
 </li>
 </ul>

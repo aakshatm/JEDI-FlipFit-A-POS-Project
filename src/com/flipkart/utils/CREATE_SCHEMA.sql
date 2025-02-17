@@ -2,7 +2,16 @@ CREATE DATABASE FlipFit_Database;
 
 USE FlipFit_Database;
 
-CREATE TABLE GymOwner (
+CREATE TABLE `FlipFit_Database`.`FlipfitAdmin` (
+  `adminId` INT NOT NULL,
+  `password` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `phoneNumber` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  PRIMARY KEY (`adminId`));
+
+
+CREATE TABLE FlipfitGymOwner (
     ownerId INT PRIMARY KEY AUTO_INCREMENT,
     ownerName VARCHAR(255),
     ownerEmail VARCHAR(255) NOT NULL,
@@ -14,14 +23,14 @@ CREATE TABLE GymOwner (
     verificationStatus VARCHAR(50) DEFAULT 'unverified'
 );
 
-CREATE TABLE Gym (
+CREATE TABLE FlipfitGymCenter (
     gymId INT PRIMARY KEY AUTO_INCREMENT,
     gymName VARCHAR(255),
     gymAddress VARCHAR(255),
     location VARCHAR(255) NOT NULL,
     ownerId INT NOT NULL,
     Status VARCHAR(50) DEFAULT 'unverified',
-    FOREIGN KEY (ownerId) REFERENCES GymOwner(ownerId)
+    FOREIGN KEY (ownerId) REFERENCES FlipfitGymOwner(ownerId)
 );
 
 CREATE TABLE Slots (
@@ -29,11 +38,11 @@ CREATE TABLE Slots (
     startTime INT NOT NULL,
     seatCount INT NOT NULL CHECK (seatCount >= 0),
     gymId INT NOT NULL,
-    FOREIGN KEY (gymId) REFERENCES Gym(gymId),
+    FOREIGN KEY (gymId) REFERENCES FlipfitGymCenter(gymId),
     UNIQUE (gymId, startTime)
 );
 
-CREATE TABLE User (
+CREATE TABLE FlipfitCustomer (
     userId INT PRIMARY KEY AUTO_INCREMENT,
     userName VARCHAR(255),
     phoneNumber VARCHAR(20),
@@ -50,7 +59,7 @@ CREATE TABLE Bookings (
     time INT NOT NULL,
     slotId INT NOT NULL,
     gymId INT NOT NULL,
-    FOREIGN KEY (userId) REFERENCES User(userId),
+    FOREIGN KEY (userId) REFERENCES FlipfitCustomer(userId),
     FOREIGN KEY (slotId) REFERENCES Slots(slotsId),
-    FOREIGN KEY (gymId) REFERENCES Gym(gymId)
+    FOREIGN KEY (gymId) REFERENCES FlipfitGymCenter(gymId)
 );

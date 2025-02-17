@@ -23,32 +23,32 @@ public interface FlipFitAdminDAOInterface {
     boolean editProfile(String password);
 
     /**
-     * Admin can view all registered gym owners.
+     * FlipfitAdmin can view all registered gym owners.
      * @return A list of FlipfitGymOwner objects representing all registered gym owners. If no gym owners are found, an empty list is returned.
      */
     List<FlipfitGymOwner> viewGymOwners();
 
     /**
-     * Admin can view all registered gyms.
+     * FlipfitAdmin can view all registered gyms.
      * @return A list of FlipfitGymCenter objects representing all registered gyms. If no gyms are found, an empty list is returned.
      */
     List<FlipfitGymCenter> viewGyms();
 
     /**
-     * Admin can view all registered users.
+     * FlipfitAdmin can view all registered users.
      * @return A list of FlipfitCustomer objects representing all registered users. If no users are found, an empty list is returned.
      */
     List<FlipfitCustomer> viewCustomers();
 
     /**
-     * Admin can verify a gym, updating its status to "verified."
+     * FlipfitAdmin can verify a gym, updating its status to "verified."
      * @param gymId The ID of the gym to be verified.
      * @return True if the gym with the specified ID is found and successfully verified, otherwise false.
      */
     boolean verifyGym(int gymId);
 
     /**
-     * Admin can verify a gym owner, updating their status to "verified."
+     * FlipfitAdmin can verify a gym owner, updating their status to "verified."
      * @param gymOwnerId The ID of the gym owner to be verified.
      * @return True if the gym owner with the specified ID is found and successfully verified, otherwise false.
      */

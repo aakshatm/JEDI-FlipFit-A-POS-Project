@@ -165,9 +165,9 @@ public class FlipfitGymCenter {
      */
     public void display() {
         System.out.println("--------------------------------------------------");
-        System.out.println("Gym ID: " + gymId);
-        System.out.println("Gym Name: " + gymName);
-        System.out.println("Gym Address: " + gymAddress);
+        System.out.println("FlipfitGymCenter ID: " + gymId);
+        System.out.println("FlipfitGymCenter Name: " + gymName);
+        System.out.println("FlipfitGymCenter Address: " + gymAddress);
         System.out.println("--------------------------------------------------");
     }
 
@@ -177,9 +177,9 @@ public class FlipfitGymCenter {
      */
     public void displayWithSlot() {
         System.out.println("--------------------------------------------------");
-        System.out.println("Gym ID: " + gymId);
-        System.out.println("Gym Name: " + gymName);
-        System.out.println("Gym Address: " + gymAddress);
+        System.out.println("FlipfitGymCenter ID: " + gymId);
+        System.out.println("FlipfitGymCenter Name: " + gymName);
+        System.out.println("FlipfitGymCenter Address: " + gymAddress);
         System.out.println("--------------------------------------------------");
 
         // Displaying all available slots in the gym
