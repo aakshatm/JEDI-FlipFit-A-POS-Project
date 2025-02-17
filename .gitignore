@@ -1,3 +1,4 @@
 out/
 javadoc/
 config.properties
+/.idea/libraries/mysql_connector_j_8_4.xml
