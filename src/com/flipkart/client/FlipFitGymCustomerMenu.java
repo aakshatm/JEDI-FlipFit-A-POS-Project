@@ -41,7 +41,8 @@ public class FlipFitGymCustomerMenu {
                 System.out.println("Press 5 to view all gyms by area");
                 System.out.println("Press 6 to view a slot's availability");
                 System.out.println("Press 7 to update your details");
-                System.out.println("Press 8 to logout" );
+                System.out.println("Press 8 to view Profile");
+                System.out.println("Press 9 to logout" );
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -110,6 +111,9 @@ public class FlipFitGymCustomerMenu {
                             System.out.println( "FlipfitCustomer update was unsuccessful" );
                         break;
                     case 8:
+                        viewProfile(email, password);
+                        break;
+                    case 9:
                         isLoggedIn = false;
                         break;
                     default:
@@ -120,6 +124,11 @@ public class FlipFitGymCustomerMenu {
             return false;
         }
         return true;
+    }
+
+    public void viewProfile(String email, String password){
+        FlipfitCustomer profile = customerService.getProfile(email, password);
+        profile.displayCustomer();
     }
 
     public boolean validateUser(String email, String password) {
