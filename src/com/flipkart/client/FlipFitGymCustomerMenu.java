@@ -37,7 +37,7 @@ public class FlipFitGymCustomerMenu {
             String formattedDate = myDateObj.format(myFormatObj);
 
             FlipfitCustomer customer = customerService.getProfile(email, password);
-            System.out.println("Gum customer " + customer.getUserName() + " logged in at " + formattedDate);
+            System.out.println("Gym customer " + customer.getUserName() + " logged in at " + formattedDate);
 
 
 
