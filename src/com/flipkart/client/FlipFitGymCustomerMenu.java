@@ -61,7 +61,7 @@ public class FlipFitGymCustomerMenu {
 
                         System.out.println("Enter the following:");
 
-                        System.out.println("FlipfitGymCenter ID: ");
+                        System.out.println("Gym ID: ");
                         int gymId = Integer.parseInt(scanner.nextLine());
 
                         System.out.println("Slot Time: ");
@@ -113,9 +113,9 @@ public class FlipFitGymCustomerMenu {
                         break;
                     case 7:
                         if (updateUserDetails())
-                            System.out.println("FlipfitCustomer updated successfully!");
+                            System.out.println("Customer updated successfully!");
                         else
-                            System.out.println("FlipfitCustomer update was unsuccessful");
+                            System.out.println("Customer update was unsuccessful");
                         break;
                     case 8:
                         viewProfile(email, password);
@@ -162,11 +162,11 @@ public class FlipFitGymCustomerMenu {
         }
 
         String gymLeftAlignFormat = "| %-5d | %-20s | %-20s | %-40s | %-15s |%n";
-        System.out.println("FlipfitGymCenter List:");
+        System.out.println("Gym List:");
 
         gyms.forEach(gym -> {
             System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
-            System.out.format("| FlipfitGymCenter ID|     Name             |     Location         |           Address                         |     Status       |\n");
+            System.out.format("| Gym ID|     Name             |     Location         |           Address                         |     Status       |\n");
             System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
             System.out.format(gymLeftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getLocation(), gym.getGymAddress(), gym.getStatus());
             System.out.format("+-------+----------------------+----------------------+------------------------------------------+------------------+\n");
@@ -270,7 +270,7 @@ public class FlipFitGymCustomerMenu {
         } else {
             String leftAlignFormat = "| %-10s | %-15s | %-10s | %-10s | %n";
             System.out.format("+------------+---------------+------------+------------+\n");
-            System.out.format("| Booking ID |     Status    |    Time    |  FlipfitGymCenter ID    |\n");
+            System.out.format("| Booking ID |     Status    |    Time    |  Gym ID    |\n");
             System.out.format("+------------+---------------+------------+------------+\n");
 
             bookings.forEach(booking ->
@@ -321,9 +321,9 @@ public class FlipFitGymCustomerMenu {
         user.setPassword(password);
 
         if (customerService.createUser(user))
-            System.out.println("FlipfitCustomer created!");
+            System.out.println("Customer created!");
         else
-            System.out.println("FlipfitCustomer not created!");
+            System.out.println("Customer not created!");
     }
 
 

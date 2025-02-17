@@ -13,8 +13,6 @@ public class FlipFitAdminMenu {
 
     private final FlipfitAdminInterface adminService = new FlipfitAdminService();
     private final Scanner scanner = new Scanner(System.in);
-
-
     /**
      * Logs in the admin with the provided credentials.
      *
@@ -31,24 +29,67 @@ public class FlipFitAdminMenu {
      */
     public void viewCustomers() {
 
-        List<FlipfitCustomer> customers = adminService.viewCustomers();
-        customers.forEach(FlipfitCustomer::displayCustomer); // Using forEach with method reference
+        List<FlipfitCustomer> users = adminService.viewCustomers();
+        if (users.isEmpty()) {
+            System.out.println("No users found.");
+            return;
+        }
+
+        String leftAlignFormat = "| %-8s | %-20s | %-30s | %-15s | %-20s | %-40s |%n";
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
+        System.out.format("| User ID  |     Name             | Email                         | Phone Number  | Location           | Address                              |%n");
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
+
+        for (FlipfitCustomer user : users) {
+            System.out.format(leftAlignFormat, user.getUserId(), user.getUserName(), user.getEmail(), user.getPhoneNumber(), user.getLocation(), user.getAddress());
+        }
+        System.out.format("+----------+----------------------+-------------------------------+---------------+--------------------+--------------------------------------+%n");
     }
 
    /**
      * Displays the list of unverified gym owners.
      */
     public void viewUnverifiedGymOwners() {
-        List<FlipfitGymOwner> gymOwners = adminService.getUnverifiedGymOwners();
-        gymOwners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
+        List<FlipfitGymOwner> gymOwnerList = adminService.getUnverifiedGymOwners();
+        if (gymOwnerList.isEmpty()) {
+            System.out.println("No unverified gym owners found.");
+            return;
+        }
+
+        String leftAlignFormat = "| %-5d | %-10d | %-20s | %-20s | %-15s |%n";
+        System.out.format("+-------+----------+----------------------+----------------------+------------------+%n");
+        System.out.format("| S.No  | Owner ID |     Owner Name       |     Email            |     Status       |%n");
+        System.out.format("+-------+----------+----------------------+----------------------+------------------+%n");
+
+        int gymOwnerCounter = 1;
+        for (FlipfitGymOwner gymOwner : gymOwnerList) {
+            System.out.format(leftAlignFormat, gymOwnerCounter, gymOwner.getOwnerId(), gymOwner.getOwnerName(), gymOwner.getOwnerEmail(), gymOwner.getVerificationStatus());
+            gymOwnerCounter++;
+        }
+        System.out.format("+-------+----------+----------------------+----------------------+------------------+%n");
     }
       
     /**
      * Displays the list of unverified gyms.
      */
     public void viewUnverifiedGyms() {
-        List<FlipfitGymCenter> gymCenters = adminService.getUnverifiedGyms();
-        gymCenters.forEach(FlipfitGymCenter::display); // Using forEach with method reference
+        List<FlipfitGymCenter> gyms = adminService.getUnverifiedGyms();
+        if (gyms.isEmpty()) {
+            System.out.println("No unverified gyms found.");
+            return;
+        }
+
+        String leftAlignFormat = "| %-5d | %-20s | %-5d | %-40s | %-20s | %-15s |%n";
+        System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
+        System.out.format("| S.No  |     Name             | Gym ID |           Address                        |   Location           |     Status       |%n");
+        System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
+
+        int gymCounter = 1;
+        for (FlipfitGymCenter g : gyms) {
+            System.out.format(leftAlignFormat, gymCounter, g.getGymName(), g.getGymId(), g.getGymAddress(), g.getLocation(), g.getStatus());
+            gymCounter++;
+        }
+        System.out.format("+-------+----------------------+--------+------------------------------------------+----------------------+------------------+%n");
     }
   
     /**
@@ -88,15 +129,41 @@ public class FlipFitAdminMenu {
      * Displays the list of all gym owners.
      */
     public void viewAllGymOwners() {
-        List<FlipfitGymOwner> owners = adminService.viewGymOwners();
-        owners.forEach(FlipfitGymOwner::display); // Using forEach with method reference
+        List<FlipfitGymOwner> gymOwners = adminService.viewGymOwners();
+        if (gymOwners.isEmpty()) {
+            System.out.println("No gym owners found.");
+            return;
+        }
+
+        String leftAlignFormat = "| %-13s | %-20s | %-30s | %-15s | %-10s | %-20s | %-20s | %-20s |%n";
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+        System.out.format("| Gym Owner ID  |     Name             | Email                         | Phone Number  | GST        | National ID          | Verification Status  | PAN                  |%n");
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
+
+        for (FlipfitGymOwner gymOwner : gymOwners) {
+            System.out.format(leftAlignFormat, gymOwner.getOwnerId(), gymOwner.getOwnerName(), gymOwner.getOwnerEmail(), gymOwner.getPhoneNo(), gymOwner.getGST(), gymOwner.getNationalId(), gymOwner.getVerificationStatus(), gymOwner.getPAN());
+        }
+        System.out.format("+---------------+----------------------+-------------------------------+---------------+------------+----------------------+----------------------+----------------------+%n");
     }
     /**
      * Displays the list of all gyms.
      */
     public void viewAllGyms(){
         List<FlipfitGymCenter> gyms = adminService.viewGyms();
-        gyms.forEach(FlipfitGymCenter::display); // Using forEach with method reference
+        if (gyms.isEmpty()) {
+            System.out.println("No gyms found.");
+            return;
+        }
+
+        String leftAlignFormat = "| %-6s | %-20s | %-40s | %-20s | %-10s | %-10s |%n";
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
+        System.out.format("| Gym ID |     Name             | Address                                | Location             | Owner ID | Status   |%n");
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n" );
+
+        for (FlipfitGymCenter gym : gyms) {
+            System.out.format(leftAlignFormat, gym.getGymId(), gym.getGymName(), gym.getGymAddress(), gym.getLocation(), gym.getOwnerId(), gym.getStatus());
+        }
+        System.out.format("+--------+----------------------+----------------------------------------+----------------------+----------+----------+%n");
     }
 
 
@@ -133,7 +200,7 @@ public class FlipFitAdminMenu {
         System.out.println("Please enter the ownerId to verify: ");
         int ownerId = scanner.nextInt();
         scanner.nextLine();
-        boolean approved = adminService.verifyGym(ownerId);
+        boolean approved = adminService.verifyGymOwner(ownerId);
         if (approved) {
             System.out.println("Successfully verified..");
             return true;

@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * This class implements the FlipFitAdminDAOInterface and provides the functionality
- * for managing the admin actions in the FlipFit Gym system, including viewing gyms,
+ * for managing the admin actions in the FlipFit FlipfitGymCenter system, including viewing gyms,
  * customers, gym owners, updating the admin profile, and verifying gyms and gym owners.
  */
 public class FlipFitAdminDAOImplementation implements FlipFitAdminDAOInterface {

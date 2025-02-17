@@ -245,7 +245,7 @@ public class FlipfitGymOwner {
      * If there are any associated gyms, their details are also displayed.
      */
     public void display() {
-        System.out.println("Admin Details:");
+        System.out.println("FlipfitAdmin Details:");
         System.out.println("------------------------------");
         System.out.println("Owner Id: " + ownerId);
         System.out.println("Owner Name: " + ownerName);

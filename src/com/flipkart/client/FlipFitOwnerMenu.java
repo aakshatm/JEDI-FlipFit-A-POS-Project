@@ -43,7 +43,7 @@ public class FlipFitOwnerMenu {
 
         System.out.println( "Login Successful! (Gym Owner)" );
         FlipfitGymOwner owner = ownerService.getProfile(email, password);
-        System.out.println("Gym Owner " + owner.getOwnerName() +  " Logged In At "+formattedDate);
+        System.out.println("FlipfitGymCenter Owner " + owner.getOwnerName() +  " Logged In At "+formattedDate);
         // show username
 
         while (true) {
