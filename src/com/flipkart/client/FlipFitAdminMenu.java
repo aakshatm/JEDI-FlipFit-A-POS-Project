@@ -90,22 +90,7 @@ public class FlipFitAdminMenu {
             return false;
         }
     }
-
     public void logout() {
         System.out.println("Logging out..");
-    }
-
-    // Optional: Stream usage for viewing all gym owners
-    public void viewAllGymOwnersUsingStream() {
-        List<FlipfitGymOwner> owners = adminService.viewGymOwners();
-        owners
-                .forEach(FlipfitGymOwner::display); // Using stream with forEach to display gym owners
-    }
-
-    // Optional: Stream usage for displaying all gyms
-    public void viewAllGymsUsingStream() {
-        List<FlipfitGymCenter> gyms = adminService.viewGyms();
-        gyms
-                .forEach(FlipfitGymCenter::display); // Using stream with forEach to display gyms
     }
 }
