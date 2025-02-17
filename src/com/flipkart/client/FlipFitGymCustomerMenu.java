@@ -112,6 +112,7 @@ public class FlipFitGymCustomerMenu {
                         break;
                     case 8:
                         viewProfile(email, password);
+                        break;
                     case 9:
                         isLoggedIn = false;
                         break;
