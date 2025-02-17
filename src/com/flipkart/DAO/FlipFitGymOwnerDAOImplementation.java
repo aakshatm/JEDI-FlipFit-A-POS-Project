@@ -19,7 +19,7 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         FlipfitGymOwner gymOwner = null;
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM GymOwner WHERE ownerEmail = ? AND password = ?")) {
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.GYM_OWNER_VERIFY_PASSWORD)) {
 
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
@@ -28,8 +28,9 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
                 if (resultSet.next()) { // Check if there is a matching record
                     gymOwner = new FlipfitGymOwner();
                     gymOwner.setOwnerId(resultSet.getInt("ownerId"));
-                    gymOwner.setOwnerName(resultSet.getString("ownerEmail"));
-                    gymOwner.setOwnerEmail(resultSet.getString("password"));
+                    gymOwner.setOwnerName(resultSet.getString("ownerName"));
+                    gymOwner.setOwnerEmail(resultSet.getString("ownerEmail"));
+                    gymOwner.setPassword(resultSet.getString("password"));
                     gymOwner.setPhoneNo(resultSet.getString("phoneNo"));
                     gymOwner.setNationalId(resultSet.getString("nationalId"));
                     gymOwner.setGST(resultSet.getString("GST"));

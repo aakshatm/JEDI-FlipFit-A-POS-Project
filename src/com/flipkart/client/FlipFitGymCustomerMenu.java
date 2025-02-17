@@ -9,7 +9,10 @@ import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.bean.Booking;
 import com.flipkart.business.PaymentInterface;
 import com.flipkart.business.PaymentService;
+import com.flipkart.bean.Slot;
 import com.flipkart.bean.Payment;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 import java.util.Scanner;
@@ -23,7 +26,17 @@ public class FlipFitGymCustomerMenu {
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
-            System.out.println("Customer Login Successful!!");
+
+            LocalDateTime myDateObj = LocalDateTime.now();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formattedDate = myDateObj.format(myFormatObj);
+
+            FlipfitCustomer customer = customerService.getProfile(email, password);
+            System.out.println("Gym customer " + customer.getUserName() + " logged in at " + formattedDate);
+
+
+
+
             while (isLoggedIn) {
                 System.out.println("-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
@@ -239,7 +252,6 @@ public class FlipFitGymCustomerMenu {
         String ownerEmail = scanner.nextLine();
         System.out.println("Password: ");
         String password = scanner.nextLine();
-
         FlipfitCustomer user = new FlipfitCustomer();
         user.setUserName(ownerName);
         user.setPhoneNumber(phoneNo);

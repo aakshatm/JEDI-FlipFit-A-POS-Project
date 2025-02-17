@@ -20,7 +20,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
 
     @Override
     public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
-        String query = "UPDATE User SET email = ?, password = ?, userName = ?, phoneNumber = ?, address = ?, location = ? WHERE userId = ?";
+        String query = SQLConstants.UPDATE_CUSTOMER_PROFILE;
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
@@ -46,7 +46,7 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         FlipfitCustomer profile = null;
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM User WHERE email = ? AND password = ?")) {
+             PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.VERIFY_USER_PASSWORD)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
