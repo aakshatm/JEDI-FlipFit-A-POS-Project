@@ -16,9 +16,12 @@ public class SQLConstants {
     // Update user password based on their email and current password
     public static final String GYM_USER_UPDATE_PASSWORD = "UPDATE User SET password = ? WHERE email = ? AND password = ?";
 
+    // Update gym owner's password
+    public static final String ADMIN_PWD_UPDATE="UPDATE Admin SET password = ?";
     // Update gym owner's password based on their email and current password
     public static final String GYM_OWNER_UPDATE_PASSWORD = "UPDATE GymOwner SET password = ? WHERE ownerEmail = ? AND password = ?";
-
+    // all admin details
+    public static final String ALL_ADMIN_DETAILS="SELECT * FROM Admin";
     // Verify gym owner credentials based on email and password
     public static final String GYM_OWNER_VERIFY_PASSWORD = "SELECT * FROM GymOwner WHERE ownerEmail = ? AND password = ?";
 
@@ -90,6 +93,9 @@ public class SQLConstants {
 
     // Insert a new booking into the system
     public static final String INSERT_BOOKING = "INSERT INTO Bookings (userId, bookingStatus, time, slotId, gymId) VALUES (?, ?, ?, ?, ?)";
+
+    //update customer profile
+    public static final String UPDATE_CUSTOMER_PROFILE ="UPDATE User SET email = ?, password = ?, userName = ?, phoneNumber = ?, address = ?, location = ? WHERE userId = ?";
 
     // Get bookings by user ID
     public static final String GET_BOOKINGS_BY_USER_ID = "SELECT * FROM Bookings WHERE userId = ?";

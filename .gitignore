@@ -1,1 +1,5 @@
 out/
+config.properties/
+config.properties
+./config.properties
+/src/config.properties
