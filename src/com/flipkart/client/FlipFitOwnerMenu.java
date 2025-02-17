@@ -19,7 +19,7 @@ public class FlipFitOwnerMenu {
         owner.display();
     }
 
-    boolean verifyGymOwner(String email, String password) {
+    public boolean verifyGymOwner(String email, String password) {
         return ownerService.validateGymOwner(email, password);
     }
 
@@ -82,8 +82,11 @@ public class FlipFitOwnerMenu {
         gym.setOwnerId(gymOwnerId);
 
         System.out.println("Enter details of the gym: ");
+        System.out.println("Name: ");
         gym.setGymName(scanner.nextLine());
+        System.out.println("Address: ");
         gym.setGymAddress(scanner.nextLine());
+        System.out.println("Location: ");
         gym.setLocation(scanner.nextLine());
         gym.setStatus("unverified");
 
@@ -93,7 +96,9 @@ public class FlipFitOwnerMenu {
 
         IntStream.range(1, slotCount + 1).forEach(currentCount -> {
             System.out.println("Add details for slot number " + currentCount + ": ");
+            System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
+            System.out.println("Enter seat count: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
             slots.add(new Slot(-1, startTime, seatCount));
         });
@@ -112,7 +117,9 @@ public class FlipFitOwnerMenu {
 
         IntStream.range(1, slotCount + 1).forEach(currentCount -> {
             System.out.println("Add details for slot number " + currentCount + ": ");
+            System.out.println("Enter start time: ");
             int startTime = Integer.parseInt(scanner.nextLine());
+            System.out.println("Enter seat count: ");
             int seatCount = Integer.parseInt(scanner.nextLine());
             slots.add(new Slot(-1, startTime, seatCount));
         });
@@ -173,7 +180,7 @@ public class FlipFitOwnerMenu {
         System.out.println(ownerService.updateSeatCount(gymId, startTime, seatCount) ? "Seat count updated!" : "Seat count not updated");
     }
 
-    public void updateGym(String email) {
+    public boolean updateGym(String email) {
         displayGyms(email);
 
         System.out.println("Enter gym ID: ");
@@ -193,17 +200,17 @@ public class FlipFitOwnerMenu {
         gym.setLocation(gymLocation);
         gym.setGymId(gymId);
 
-        ownerService.updateGymDetails(gym);
+        return ownerService.updateGymDetails(gym);
     }
 
     private boolean updateGymOwnerDetails() {
         System.out.println("Enter gym owner details:");
-        System.out.println("Email: ");
+        System.out.println("Your present Email: ");
         String ownerEmail = scanner.nextLine();
 
-        System.out.println("Name: ");
+        System.out.println("Name to change: ");
         String ownerName = scanner.nextLine();
-        System.out.println("Phone Number: ");
+        System.out.println("Phone Number to change: ");
         String phoneNo = scanner.nextLine();
 
         FlipfitGymOwner gymOwner = new FlipfitGymOwner();
