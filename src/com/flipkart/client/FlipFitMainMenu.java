@@ -1,14 +1,5 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.*;
-import com.flipkart.business.FlipfitAdminInterface;
-import com.flipkart.business.FlipfitGymOwnerInterface;
-
-import com.flipkart.business.FlipfitAdminService;
-import com.flipkart.business.FlipfitGymCustomerService;
-import com.flipkart.business.FlipfitGymOwnerService;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class FlipFitMainMenu {
@@ -72,7 +63,7 @@ public class FlipFitMainMenu {
                                     // Print login details
                                     System.out.println("Gym Admin " + adminMenu.getAdminName() + " logged in at " + formattedDateTime);
 
-                                while (loggedIn) {
+                                do {
                                     System.out.println("-----------------Admin Menu------------------");
                                     System.out.println("Press 1 to view customers");
                                     System.out.println("Press 2 to view all gyms");
@@ -94,10 +85,10 @@ public class FlipFitMainMenu {
                                             adminMenu.viewAllGyms();
                                             break;
                                         case 3:
-                                            adminMenu.viewAllGymOwnwers();
+                                            adminMenu.viewAllGymOwners();
                                             break;
                                         case 4:
-                                            adminMenu.viewUnverfiedGyms();
+                                            adminMenu.viewUnverifiedGyms();
                                             System.out.println("Enter the gym ID to be verified:");
                                             if (adminMenu.verifyGym())
                                                 System.out.println("Gym verified successfully!");
@@ -105,18 +96,18 @@ public class FlipFitMainMenu {
                                                 System.out.println("Gym with given Id does not exist.");
                                             break;
                                         case 5:
-                                            adminMenu.viewUnverfiedGymOwnwers();
+                                            adminMenu.viewUnverifiedGymOwners();
                                             System.out.println("Enter the gym owner ID to be verified:");
-                                            if (adminMenu.verifyGymOwnner())
+                                            if (adminMenu.verifyGymOwner())
                                                 System.out.println("Gym owner verified successfully!");
                                             else
                                                 System.out.println("Gym owner with given ID does not exist.");
                                             break;
                                         case 6:
-                                            adminMenu.viewUnverfiedGyms();
+                                            adminMenu.viewUnverifiedGyms();
                                             break;
                                         case 7:
-                                            adminMenu.viewUnverfiedGymOwnwers();
+                                            adminMenu.viewUnverifiedGymOwners();
                                             break;
                                         case 8:
                                             adminMenu.viewProfile();
@@ -125,8 +116,7 @@ public class FlipFitMainMenu {
                                             loggedIn = false;
                                             break;
                                     }
-                                    if (!loggedIn) break;
-                                }
+                                } while (loggedIn);
                             }
                             break;
 
@@ -146,7 +136,7 @@ public class FlipFitMainMenu {
                     System.out.println("Press 1 for gym user");
                     System.out.println("Press 2 for gym owner");
                     System.out.println("Press 3 for gym admin");
-                    int rolechoice = Integer.parseInt(scanner.nextLine());
+                    int roleChoice = Integer.parseInt(scanner.nextLine());
                     System.out.println("Please enter your email:");
                     email = scanner.nextLine();
                     System.out.println("Please enter your current password:");
@@ -155,7 +145,7 @@ public class FlipFitMainMenu {
                     String updatedPassword = scanner.nextLine();
 
 
-                    switch (rolechoice) {
+                    switch (roleChoice) {
                         case 1:
                             if (!customerMenu.validateUser(email, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials");
