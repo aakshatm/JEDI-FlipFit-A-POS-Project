@@ -36,22 +36,10 @@ public class FlipFitGymCustomerMenu {
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String formattedDate = myDateObj.format(myFormatObj);
 
-            // Print current date and time with formatting
-            System.out.println("=====================================");
-            System.out.println("|         CURRENT DATE & TIME        |");
-            System.out.println("=====================================");
-            System.out.printf("| %s |\n ", formattedDate);
-            System.out.println("=====================================\n");
-
-            // Simulate getting customer details (replace with actual method call)
             FlipfitCustomer customer = customerService.getProfile(email, password);
 
-            // Print customer details with better formatting
-            System.out.println("=====================================");
-            System.out.println("|        CUSTOMER PROFILE           |");
-            System.out.println("=====================================");
-            System.out.printf("| Name: %-28s |\n  ", customer.getUserName());
-            System.out.println("=====================================");
+            System.out.println(customer.getUserName());
+            System.out.println(formattedDate);
 
             while (isLoggedIn) {
                 System.out.println( "-------------CUSTOMER MENU-------------");
