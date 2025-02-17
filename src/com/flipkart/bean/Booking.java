@@ -208,6 +208,10 @@ public class Booking {
         this.bookingStatus = bookingStatus;
     }
 
+    /**
+     * Displays the details of the booking, including customer ID, booking ID,
+     * creation date, status, date, time, and slot ID.
+     */
     public void displayBookings() {
         System.out.println("Booking Details:");
         System.out.println("------------------------------");
@@ -215,15 +219,13 @@ public class Booking {
         System.out.println("Booking ID: " + bookingId);
         System.out.println("Created At: " + createdAt);
         String bookingStatusmsg = "confirmed";
-        if (bookingStatus == 2){
+        if (bookingStatus == 2) {
             bookingStatusmsg = "cancelled";
         }
         System.out.println("Booking Status: " + bookingStatusmsg);
         System.out.println("Date: " + date);
         System.out.println("Time: " + time);
-//        System.out.println("Status: " + status);
         System.out.println("Slot Id: " + slotId);
-//        System.out.println("Status: " + status);
         System.out.println("------------------------------");
     }
 }

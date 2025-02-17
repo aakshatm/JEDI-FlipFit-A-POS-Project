@@ -13,14 +13,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FlipFitOwnerMenu {
-//    System.out.println("1. View Profile");
-//            System.out.println("2. Edit Profile");
-//            System.out.println("3. Register his/her gym");
-//            System.out.println("4. View approved gyms");
-//            System.out.println("5. View pending approvals");
-//            System.out.println("6. Edit Gym Details");
-//            System.out.println("7. Remove his Gym Centers");
-//            System.out.println("8. Log out");
 
     private static FlipfitGymOwnerInterface ownerService = new FlipfitGymOwnerService();
     private static Scanner scanner = new Scanner(System.in);

@@ -3,7 +3,6 @@ package com.flipkart.client;
 import com.flipkart.bean.*;
 import com.flipkart.business.FlipfitAdminInterface;
 import com.flipkart.business.FlipfitGymOwnerInterface;
-
 import com.flipkart.business.FlipfitAdminService;
 import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.business.FlipfitGymOwnerService;
@@ -11,21 +10,32 @@ import com.flipkart.business.FlipfitGymOwnerService;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class represents the main menu for the FlipFit application.
+ * It allows users to log in as a gym customer, gym owner, or gym admin and
+ * provides options for various user interactions based on the role selected.
+ * It also allows gym customer and gym owner registration, password changes,
+ * and navigation to specific menus for their respective roles.
+ */
 public class FlipFitMainMenu {
 
     static Scanner scanner = new Scanner(System.in);
-
     static FlipFitAdminMenu adminMenu = new FlipFitAdminMenu();
     static FlipFitGymCustomerMenu customerMenu = new FlipFitGymCustomerMenu();
     static FlipFitOwnerMenu ownerMenu = new FlipFitOwnerMenu();
 
-
-
+    /**
+     * The main method that serves as the entry point of the FlipFit application.
+     * It displays the main menu and handles user interactions for login, registration, password changes, and role-based navigation.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         String email, password;
         boolean isInApp = true;
         System.out.println("Welcome to FlipFit Application");
 
+        // Main menu loop
         while (isInApp) {
             System.out.println("\nEnter your choice:");
             System.out.println("1. Login");
@@ -38,6 +48,7 @@ public class FlipFitMainMenu {
 
             switch (optionSelected) {
                 case 1:
+                    // Handle login based on role
                     System.out.println("Enter email:");
                     email = scanner.nextLine();
                     System.out.println("Enter Password:");
@@ -54,7 +65,6 @@ public class FlipFitMainMenu {
                             }
                             break;
                         case "gym owner":
-//                            ownerMenu(scanner);
                             if (!ownerMenu.gymOwnerLogin(email, password)) {
                                 System.out.println("Invalid credentials! Please enter valid credentials to login");
                                 break;
@@ -65,13 +75,14 @@ public class FlipFitMainMenu {
                             if (!loggedIn) {
                                 System.out.println("Incorrect Email and password. Try Again!!");
                             } else {
-                                    java.time.LocalDateTime currentDateTime = java.time.LocalDateTime.now();
-                                    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                                    String formattedDateTime = currentDateTime.format(formatter);
+                                java.time.LocalDateTime currentDateTime = java.time.LocalDateTime.now();
+                                java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                String formattedDateTime = currentDateTime.format(formatter);
 
-                                    // Print login details
-                                    System.out.println("Gym Admin " + adminMenu.getAdminName() + " logged in at " + formattedDateTime);
+                                // Print login details
+                                System.out.println("Gym Admin " + adminMenu.getAdminName() + " logged in at " + formattedDateTime);
 
+                                // Admin menu loop
                                 while (loggedIn) {
                                     System.out.println("-----------------Admin Menu------------------");
                                     System.out.println("Press 1 to view customers");
@@ -129,18 +140,23 @@ public class FlipFitMainMenu {
                                 }
                             }
                             break;
-
                         default:
                             System.out.println("Invalid role entered. Returning to main menu.");
                     }
                     break;
+
                 case 2:
+                    // Register a new gym customer
                     customerMenu.createCustomer();
                     break;
+
                 case 3:
+                    // Register a new gym owner
                     ownerMenu.createGymOwner();
                     break;
+
                 case 4:
+                    // Handle password reset
                     System.out.println("-------------Reset Password Page--------------");
                     System.out.println("Select your role:");
                     System.out.println("Press 1 for gym user");
@@ -154,7 +170,7 @@ public class FlipFitMainMenu {
                     System.out.println("Please enter new password:");
                     String updatedPassword = scanner.nextLine();
 
-
+                    // Reset password based on role
                     switch (rolechoice) {
                         case 1:
                             if (!customerMenu.validateUser(email, password)) {
@@ -177,12 +193,13 @@ public class FlipFitMainMenu {
                             }
                             break;
                         case 3:
-//                            adminMenu.changePassword(updatedPassword);
                             System.out.println("Sorry! You don't have enough rights to do that.");
                             break;
                     }
                     break;
+
                 case 5:
+                    // Exit the application
                     isInApp = false;
                     break;
             }

@@ -40,8 +40,6 @@ public class FlipfitGymCenter {
 
     /**
      * Gets the unique identifier for the owner of the gym.
-     *
-
      */
     public int getOwnerId() {
         return ownerId;
@@ -148,7 +146,6 @@ public class FlipfitGymCenter {
 
     /**
      * Gets the location of the gym.
-     *
      */
     public String getLocation() {
         return location;
@@ -163,7 +160,10 @@ public class FlipfitGymCenter {
         this.location = location;
     }
 
-    public void display(){
+    /**
+     * Displays the details of the gym, including gym ID, name, and address.
+     */
+    public void display() {
         System.out.println("--------------------------------------------------");
         System.out.println("Gym ID: " + gymId);
         System.out.println("Gym Name: " + gymName);
@@ -171,18 +171,21 @@ public class FlipfitGymCenter {
         System.out.println("--------------------------------------------------");
     }
 
-    public void displayWithSlot(){
+    /**
+     * Displays the details of the gym, including gym ID, name, and address,
+     * and then displays the slots available in the gym.
+     */
+    public void displayWithSlot() {
         System.out.println("--------------------------------------------------");
         System.out.println("Gym ID: " + gymId);
         System.out.println("Gym Name: " + gymName);
         System.out.println("Gym Address: " + gymAddress);
         System.out.println("--------------------------------------------------");
 
-        for (Slot slot: slots){
+        // Displaying all available slots in the gym
+        for (Slot slot : slots) {
             slot.display();
         }
     }
-
-
 }
 

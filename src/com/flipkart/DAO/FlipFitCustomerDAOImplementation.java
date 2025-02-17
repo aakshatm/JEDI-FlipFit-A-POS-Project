@@ -18,6 +18,18 @@ import java.util.List;
 public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInterface {
     FlipFitGymOwnerDAOImplementation flipFitGymOwnerDAOImplementation = new FlipFitGymOwnerDAOImplementation();
 
+    /**
+     * Edits the profile details of a customer in the database.
+     *
+     * @param customerId   The unique identifier for the customer.
+     * @param email        The new email address of the customer.
+     * @param password     The new password for the customer.
+     * @param username     The new username of the customer.
+     * @param phoneNumber  The new phone number of the customer.
+     * @param address      The new address of the customer.
+     * @param location     The new location of the customer.
+     * @return true if the profile update is successful, false otherwise.
+     */
     @Override
     public boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location) {
         String query = SQLConstants.UPDATE_CUSTOMER_PROFILE;
@@ -42,6 +54,14 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         }
     }
 
+    /**
+     * Retrieves the profile details of a customer from the database based on email and password.
+     *
+     * @param email    The email address of the customer.
+     * @param password The password of the customer.
+     * @return A FlipfitCustomer object containing the user's details, or null if the user is not found.
+     * @throws UserNotFoundException if no user is found with the provided credentials.
+     */
     public FlipfitCustomer getProfile(String email, String password){
         FlipfitCustomer profile = null;
 
@@ -76,6 +96,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return profile;
     }
 
+    /**
+     * Retrieves a list of gyms available in the specified area.
+     *
+     * @param area The area to filter gyms.
+     * @return A list of FlipfitGymCenter objects available in the specified area.
+     */
     @Override
     public List<FlipfitGymCenter> viewAllGymsByArea(String area) {
         List<FlipfitGymCenter> gyms = new ArrayList<>();
@@ -118,6 +144,11 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return gyms;
     }
 
+    /**
+     * Retrieves a list of all gyms with available slots.
+     *
+     * @return A list of FlipfitGymCenter objects with their respective slots.
+     */
     public List<FlipfitGymCenter> viewAllGymsWithSlots() {
         List<FlipfitGymCenter> gyms = new ArrayList<>();
 
@@ -156,6 +187,14 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return gyms;
     }
 
+    /**
+     * Books a slot for the user in a gym.
+     *
+     * @param gymId     The ID of the gym.
+     * @param startTime The start time of the slot to be booked.
+     * @param email     The email of the user making the booking.
+     * @return true if the booking is successful, false otherwise.
+     */
     @Override
     public boolean bookSlot(int gymId, int startTime, String email) {
         boolean isBookingSuccessful = false;
@@ -215,10 +254,26 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             return false;
     }
 
+    /**
+     * Retrieves the number of available seats for a specific gym and time slot.
+     *
+     * @param gymId     The ID of the gym.
+     * @param startTime The start time of the slot.
+     * @return The number of available seats for the given gym and time slot.
+     */
     public int getSeatCount(int gymId, int startTime) {
         return flipFitGymOwnerDAOImplementation.getSeatCount(gymId, startTime);
     }
 
+    /**
+     * Cancels any overlapping booking for the given user in a specific gym and time slot.
+     *
+     * @param gymId        The ID of the gym.
+     * @param startTime    The start time of the slot.
+     * @param userId       The ID of the user.
+     * @param bookingStatus The booking status to be set for the cancelled booking.
+     * @return true if the overlapping booking was successfully cancelled, false otherwise.
+     */
     public boolean cancelOverlappingBookingIfExists(int gymId, int startTime, int userId, int bookingStatus) {
         boolean isBookingCancelled = false;
 
@@ -248,6 +303,13 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         }
     }
 
+    /**
+     * Retrieves the slot ID for a specific gym and time slot.
+     *
+     * @param gymId     The ID of the gym.
+     * @param startTime The start time of the slot.
+     * @return The ID of the slot, or -1 if no slot is found.
+     */
     public int getSlotsIdByGymIdAndStartTime(int gymId, int startTime) {
         int slotId = -1;
 
@@ -269,6 +331,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return slotId;
     }
 
+    /**
+     * Retrieves all bookings made by a user based on their user ID.
+     *
+     * @param userId The unique identifier for the user.
+     * @return A list of Booking objects for the specified user.
+     */
     @Override
     public List<Booking> getAllBookingsByUserID(int userId) {
         List<Booking> bookings = new ArrayList<>();
@@ -296,6 +364,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return bookings;
     }
 
+    /**
+     * Cancels a booking with the specified booking ID.
+     *
+     * @param bookingId The ID of the booking to be cancelled.
+     * @return true if the booking is successfully cancelled, false otherwise.
+     */
     @Override
     public boolean cancelBooking(int bookingId) {
         boolean isBookingCancelled = false;
@@ -332,6 +406,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
             return false;
     }
 
+    /**
+     * Retrieves the booking details for a specific booking ID.
+     *
+     * @param bookingId The ID of the booking.
+     * @return A Booking object containing the booking details.
+     */
     public Booking getBooking(int bookingId) {
         Booking booking = new Booking();
 
@@ -358,6 +438,13 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return booking;
     }
 
+    /**
+     * Validates the user's login credentials by checking the username and password.
+     *
+     * @param username The username entered by the user.
+     * @param password The password entered by the user.
+     * @return true if the credentials are valid, false otherwise.
+     */
     @Override
     public boolean validateUser(String username, String password) {
         try (Connection conn = DatabaseConnector.getConnection();
@@ -378,6 +465,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         return false;
     }
 
+    /**
+     * Creates a new user in the system.
+     *
+     * @param user A FlipfitCustomer object containing the details of the user to be created.
+     * @return true if the user is successfully created, false otherwise.
+     */
     @Override
     public boolean createUser(FlipfitCustomer user) {
         try (Connection conn = DatabaseConnector.getConnection();
@@ -407,6 +500,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         }
     }
 
+    /**
+     * Updates the details of an existing user in the system.
+     *
+     * @param user A FlipfitCustomer object containing the updated user details.
+     * @return true if the user details are successfully updated, false otherwise.
+     */
     public boolean updateUserDetails(FlipfitCustomer user) {
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_USER);
@@ -431,6 +530,12 @@ public class FlipFitCustomerDAOImplementation implements FlipFitCustomerDAOInter
         }
     }
 
+    /**
+     * Retrieves the user ID associated with a given email address.
+     *
+     * @param email The email address of the user.
+     * @return The user ID, or -1 if no user is found with the given email.
+     */
     public int getUserIdByEmail(String email) {
         int userId = -1;
 

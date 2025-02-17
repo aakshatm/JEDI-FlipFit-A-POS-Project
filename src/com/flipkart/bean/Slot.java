@@ -22,7 +22,7 @@ public class Slot {
     /**
      * Constructs a Slots object with the specified slot ID, start time, and seat count.
      *
-     * @param slotId the unique identifier for the slot
+     * @param slotId    the unique identifier for the slot
      * @param startTime the starting time of the slot
      * @param seatCount the number of seats available in the slot
      */
@@ -36,7 +36,7 @@ public class Slot {
      * Gets the unique identifier for the time slot.
      *
      * @return the slotsId, which is the unique identifier for the slot.
-     * */
+     */
     public int getSlotsId() {
         return slotId;
     }
@@ -86,14 +86,15 @@ public class Slot {
         this.seatCount = seatCount;
     }
 
-
-    public void display(){
+    /**
+     * Displays the details of the slot, including the slot ID, start time, and
+     * the seat count available for the slot.
+     */
+    public void display() {
         System.out.println("--------------------------------------------------");
         System.out.println("Slot ID: " + slotId);
         System.out.println("Start Time: " + startTime);
         System.out.println("Seat Count: " + seatCount);
         System.out.println("--------------------------------------------------");
-
-
     }
 }

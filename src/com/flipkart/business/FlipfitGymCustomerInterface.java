@@ -12,12 +12,38 @@ import java.util.List;
  *
  */
 public interface FlipfitGymCustomerInterface {
+    /**
+     * Updates the password for the gym customer.
+     *
+     * @param email The email of the customer.
+     * @param password The current password of the customer.
+     * @param updatedPassword The new password to be set.
+     * @return true if the password is updated successfully; false otherwise.
+     */
     public boolean updateGymUserPassword(String email, String password, String updatedPassword);
 
+    /**
+     * Edits the profile of the customer.
+     *
+     * @param customerId The unique ID of the customer.
+     * @param email The email address of the customer.
+     * @param password The current password of the customer.
+     * @param username The new username of the customer.
+     * @param phoneNumber The new phone number of the customer.
+     * @param address The new address of the customer.
+     * @param location The new location of the customer.
+     * @return true if the profile is updated successfully; false otherwise.
+     */
     boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
 
+    /**
+     * Retrieves the profile of a customer.
+     *
+     * @param email The email address of the customer.
+     * @param password The password of the customer.
+     * @return A FlipfitCustomer object representing the customer's profile if valid credentials are provided; null otherwise.
+     */
     FlipfitCustomer getProfile(String email, String password);
-
     /**
      * Cancels a slot booking based on the booking ID.
      *

@@ -15,6 +15,15 @@ import java.util.List;
 
 public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInterface {
 
+    /**
+     * Retrieves the profile information of a gym owner based on the provided email and password.
+     * This method validates the credentials and returns the gym owner's profile details if the credentials match.
+     *
+     * @param email The email address of the gym owner whose profile is to be retrieved.
+     * @param password The password of the gym owner to validate the credentials.
+     * @return A `FlipfitGymOwner` object containing the profile details of the gym owner if credentials are valid,
+     *         or `null` if no matching record is found or if there is a SQL error.
+     */
     public FlipfitGymOwner getProfile(String email, String password) {
         FlipfitGymOwner gymOwner = null;
 
@@ -48,8 +57,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return null; // Returns null if no record is found
     }
 
-
-
+    /**
+     * Adds a new gym to the database with the provided details. The gym information includes name, address, location,
+     * owner ID, and status. If the gym is successfully added, the method proceeds to add the slots associated with the gym.
+     *
+     * @param gym The `FlipfitGymCenter` object containing the gym's details to be added.
+     * @return `true` if the gym and its associated slots are successfully added to the database;
+     *         `false` if the registration fails or an error occurs during the process.
+     */
     @Override
     public boolean addGym(FlipfitGymCenter gym) {
         int gymId = -1;
@@ -84,6 +99,15 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return addSlots(gymId, gym.getSlots());
     }
 
+    /**
+     * Adds a list of slots for a specific gym to the database. Each slot includes start time, seat count, and the gym ID.
+     * If any slot insertion fails, the method returns `false`. If all slots are successfully added, it returns `true`.
+     *
+     * @param gymId The ID of the gym to which the slots will be added.
+     * @param slots A list of `Slot` objects representing the slots to be added.
+     * @return `true` if all slots are successfully added to the database;
+     *         `false` if any slot insertion fails or an error occurs during the process.
+     */
     @Override
     public boolean addSlots(int gymId, List<Slot> slots) {
         for (Slot slot : slots) {
@@ -111,7 +135,16 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return true;
     }
 
-
+    /**
+     * Registers a new gym owner in the system by adding their details to the database.
+     * The owner's information, such as name, email, password, contact details,
+     * and identification numbers, are inserted into the database with a default status of "unverified".
+     * If the registration fails for any reason, the method returns `false`.
+     * If the owner is successfully registered, it returns `true`.
+     *
+     * @param gymOwner An instance of `FlipfitGymOwner` containing the owner's details to be registered.
+     * @return `true` if the gym owner was successfully registered; `false` if the registration failed.
+     */
     @Override
     public boolean createGymOwner(FlipfitGymOwner gymOwner) {
         try (Connection conn = DatabaseConnector.getConnection();
@@ -142,6 +175,15 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         }
     }
 
+    /**
+     * Updates the details of an existing gym owner in the database.
+     * This method allows updating the gym owner's name, phone number, and email.
+     * If the update is successful, it returns `true`. If no rows are updated or if the update fails,
+     * it returns `false`.
+     *
+     * @param gymOwner An instance of `FlipfitGymOwner` containing the updated details of the gym owner.
+     * @return `true` if the gym owner's details were successfully updated; `false` if the update failed.
+     */
     @Override
     public boolean updateGymOwner(FlipfitGymOwner gymOwner) {
         try (Connection conn = DatabaseConnector.getConnection();
@@ -169,6 +211,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         }
     }
 
+    /**
+     * Validates the login credentials of a gym owner by checking the provided email and password against the database.
+     * If the email and password match an existing gym owner, the method returns `true`. Otherwise, it returns `false`.
+     *
+     * @param email The email address of the gym owner.
+     * @param password The password of the gym owner.
+     * @return `true` if the credentials are valid; `false` otherwise.
+     */
     @Override
     public boolean validateGymOwner(String email, String password) {
         try (Connection conn = DatabaseConnector.getConnection();
@@ -189,6 +239,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return false;
     }
 
+    /**
+     * Retrieves a list of gyms associated with a specific gym owner identified by the owner ID.
+     * The method queries the database for all gyms belonging to the owner and populates a list of `FlipfitGymCenter` objects.
+     * Additionally, it fetches the available slots for each gym.
+     *
+     * @param ownerId The ID of the gym owner.
+     * @return A list of `FlipfitGymCenter` objects representing the gyms owned by the gym owner.
+     */
     @Override
     public List<FlipfitGymCenter> viewMyGyms(int ownerId) {
         List<FlipfitGymCenter> gyms = new ArrayList<>();
@@ -227,6 +285,13 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return gyms;
     }
 
+    /**
+     * Retrieves the list of available slots for a given gym based on the gym's ID.
+     * This method queries the database to fetch all slots (start time and seat count) associated with the specified gym.
+     *
+     * @param gymId The ID of the gym.
+     * @return A list of `Slot` objects representing the available slots for the gym.
+     */
     public List<Slot> getSlotsByGymId(int gymId) {
         List<Slot> slotList = new ArrayList<>();
 
@@ -251,6 +316,16 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return slotList;
     }
 
+    /**
+     * Updates the seat count for a specific gym and slot based on the provided gym ID and start time.
+     * If the update is successful, the method returns `true`. If no rows are updated or an exception occurs,
+     * it returns `false`.
+     *
+     * @param gymId The ID of the gym.
+     * @param startTime The start time of the slot.
+     * @param seatCount The new seat count to be updated.
+     * @return `true` if the seat count was updated successfully; `false` otherwise.
+     */
     @Override
     public boolean updateSeatCount(int gymId, int startTime, int seatCount) {
 
@@ -278,6 +353,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         }
     }
 
+    /**
+     * Retrieves the current seat count for a specific gym and slot based on the provided gym ID and start time.
+     * If the seat count is found, it is returned. If an error occurs or no data is found, the method returns `-1`.
+     *
+     * @param gymId The ID of the gym.
+     * @param startTime The start time of the slot.
+     * @return The seat count for the specified gym and slot, or `-1` if an error occurs or no data is found.
+     */
     public int getSeatCount(int gymId, int startTime) {
         int seatCount = -1;
 
@@ -299,6 +382,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return seatCount;
     }
 
+    /**
+     * Retrieves the gym owner's ID based on their email address.
+     * The method queries the database and returns the owner ID if a matching record is found.
+     * If no matching record is found or an error occurs, it returns `-1`.
+     *
+     * @param email The email address of the gym owner.
+     * @return The owner ID associated with the provided email, or `-1` if not found or an error occurs.
+     */
     public int getGymOwnerIdByEmail(String email) {
         int ownerId = -1;
 
@@ -319,6 +410,14 @@ public class FlipFitGymOwnerDAOImplementation implements FlipFitGymOwnerDAOInter
         return ownerId;
     }
 
+    /**
+     * Updates the details of a gym (location, address, name) based on the provided `FlipfitGymCenter` object.
+     * If the update is successful, the method returns `true`. If no rows are updated or an exception occurs,
+     * it returns `false`.
+     *
+     * @param gym The `FlipfitGymCenter` object containing the updated gym details.
+     * @return `true` if the gym details were updated successfully; `false` otherwise.
+     */
     public boolean updateGymDetails(FlipfitGymCenter gym) {
 
         try (Connection conn = DatabaseConnector.getConnection();

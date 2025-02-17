@@ -165,6 +165,10 @@ public class FlipfitCustomer {
         this.password = password;
     }
 
+    /**
+     * Displays the details of the customer, including ID, name, email,
+     * phone number, address, and location.
+     */
     public void displayCustomer() {
         System.out.println("Customer Details:");
         System.out.println("------------------------------");
