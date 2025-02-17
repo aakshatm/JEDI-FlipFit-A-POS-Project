@@ -7,9 +7,10 @@ import com.flipkart.business.FlipfitGymCustomerService;
 import com.flipkart.bean.Booking;
 import com.flipkart.business.PaymentInterface;
 import com.flipkart.business.PaymentService;
-import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.bean.Slot;
 import com.flipkart.bean.Payment;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 import java.util.Scanner;
@@ -31,7 +32,15 @@ public class FlipFitGymCustomerMenu {
     public boolean userLogin(String email, String password) {
         if (validateUser(email, password)) {
             boolean isLoggedIn = true;
-            System.out.println( "Customer Login Successful!!" );
+            LocalDateTime myDateObj = LocalDateTime.now();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formattedDate = myDateObj.format(myFormatObj);
+
+            FlipfitCustomer customer = customerService.getProfile(email, password);
+
+            System.out.println(customer.getUserName());
+            System.out.println(formattedDate);
+
             while (isLoggedIn) {
                 System.out.println( "-------------CUSTOMER MENU-------------");
                 System.out.println("Press 1 to view all gyms with slots");
@@ -283,10 +292,6 @@ public class FlipFitGymCustomerMenu {
 //        Password
         System.out.println( "Password: " );
         String password = scanner.nextLine();
-        
-
-
-
 
 
         FlipfitCustomer user = new FlipfitCustomer();
@@ -337,101 +342,3 @@ public class FlipFitGymCustomerMenu {
         return customerService.updateGymUserPassword(userMail, password, updatedPassword);
     }
 }
-
-
-//    public void viewProfile(String email, String password){
-//        try{
-//            FlipfitCustomer customer = customerService.getProfile(email, password);
-//            if (customer == null){
-//                throw new UserNotFoundException();
-//            }
-//            customer.displayCustomer();
-//        } catch (UserNotFoundException e){
-//
-//        }
-//
-//    }
-//
-//    public void editProfile(String email, String password){
-//        String username, phoneNumber, address, location;
-//
-//        System.out.println("Enter your username: ");
-//        username = scanner.nextLine();
-//
-//        System.out.println("Enter your phone number: ");
-//        phoneNumber = scanner.nextLine();
-//
-//        System.out.println("Enter your address: ");
-//        address = scanner.nextLine();
-//
-//        System.out.println("Enter your location: ");
-//        location = scanner.nextLine();
-//
-//        FlipfitCustomer customer = customerService.getProfile(email, password);
-//        int customerId = customer.getUserId();
-//
-////        boolean editProfile(int customerId, String email, String password, String username, String phoneNumber, String address, String location);
-//
-//        customerService.editProfile(customerId, email, password, username, phoneNumber, address, location);
-//    }
-//
-//    public void viewGymBasedOnLocation(String location){
-//        List<FlipfitGymCenter> gyms = customerService.viewAllGymsByArea(location);
-//        for (FlipfitGymCenter gym: gyms){
-//            gym.display();
-//        }
-//    }
-//
-//    public void bookGymSlot(String email){
-//        List<FlipfitGymCenter> listOfGyms = customerService.viewAllGymsWithSlots();
-//        for (FlipfitGymCenter gym: listOfGyms){
-//            gym.displayWithSlot();
-//        }
-//        int gymId, startTime;
-//        System.out.println("Enter gymID: ");
-//        System.out.println("Enter startTime: ");
-//        gymId = scanner.nextInt();
-//        scanner.nextLine();
-//        startTime = scanner.nextInt();
-//        scanner.nextLine();
-//        boolean bookingDone = customerService.bookSlot(gymId, startTime, email);
-//        // payment handle later
-//        if (bookingDone){
-//            System.out.println("Booking Confirmed");
-//        }else{
-//            System.out.println("Booking not done..");
-//        }
-//    }
-//
-//    public void viewAllBookings(String email, String password) {
-//        FlipfitCustomer customer = customerService.getProfile(email, password);
-//        int userId = customer.getUserId();
-//
-//        List<Booking> bookings = customerService.viewAllBookings(userId);
-//        for (Booking booking : bookings){
-//            booking.displayBookings();
-//        }
-//    }
-//
-//
-//    public void cancelBooking(){
-//        int bookingId;
-//        System.out.println("Please enter the booking ID: ");
-//        bookingId = scanner.nextInt();
-//        scanner.nextLine();
-//        boolean cancelledSuccessfully = customerService.cancelSlot(bookingId);
-//        if (cancelledSuccessfully){
-//            System.out.println("Booking Cancelling Successfully..");
-//            System.out.println("Refund Initiated");
-//        }
-//        else{
-//            System.out.println("Not able to cancel Booking");
-//        }
-//    }
-//
-//    public void logout(){
-//        System.out.println("Logging out");
-//    }
-
-
-
